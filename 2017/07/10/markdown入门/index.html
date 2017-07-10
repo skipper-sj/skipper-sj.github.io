@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/07/10/markdown入门/index.html">
 <meta property="og:site_name" content="skipper`s technique notes">
 <meta property="og:description" content="旨在针对markdown做部分笔记">
-<meta property="og:updated_time" content="2017-07-10T06:14:13.000Z">
+<meta property="og:updated_time" content="2017-07-10T12:47:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="markdown入门">
 <meta name="twitter:description" content="旨在针对markdown做部分笔记">
@@ -310,7 +310,22 @@
 <h2 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h2><p>利用**和_来加重强调</p>
 <h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>用##和=======或者——来表示标题</p>
 <h2 id="断行"><a href="#断行" class="headerlink" title="断行"></a>断行</h2><p>使用&lt;br/&gt;来进行断行</p>
-<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><h2 id="兼容HTML"><a href="#兼容HTML" class="headerlink" title="兼容HTML"></a>兼容HTML</h2><p>支持HTML撰写，制约一些区块元素，必须在前后加上空行与其他内容区隔开，还要求他们的开始标签与结尾标签不能用制表符或空格来缩进。</p>
+<h2 id="特殊字符自动转换"><a href="#特殊字符自动转换" class="headerlink" title="特殊字符自动转换"></a>特殊字符自动转换</h2><p>Markdown 让你可以自然地书写字符，需要转换的由它来处理好了。如果你使用的 &amp; 字符是 HTML 字符实体的一部分，它会保留原状，否则它会被转换成&amp; amp;。<br>其他特殊字符：  </p>
+<p>&copy;版权符号:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&amp;copy;</div></pre></td></tr></table></figure></p>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>Markdown 支持有序列表和无序列表。<br>无序列表使用星号、加号或是减号作为列表标记，有序列表则使用数字接着一个英文句点。<br>很重要的一点是，你在列表标记上使用的数字并不会影响输出的 HTML 结果。<br>符号·：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-</div></pre></td></tr></table></figure></p>
+<h2 id="分隔线"><a href="#分隔线" class="headerlink" title="分隔线"></a>分隔线</h2><p>你可以在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。你也可以在星号或是减号中间插入空格。</p>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>See my <a href="../../07/初识JVM/">About</a> page for details.的实现方式如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">See my [About](../../<span class="number">07</span>/初识JVM/) page <span class="keyword">for</span> details.</div></pre></td></tr></table></figure></p>
+<p>链接内容定义的形式为：</p>
+<ul>
+<li>方括号（前面可以选择性地加上至多三个空格来缩进），里面输入链接文字</li>
+<li>接着一个冒号</li>
+<li>接着一个以上的空格或制表符</li>
+<li>接着链接的网址</li>
+<li>选择性地接着 title 内容，可以用单引号、双引号或是括弧包着  </li>
+</ul>
+<p>例如：  </p>
+
       
     </div>
     
@@ -321,7 +336,7 @@
         <p><span>本文标题:</span><a href="/2017/07/10/markdown入门/">markdown入门</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Skipper shou</a></p>
         <p><span>发布时间:</span>2017-07-10, 11:50:30</p>
-        <p><span>最后更新:</span>2017-07-10, 14:14:13</p>
+        <p><span>最后更新:</span>2017-07-10, 20:47:06</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/07/10/markdown入门/" title="markdown入门">http://yoursite.com/2017/07/10/markdown入门/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/07/10/markdown入门/　　作者: Skipper shou" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -357,7 +372,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-基本概念"><span class="toc-number">1.</span> <span class="toc-text">1.基本概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-基本语法"><span class="toc-number">2.</span> <span class="toc-text">2.基本语法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#换行"><span class="toc-number">2.1.</span> <span class="toc-text">换行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#强调"><span class="toc-number">2.2.</span> <span class="toc-text">强调</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标题"><span class="toc-number">2.3.</span> <span class="toc-text">标题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#断行"><span class="toc-number">2.4.</span> <span class="toc-text">断行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用"><span class="toc-number">2.5.</span> <span class="toc-text">引用</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-基本概念"><span class="toc-number">1.</span> <span class="toc-text">1.基本概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-基本语法"><span class="toc-number">2.</span> <span class="toc-text">2.基本语法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#换行"><span class="toc-number">2.1.</span> <span class="toc-text">换行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#强调"><span class="toc-number">2.2.</span> <span class="toc-text">强调</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标题"><span class="toc-number">2.3.</span> <span class="toc-text">标题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#断行"><span class="toc-number">2.4.</span> <span class="toc-text">断行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用"><span class="toc-number">2.5.</span> <span class="toc-text">引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#兼容HTML"><span class="toc-number">2.6.</span> <span class="toc-text">兼容HTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#特殊字符自动转换"><span class="toc-number">2.7.</span> <span class="toc-text">特殊字符自动转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#列表"><span class="toc-number">2.8.</span> <span class="toc-text">列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分隔线"><span class="toc-number">2.9.</span> <span class="toc-text">分隔线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链接"><span class="toc-number">2.10.</span> <span class="toc-text">链接</span></a></li></ol></li></ol>
         
     </div>
     <style>
