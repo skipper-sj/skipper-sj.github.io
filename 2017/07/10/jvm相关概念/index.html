@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="skipper`s technique notes">
 <meta property="og:description" content="一些比较杂的概念">
 <meta property="og:image" content="https://skipper-sj.github.io/2017/07/10/jvm相关概念/类的生命周期.jpg">
-<meta property="og:updated_time" content="2017-07-14T03:24:48.000Z">
+<meta property="og:updated_time" content="2017-07-17T07:55:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jvm相关概念">
 <meta name="twitter:description" content="一些比较杂的概念">
@@ -188,7 +188,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/jvm/">jvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-boot/">spring boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-mvc/">spring mvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂/">杂</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/jvm/">-jvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">-基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jvm/">jvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-boot/">spring boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-mvc/">spring mvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂/">杂</a></li></ul>
                     </div>
                 </section>
                 
@@ -314,6 +314,7 @@
 <li>将定义类的二进制字节流所代表的静态存储结构转换为方法区的运行时数据结构。</li>
 <li>在java堆中生成一个代表该类的java.lang.Class对象，作为方法区数据的访问入口。  </li>
 </ul>
+<p>在<a href="../../17/类加载机制">类加载机制</a>做详细介绍。</p>
 <h4 id="（2）验证"><a href="#（2）验证" class="headerlink" title="（2）验证"></a>（2）验证</h4><p>为了确保class文件的字节流中包含的信息符合当前虚拟机的要求，并且不会危害虚拟机的安全。  </p>
 <ul>
 <li>文件格式验证：验证Class文件魔数(指的是文件的格式，位于class文件的头4个字节)、主次版本（第5到8个字节代表着jdk的版本）、常量池（代表常量池中有多少项常量）、类文件本身等等。</li>
@@ -330,7 +331,7 @@
 <li>当初始化一个类的时候，如果发现其父类还没有初始化，则需要先触发对其父类的初始化。</li>
 <li>当虚拟机启动时，用户需要指定一个要执行的主类(包含main()方法的类)，虚拟机会先初始化这个类。</li>
 </ul>
-<p>也就是说，初始化是从变量、静态方法等-&gt;反射-&gt;父类-&gt;主类</p>
+<p>也就是说，初始化是从变量、静态方法等-&gt;反射-&gt;父类-&gt;主类  </p>
 <h4 id="（6）使用"><a href="#（6）使用" class="headerlink" title="（6）使用"></a>（6）使用</h4><p>通过堆中java.lang.Class对象的入口地址，调用方法区的方法逻辑，最后将方法的运算结果通过方法返回地址存放到方法区或堆中。</p>
 <h4 id="（7）卸载"><a href="#（7）卸载" class="headerlink" title="（7）卸载"></a>（7）卸载</h4><p>当对象不再被使用时，java虚拟机的垃圾收集器将会回收堆中的对象，方法区中不再被使用的Class也要被卸载。</p>
 
@@ -344,7 +345,7 @@
         <p><span>本文标题:</span><a href="/2017/07/10/jvm相关概念/">jvm相关概念</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Skipper shou</a></p>
         <p><span>发布时间:</span>2017-07-10, 14:58:09</p>
-        <p><span>最后更新:</span>2017-07-14, 11:24:48</p>
+        <p><span>最后更新:</span>2017-07-17, 15:55:49</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/07/10/jvm相关概念/" title="jvm相关概念">https://skipper-sj.github.io/2017/07/10/jvm相关概念/</a>
             <span class="copy-path" data-clipboard-text="原文: https://skipper-sj.github.io/2017/07/10/jvm相关概念/　　作者: Skipper shou" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -450,7 +451,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/JVM调优试验与总结/">JVM调优试验与总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/垃圾回收算法详解/">垃圾回收算法详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/JVM分区以及垃圾回收/">JVM分区以及垃圾回收</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/favorite/">favorite</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/springboot概念以及使用/">springboot概念以及使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/springmvc理解/">springmvc理解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/spring基本概念/">spring基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/jvm相关知识点梳理/">jvm相关知识点梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/深入jvm字节码/">深入jvm字节码</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/jvm相关概念/">jvm相关概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/markdown入门/">markdown入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/study plan/">study plan</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/07/初识JVM/">初识JVM Java内存结构</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/Dubbo学习笔记/">Dubbo学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/java的四种引用方式以及使用场景/">java的四种引用方式以及使用场景</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/类加载机制/">类加载机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/JVM调优试验与总结/">JVM调优试验与总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/垃圾回收算法详解/">垃圾回收算法详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/JVM分区以及垃圾回收/">JVM分区以及垃圾回收</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/favorite/">favorite</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/springboot概念以及使用/">springboot概念以及使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/springmvc理解/">springmvc理解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/spring基本概念/">spring基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/jvm相关知识点梳理/">jvm相关知识点梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/深入jvm字节码/">深入jvm字节码</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/jvm相关概念/">jvm相关概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/markdown入门/">markdown入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/study plan/">study plan</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/07/初识JVM/">初识JVM Java内存结构</a></li></ul>
 
 
 

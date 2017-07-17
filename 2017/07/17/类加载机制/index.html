@@ -15,17 +15,20 @@
 
 
 
-<meta name="description" content="付出不一定有收获，但是不付出一定不会有收获。">
-<meta name="keywords" content="spring">
+<meta name="description" content="描述类加载机制以及相关概念">
+<meta name="keywords" content="-jvm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="spring基本概念">
-<meta property="og:url" content="https://skipper-sj.github.io/2017/07/10/spring基本概念/index.html">
+<meta property="og:title" content="类加载机制">
+<meta property="og:url" content="https://skipper-sj.github.io/2017/07/17/类加载机制/index.html">
 <meta property="og:site_name" content="skipper`s technique notes">
-<meta property="og:description" content="付出不一定有收获，但是不付出一定不会有收获。">
-<meta property="og:updated_time" content="2017-07-12T02:59:31.000Z">
+<meta property="og:description" content="描述类加载机制以及相关概念">
+<meta property="og:image" content="https://skipper-sj.github.io/2017/07/17/类加载机制/类加载器体系结构.jpg">
+<meta property="og:image" content="https://skipper-sj.github.io/2017/07/17/类加载机制/双亲委派模式实现.png">
+<meta property="og:updated_time" content="2017-07-17T00:25:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spring基本概念">
-<meta name="twitter:description" content="付出不一定有收获，但是不付出一定不会有收获。">
+<meta name="twitter:title" content="类加载机制">
+<meta name="twitter:description" content="描述类加载机制以及相关概念">
+<meta name="twitter:image" content="https://skipper-sj.github.io/2017/07/17/类加载机制/类加载器体系结构.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -57,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>spring基本概念 | skipper`s technique notes</title>
+<title>类加载机制 | skipper`s technique notes</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -265,11 +268,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-spring基本概念" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-类加载机制" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/07/10/spring基本概念/" class="article-date">
-      <time datetime="2017-07-10T06:58:55.000Z" itemprop="datePublished">2017-07-10</time>
+      <a href="/2017/07/17/类加载机制/" class="article-date">
+      <time datetime="2017-07-16T23:52:46.000Z" itemprop="datePublished">2017-07-17</time>
 </a>
 
 
@@ -284,7 +287,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      spring基本概念
+      类加载机制
     </h1>
   
 
@@ -295,7 +298,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jvm/">-jvm</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -305,7 +308,13 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        
+        <p>关于类加载器所做的事情，已经在前一篇文章做了介绍。此处先介绍类加载器体系结构<br><img src="/2017/07/17/类加载机制/类加载器体系结构.jpg" alt="类加载器体系结构"><br>如图所示，类加载器可分为几类：  </p>
+<h3 id="（1）启动类加载器"><a href="#（1）启动类加载器" class="headerlink" title="（1）启动类加载器"></a>（1）启动类加载器</h3><p>负责加载存放在%JAVA_HOME%\lib目录中的类库，并且被java虚拟机识别的类库（识别方式是按照文件名，所以，名字不符的就算放入也不会加载），启动类加载器无法被java程序直接引用。  </p>
+<h3 id="（2）扩展类加载器"><a href="#（2）扩展类加载器" class="headerlink" title="（2）扩展类加载器"></a>（2）扩展类加载器</h3><p>负责加载%JAVA_HOME%\lib\ext目录中的类库。</p>
+<h3 id="（3）应用程序类加载器"><a href="#（3）应用程序类加载器" class="headerlink" title="（3）应用程序类加载器"></a>（3）应用程序类加载器</h3><p>负责加载用户类路径classpath上所指定的类库</p>
+<h3 id="（4）自定义类加载器"><a href="#（4）自定义类加载器" class="headerlink" title="（4）自定义类加载器"></a>（4）自定义类加载器</h3><p>如果程序中没有自定义过类加载器，应用程序类加载器就是程序中默认的类加载器。<br>若要实现自定义类加载器，只需要继承java.lang.ClassLoader 类，并且重写其findClass()方法即可。  </p>
+<h2 id="双亲委派模式"><a href="#双亲委派模式" class="headerlink" title="双亲委派模式"></a>双亲委派模式</h2><p>当一个类收到了类加载请求，他首先不会尝试自己去加载这个类，而是把这个请求委派给父类去完成，每一个层次类加载器都是如此，因此所有的加载请求都应该传送到启动类加载其中，只有当父类加载器反馈自己无法完成这个请求的时候（在它的加载路径下没有找到所需加载的Class），子类加载器才会尝试自己去加载。<br>在下图中很好的体现了该模式的运行方式：<br><img src="/2017/07/17/类加载机制/双亲委派模式实现.png" alt="双亲委派模式过程"></p>
+
       
     </div>
     
@@ -313,13 +322,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/07/10/spring基本概念/">spring基本概念</a></p>
+        <p><span>本文标题:</span><a href="/2017/07/17/类加载机制/">类加载机制</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Skipper shou</a></p>
-        <p><span>发布时间:</span>2017-07-10, 14:58:55</p>
-        <p><span>最后更新:</span>2017-07-12, 10:59:31</p>
+        <p><span>发布时间:</span>2017-07-17, 07:52:46</p>
+        <p><span>最后更新:</span>2017-07-17, 08:25:10</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/07/10/spring基本概念/" title="spring基本概念">https://skipper-sj.github.io/2017/07/10/spring基本概念/</a>
-            <span class="copy-path" data-clipboard-text="原文: https://skipper-sj.github.io/2017/07/10/spring基本概念/　　作者: Skipper shou" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/07/17/类加载机制/" title="类加载机制">https://skipper-sj.github.io/2017/07/17/类加载机制/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://skipper-sj.github.io/2017/07/17/类加载机制/　　作者: Skipper shou" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -332,15 +341,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/07/10/springmvc理解/">
-                    springmvc理解
+                <a href="/2017/07/17/java的四种引用方式以及使用场景/">
+                    java的四种引用方式以及使用场景
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/07/10/jvm相关知识点梳理/">
-                    jvm相关知识点梳理
+                <a href="/2017/07/14/JVM调优试验与总结/">
+                    JVM调优试验与总结
                 </a>
             </div>
         
@@ -352,7 +361,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#（1）启动类加载器"><span class="toc-number">1.</span> <span class="toc-text">（1）启动类加载器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（2）扩展类加载器"><span class="toc-number">2.</span> <span class="toc-text">（2）扩展类加载器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（3）应用程序类加载器"><span class="toc-number">3.</span> <span class="toc-text">（3）应用程序类加载器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（4）自定义类加载器"><span class="toc-number">4.</span> <span class="toc-text">（4）自定义类加载器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#双亲委派模式"><span class="toc-number"></span> <span class="toc-text">双亲委派模式</span></a>
         
     </div>
     <style>
@@ -388,7 +397,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"spring基本概念　| skipper`s technique notes　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"类加载机制　| skipper`s technique notes　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -408,7 +417,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/07/10/springmvc理解/" title="上一篇: springmvc理解">
+            <a href="/2017/07/17/java的四种引用方式以及使用场景/" title="上一篇: java的四种引用方式以及使用场景">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -416,7 +425,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/07/10/jvm相关知识点梳理/" title="下一篇: jvm相关知识点梳理">
+            <a href="/2017/07/14/JVM调优试验与总结/" title="下一篇: JVM调优试验与总结">
                 <i class="fa fa-angle-right"></i>
             </a>
         
