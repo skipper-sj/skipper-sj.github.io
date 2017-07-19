@@ -16,16 +16,20 @@
 
 
 <meta name="description" content="类的一些概念">
-<meta name="keywords" content="jvm">
+<meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="jvm相关知识点梳理">
+<meta property="og:title" content="JVM相关知识点梳理">
 <meta property="og:url" content="https://skipper-sj.github.io/2017/07/10/jvm相关知识点梳理/index.html">
 <meta property="og:site_name" content="skipper`s technique notes">
 <meta property="og:description" content="类的一些概念">
-<meta property="og:updated_time" content="2017-07-17T07:55:48.000Z">
+<meta property="og:image" content="https://skipper-sj.github.io/2017/07/10/jvm相关知识点梳理/democlass.png">
+<meta property="og:image" content="https://skipper-sj.github.io/2017/07/10/jvm相关知识点梳理/javap得到的字节码结果.png">
+<meta property="og:image" content="https://skipper-sj.github.io/2017/07/10/jvm相关知识点梳理/二进制结果.png">
+<meta property="og:updated_time" content="2017-07-18T03:04:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jvm相关知识点梳理">
+<meta name="twitter:title" content="JVM相关知识点梳理">
 <meta name="twitter:description" content="类的一些概念">
+<meta name="twitter:image" content="https://skipper-sj.github.io/2017/07/10/jvm相关知识点梳理/democlass.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -57,7 +61,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>jvm相关知识点梳理 | skipper`s technique notes</title>
+<title>JVM相关知识点梳理 | skipper`s technique notes</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -186,7 +190,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/jvm/">-jvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">-基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jvm/">jvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-boot/">spring boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-mvc/">spring mvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂/">杂</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">-基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/">RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-boot/">spring boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-mvc/">spring mvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂/">杂</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码/">源码</a></li></ul>
                     </div>
                 </section>
                 
@@ -284,7 +288,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      jvm相关知识点梳理
+      JVM相关知识点梳理
     </h1>
   
 
@@ -295,7 +299,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jvm/">jvm</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/">JVM</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -305,12 +309,15 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h3 id="类文件结构"><a href="#类文件结构" class="headerlink" title="类文件结构"></a>类文件结构</h3><h4 id="1-魔数与Class文件的版本"><a href="#1-魔数与Class文件的版本" class="headerlink" title="1.魔数与Class文件的版本"></a>1.魔数与Class文件的版本</h4><p>每个class文件的头4个字节被称为魔数，值为：0xCAFEBABE，56位为次版本号，78位为主版本号，例如JDK 1.7.0的其中一个版本为00000032。</p>
+        <h3 id="类文件结构"><a href="#类文件结构" class="headerlink" title="类文件结构"></a>类文件结构</h3><p>这里举出一个例子代码<img src="/2017/07/10/jvm相关知识点梳理/democlass.png" alt="例子代码"><br>字节码分析结果：<br><img src="/2017/07/10/jvm相关知识点梳理/javap得到的字节码结果.png" alt="字节码结果"><br>文件的二进制结果：<br><img src="/2017/07/10/jvm相关知识点梳理/二进制结果.png" alt="文件的二进制结果"></p>
+<h4 id="1-魔数与Class文件的版本"><a href="#1-魔数与Class文件的版本" class="headerlink" title="1.魔数与Class文件的版本"></a>1.魔数与Class文件的版本</h4><p>每个class文件的头4个字节被称为魔数，值为：0xCAFEBABE，56位为次版本号，78位为主版本号，例如JDK 1.7.0的其中一个版本为00000032。</p>
 <h4 id="2-常量池"><a href="#2-常量池" class="headerlink" title="2.常量池"></a>2.常量池</h4><p>紧接着版本号后面的是常量池，首先是常量池容量，由89两位表示。<br>常量池的项目类型对应着一张关联表。不同的项目类型，后面跟的数据不同</p>
 <ul>
 <li>CONSTANT_Class_info的标示位为：0x07，</li>
+<li>0x0014代表之后的21位常量<br>根据二进制结果与常量池的项目类型对照表，可以得到对应的字节码结果。</li>
 </ul>
-
+<h4 id="3-访问标志"><a href="#3-访问标志" class="headerlink" title="3.访问标志"></a>3.访问标志</h4><p>常量池结束后紧接着的两个字节代表访问标志。</p>
+<h4 id="4-类索引、父类索引与接口索引集合"><a href="#4-类索引、父类索引与接口索引集合" class="headerlink" title="4.类索引、父类索引与接口索引集合"></a>4.类索引、父类索引与接口索引集合</h4><h4 id="5-字段表集合"><a href="#5-字段表集合" class="headerlink" title="5.字段表集合"></a>5.字段表集合</h4><h4 id="6-方法表集合"><a href="#6-方法表集合" class="headerlink" title="6.方法表集合"></a>6.方法表集合</h4><h4 id="7-属性表集合"><a href="#7-属性表集合" class="headerlink" title="7.属性表集合"></a>7.属性表集合</h4>
       
     </div>
     
@@ -318,12 +325,12 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/07/10/jvm相关知识点梳理/">jvm相关知识点梳理</a></p>
+        <p><span>本文标题:</span><a href="/2017/07/10/jvm相关知识点梳理/">JVM相关知识点梳理</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Skipper shou</a></p>
         <p><span>发布时间:</span>2017-07-10, 14:58:41</p>
-        <p><span>最后更新:</span>2017-07-17, 15:55:48</p>
+        <p><span>最后更新:</span>2017-07-18, 11:04:21</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/07/10/jvm相关知识点梳理/" title="jvm相关知识点梳理">https://skipper-sj.github.io/2017/07/10/jvm相关知识点梳理/</a>
+            <span>原始链接:</span><a class="post-url" href="/2017/07/10/jvm相关知识点梳理/" title="JVM相关知识点梳理">https://skipper-sj.github.io/2017/07/10/jvm相关知识点梳理/</a>
             <span class="copy-path" data-clipboard-text="原文: https://skipper-sj.github.io/2017/07/10/jvm相关知识点梳理/　　作者: Skipper shou" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -345,7 +352,7 @@
         
             <div id="article-nav-older" class="article-nav-title">
                 <a href="/2017/07/10/深入jvm字节码/">
-                    深入jvm字节码
+                    深入JVM字节码
                 </a>
             </div>
         
@@ -357,7 +364,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#类文件结构"><span class="toc-number">1.</span> <span class="toc-text">类文件结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-魔数与Class文件的版本"><span class="toc-number">1.1.</span> <span class="toc-text">1.魔数与Class文件的版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-常量池"><span class="toc-number">1.2.</span> <span class="toc-text">2.常量池</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#类文件结构"><span class="toc-number">1.</span> <span class="toc-text">类文件结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-魔数与Class文件的版本"><span class="toc-number">1.1.</span> <span class="toc-text">1.魔数与Class文件的版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-常量池"><span class="toc-number">1.2.</span> <span class="toc-text">2.常量池</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-访问标志"><span class="toc-number">1.3.</span> <span class="toc-text">3.访问标志</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-类索引、父类索引与接口索引集合"><span class="toc-number">1.4.</span> <span class="toc-text">4.类索引、父类索引与接口索引集合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-字段表集合"><span class="toc-number">1.5.</span> <span class="toc-text">5.字段表集合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-方法表集合"><span class="toc-number">1.6.</span> <span class="toc-text">6.方法表集合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-属性表集合"><span class="toc-number">1.7.</span> <span class="toc-text">7.属性表集合</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -393,7 +400,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"jvm相关知识点梳理　| skipper`s technique notes　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"JVM相关知识点梳理　| skipper`s technique notes　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -421,13 +428,13 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/07/10/深入jvm字节码/" title="下一篇: 深入jvm字节码">
+            <a href="/2017/07/10/深入jvm字节码/" title="下一篇: 深入JVM字节码">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/Dubbo学习笔记/">Dubbo学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/java的四种引用方式以及使用场景/">java的四种引用方式以及使用场景</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/类加载机制/">类加载机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/JVM调优试验与总结/">JVM调优试验与总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/垃圾回收算法详解/">垃圾回收算法详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/JVM分区以及垃圾回收/">JVM分区以及垃圾回收</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/favorite/">favorite</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/springboot概念以及使用/">springboot概念以及使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/springmvc理解/">springmvc理解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/spring基本概念/">spring基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/jvm相关知识点梳理/">jvm相关知识点梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/深入jvm字节码/">深入jvm字节码</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/jvm相关概念/">jvm相关概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/markdown入门/">markdown入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/study plan/">study plan</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/07/初识JVM/">初识JVM Java内存结构</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/07/19/hashmap源码解读笔记/">HashMap源码解读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/19/spring中出现的九种设计模式/">spring中出现的九种设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/RPC框架原理入门/">RPC框架原理入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/Dubbo学习笔记/">Dubbo学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/java的四种引用方式以及使用场景/">java的四种引用方式以及使用场景</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/类加载机制/">类加载机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/JVM调优试验与总结/">JVM调优试验与总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/垃圾回收算法详解/">垃圾回收算法详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/JVM分区以及垃圾回收/">JVM分区以及垃圾回收</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/favorite/">favorite</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/springboot概念以及使用/">springboot概念以及使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/springmvc理解/">springmvc理解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/spring基本概念/">spring基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/jvm相关知识点梳理/">JVM相关知识点梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/深入jvm字节码/">深入JVM字节码</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/jvm相关概念/">JVM相关概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/markdown入门/">markdown入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/study plan/">study plan</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/07/初识JVM/">初识JVM Java内存结构</a></li></ul>
 
 
 

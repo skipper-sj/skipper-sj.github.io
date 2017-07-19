@@ -16,7 +16,7 @@
 
 
 <meta name="description" content="简单介绍分区以及使用的垃圾回收方式">
-<meta name="keywords" content="jvm">
+<meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM分区以及垃圾回收">
 <meta property="og:url" content="https://skipper-sj.github.io/2017/07/11/JVM分区以及垃圾回收/index.html">
@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://skipper-sj.github.io/2017/07/11/JVM分区以及垃圾回收/新生代回收方式.jpeg">
 <meta property="og:image" content="https://skipper-sj.github.io/2017/07/11/JVM分区以及垃圾回收/jvm垃圾回收算法.png">
 <meta property="og:image" content="https://skipper-sj.github.io/2017/07/11/JVM分区以及垃圾回收/可达性分析算法.jpg">
-<meta property="og:updated_time" content="2017-07-12T03:00:05.000Z">
+<meta property="og:updated_time" content="2017-07-18T00:23:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM分区以及垃圾回收">
 <meta name="twitter:description" content="简单介绍分区以及使用的垃圾回收方式">
@@ -191,7 +191,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/jvm/">-jvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">-基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jvm/">jvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-boot/">spring boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-mvc/">spring mvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂/">杂</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">-基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/">RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-boot/">spring boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-mvc/">spring mvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂/">杂</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码/">源码</a></li></ul>
                     </div>
                 </section>
                 
@@ -300,7 +300,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jvm/">jvm</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/">JVM</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -310,7 +310,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="Java虚拟机垃圾收集器关注的内存结构如下"><a href="#Java虚拟机垃圾收集器关注的内存结构如下" class="headerlink" title="Java虚拟机垃圾收集器关注的内存结构如下"></a>Java虚拟机垃圾收集器关注的内存结构如下</h2><p><img src="/2017/07/11/JVM分区以及垃圾回收/jvm垃圾回收内存结构.jpg" alt="jvm垃圾回收内存结构"><br>如图所示：堆内存被分为新生代和老年代两个部分，整个堆内存使用分代复制垃圾收集算法。方法区：一般被称为永久代。<br>其中详细的算法会在<a href="../垃圾回收算法详解">垃圾回收算法详解</a>中进行描述。</p>
+        <h2 id="Java虚拟机垃圾收集器关注的内存结构如下"><a href="#Java虚拟机垃圾收集器关注的内存结构如下" class="headerlink" title="Java虚拟机垃圾收集器关注的内存结构如下"></a>Java虚拟机垃圾收集器关注的内存结构如下</h2><p><img src="/2017/07/11/JVM分区以及垃圾回收/jvm垃圾回收内存结构.jpg" alt="JVM垃圾回收内存结构"><br>如图所示：堆内存被分为新生代和老年代两个部分，整个堆内存使用分代复制垃圾收集算法。方法区：一般被称为永久代。<br>其中详细的算法会在<a href="../垃圾回收算法详解">垃圾回收算法详解</a>中进行描述。</p>
 <h3 id="新生代"><a href="#新生代" class="headerlink" title="新生代"></a>新生代</h3><p>新生代使用的是复制和标记-清除垃圾算法。<br>新生代中98%的对象是朝生夕死的短生命周期对象。所以不需要将新生代分为容量大小相等的两部分内存。<br>如果空白的survivor空间无法存放下仍然存活的对象，使用内存分配担保机制，直接将新生代依然存活的对象复制到年老代内存中，同时对于创建大对象时，如果新生代中无足够的连续内存时，也直接在年老代中分配内存空间。<br>Java虚拟机对新生代的垃圾回收称为Minor GC，次数比较频繁，每次回收时间也比较短。<br>使用java虚拟机-Xmn参数可以指定新生代内存大小。<br><img src="/2017/07/11/JVM分区以及垃圾回收/新生代回收方式.jpeg" alt="新生代回收方式"></p>
 <h3 id="老年代"><a href="#老年代" class="headerlink" title="老年代"></a>老年代</h3><p>年老代中的对象一般都是长生命周期对象，对象的存活率比较高，因此在年老代中使用标记-整理垃圾回收算法。<br>Java虚拟机对年老代的垃圾回收称为MajorGC/Full GC，次数相对比较少，每次回收的时间也比较长。<br>当新生代中无足够空间为对象创建分配内存，年老代中内存回收也无法回收到足够的内存空间，并且新生代和年老代空间无法在扩展时，堆就会产生OutOfMemoryError异常。<br>java虚拟机-Xms参数可以指定最小内存大小，-Xmx参数可以指定最大内存大小，这两个参数分别减去Xmn参数指定的新生代内存大小，可以计算出年老代最小和最大内存容量。</p>
 <h3 id="永久代"><a href="#永久代" class="headerlink" title="永久代"></a>永久代</h3><p>java虚拟机内存中的方法区在Sun HotSpot虚拟机中被称为永久代，是被各个线程共享的内存区域，它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译后的代码等数据。永久代垃圾回收比较少，效率也比较低，但是也必须进行垃圾回收，否则会永久代内存不够用时仍然会抛出OutOfMemoryError异常。<br>永久代也使用标记-整理算法进行垃圾回收，java虚拟机参数-XX:PermSize和-XX:MaxPermSize可以设置永久代的初始大小和最大容量。</p>
@@ -319,7 +319,7 @@
 <ul>
 <li>ps:打印gc日志的方式是在VM Option中添加：<br>-verbose:gc  -XX:+PrintGCDetails  </li>
 </ul>
-<p>如上图，循环引用进行回收，说明jvm使用的不是引用计数算法</p>
+<p>如上图，循环引用进行回收，说明JVM使用的不是引用计数算法</p>
 <h5 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h5><p><img src="/2017/07/11/JVM分区以及垃圾回收/可达性分析算法.jpg" alt="可达性分析算法"><br>如上图，这个算法的基本思路就是通过一系列的称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Roots没有任何引用链相连（用图论的话来说，就是从GC Roots到这个对象不可达）时，则证明此对象是不可用的。</p>
 <p>可作为GC Roots的对象包括下面几种：<br>虚拟机栈（栈帧中的本地变量表）中引用的对象。<br>方法区中类静态属性引用的对象。<br>方法区中常量引用的对象。<br>本地方法栈中JNI（即一般说的Native方法）引用的对象。  </p>
 
@@ -333,7 +333,7 @@
         <p><span>本文标题:</span><a href="/2017/07/11/JVM分区以及垃圾回收/">JVM分区以及垃圾回收</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Skipper shou</a></p>
         <p><span>发布时间:</span>2017-07-11, 16:35:50</p>
-        <p><span>最后更新:</span>2017-07-12, 11:00:05</p>
+        <p><span>最后更新:</span>2017-07-18, 08:23:54</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/07/11/JVM分区以及垃圾回收/" title="JVM分区以及垃圾回收">https://skipper-sj.github.io/2017/07/11/JVM分区以及垃圾回收/</a>
             <span class="copy-path" data-clipboard-text="原文: https://skipper-sj.github.io/2017/07/11/JVM分区以及垃圾回收/　　作者: Skipper shou" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -439,7 +439,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/Dubbo学习笔记/">Dubbo学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/java的四种引用方式以及使用场景/">java的四种引用方式以及使用场景</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/类加载机制/">类加载机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/JVM调优试验与总结/">JVM调优试验与总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/垃圾回收算法详解/">垃圾回收算法详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/JVM分区以及垃圾回收/">JVM分区以及垃圾回收</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/favorite/">favorite</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/springboot概念以及使用/">springboot概念以及使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/springmvc理解/">springmvc理解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/spring基本概念/">spring基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/jvm相关知识点梳理/">jvm相关知识点梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/深入jvm字节码/">深入jvm字节码</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/jvm相关概念/">jvm相关概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/markdown入门/">markdown入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/study plan/">study plan</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/07/初识JVM/">初识JVM Java内存结构</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/07/19/hashmap源码解读笔记/">HashMap源码解读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/19/spring中出现的九种设计模式/">spring中出现的九种设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/RPC框架原理入门/">RPC框架原理入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/Dubbo学习笔记/">Dubbo学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/java的四种引用方式以及使用场景/">java的四种引用方式以及使用场景</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/类加载机制/">类加载机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/JVM调优试验与总结/">JVM调优试验与总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/垃圾回收算法详解/">垃圾回收算法详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/JVM分区以及垃圾回收/">JVM分区以及垃圾回收</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/favorite/">favorite</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/springboot概念以及使用/">springboot概念以及使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/springmvc理解/">springmvc理解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/spring基本概念/">spring基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/jvm相关知识点梳理/">JVM相关知识点梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/深入jvm字节码/">深入JVM字节码</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/jvm相关概念/">JVM相关概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/markdown入门/">markdown入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/study plan/">study plan</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/07/初识JVM/">初识JVM Java内存结构</a></li></ul>
 
 
 

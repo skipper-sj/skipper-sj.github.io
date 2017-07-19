@@ -16,7 +16,7 @@
 
 
 <meta name="description" content="描述类加载机制以及相关概念">
-<meta name="keywords" content="-jvm">
+<meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="类加载机制">
 <meta property="og:url" content="https://skipper-sj.github.io/2017/07/17/类加载机制/index.html">
@@ -24,7 +24,7 @@
 <meta property="og:description" content="描述类加载机制以及相关概念">
 <meta property="og:image" content="https://skipper-sj.github.io/2017/07/17/类加载机制/类加载器体系结构.jpg">
 <meta property="og:image" content="https://skipper-sj.github.io/2017/07/17/类加载机制/双亲委派模式实现.png">
-<meta property="og:updated_time" content="2017-07-17T00:25:10.000Z">
+<meta property="og:updated_time" content="2017-07-18T03:04:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="类加载机制">
 <meta name="twitter:description" content="描述类加载机制以及相关概念">
@@ -189,7 +189,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/jvm/">-jvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">-基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jvm/">jvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-boot/">spring boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-mvc/">spring mvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂/">杂</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">-基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/">RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-boot/">spring boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-mvc/">spring mvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂/">杂</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码/">源码</a></li></ul>
                     </div>
                 </section>
                 
@@ -298,7 +298,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jvm/">-jvm</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/">JVM</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -314,6 +314,15 @@
 <h3 id="（3）应用程序类加载器"><a href="#（3）应用程序类加载器" class="headerlink" title="（3）应用程序类加载器"></a>（3）应用程序类加载器</h3><p>负责加载用户类路径classpath上所指定的类库</p>
 <h3 id="（4）自定义类加载器"><a href="#（4）自定义类加载器" class="headerlink" title="（4）自定义类加载器"></a>（4）自定义类加载器</h3><p>如果程序中没有自定义过类加载器，应用程序类加载器就是程序中默认的类加载器。<br>若要实现自定义类加载器，只需要继承java.lang.ClassLoader 类，并且重写其findClass()方法即可。  </p>
 <h2 id="双亲委派模式"><a href="#双亲委派模式" class="headerlink" title="双亲委派模式"></a>双亲委派模式</h2><p>当一个类收到了类加载请求，他首先不会尝试自己去加载这个类，而是把这个请求委派给父类去完成，每一个层次类加载器都是如此，因此所有的加载请求都应该传送到启动类加载其中，只有当父类加载器反馈自己无法完成这个请求的时候（在它的加载路径下没有找到所需加载的Class），子类加载器才会尝试自己去加载。<br>在下图中很好的体现了该模式的运行方式：<br><img src="/2017/07/17/类加载机制/双亲委派模式实现.png" alt="双亲委派模式过程"></p>
+<h2 id="获取类的二进制流"><a href="#获取类的二进制流" class="headerlink" title="获取类的二进制流"></a>获取类的二进制流</h2><p>目前来说，获取二进制流的方式有很多，比如：</p>
+<ul>
+<li>从ZIP包中读取，比如JAR、WAR、EAR格式</li>
+<li>从网络中获取，比如说Applet</li>
+<li>运行时计算生成，比如动态代理</li>
+<li>由其他文件生成，比如JSP应用，由JSP文件生成对应的Class类</li>
+<li>从数据库中读取，比较少见  </li>
+<li>…等等</li>
+</ul>
 
       
     </div>
@@ -325,7 +334,7 @@
         <p><span>本文标题:</span><a href="/2017/07/17/类加载机制/">类加载机制</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Skipper shou</a></p>
         <p><span>发布时间:</span>2017-07-17, 07:52:46</p>
-        <p><span>最后更新:</span>2017-07-17, 08:25:10</p>
+        <p><span>最后更新:</span>2017-07-18, 11:04:18</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/07/17/类加载机制/" title="类加载机制">https://skipper-sj.github.io/2017/07/17/类加载机制/</a>
             <span class="copy-path" data-clipboard-text="原文: https://skipper-sj.github.io/2017/07/17/类加载机制/　　作者: Skipper shou" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -361,7 +370,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#（1）启动类加载器"><span class="toc-number">1.</span> <span class="toc-text">（1）启动类加载器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（2）扩展类加载器"><span class="toc-number">2.</span> <span class="toc-text">（2）扩展类加载器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（3）应用程序类加载器"><span class="toc-number">3.</span> <span class="toc-text">（3）应用程序类加载器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（4）自定义类加载器"><span class="toc-number">4.</span> <span class="toc-text">（4）自定义类加载器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#双亲委派模式"><span class="toc-number"></span> <span class="toc-text">双亲委派模式</span></a>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#（1）启动类加载器"><span class="toc-number">1.</span> <span class="toc-text">（1）启动类加载器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（2）扩展类加载器"><span class="toc-number">2.</span> <span class="toc-text">（2）扩展类加载器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（3）应用程序类加载器"><span class="toc-number">3.</span> <span class="toc-text">（3）应用程序类加载器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（4）自定义类加载器"><span class="toc-number">4.</span> <span class="toc-text">（4）自定义类加载器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#双亲委派模式"><span class="toc-number"></span> <span class="toc-text">双亲委派模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取类的二进制流"><span class="toc-number"></span> <span class="toc-text">获取类的二进制流</span></a>
         
     </div>
     <style>
@@ -431,7 +440,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/Dubbo学习笔记/">Dubbo学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/java的四种引用方式以及使用场景/">java的四种引用方式以及使用场景</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/类加载机制/">类加载机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/JVM调优试验与总结/">JVM调优试验与总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/垃圾回收算法详解/">垃圾回收算法详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/JVM分区以及垃圾回收/">JVM分区以及垃圾回收</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/favorite/">favorite</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/springboot概念以及使用/">springboot概念以及使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/springmvc理解/">springmvc理解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/spring基本概念/">spring基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/jvm相关知识点梳理/">jvm相关知识点梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/深入jvm字节码/">深入jvm字节码</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/jvm相关概念/">jvm相关概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/markdown入门/">markdown入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/study plan/">study plan</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/07/初识JVM/">初识JVM Java内存结构</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/07/19/hashmap源码解读笔记/">HashMap源码解读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/19/spring中出现的九种设计模式/">spring中出现的九种设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/RPC框架原理入门/">RPC框架原理入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/Dubbo学习笔记/">Dubbo学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/java的四种引用方式以及使用场景/">java的四种引用方式以及使用场景</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/类加载机制/">类加载机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/JVM调优试验与总结/">JVM调优试验与总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/垃圾回收算法详解/">垃圾回收算法详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/JVM分区以及垃圾回收/">JVM分区以及垃圾回收</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/11/favorite/">favorite</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/springboot概念以及使用/">springboot概念以及使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/springmvc理解/">springmvc理解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/spring基本概念/">spring基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/jvm相关知识点梳理/">JVM相关知识点梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/深入jvm字节码/">深入JVM字节码</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/jvm相关概念/">JVM相关概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/markdown入门/">markdown入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/study plan/">study plan</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/07/初识JVM/">初识JVM Java内存结构</a></li></ul>
 
 
 
