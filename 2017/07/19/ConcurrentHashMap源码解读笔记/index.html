@@ -15,17 +15,17 @@
 
 
 
-<meta name="description" content="工具类收藏夹hexo主站：hexohexo主题：yelee 学习途径刷题工具：leetcode">
-<meta name="keywords" content="工具">
+<meta name="description" content="简单介绍ConcurrentHashMap源码以及结构介绍">
+<meta name="keywords" content="源码,数据结构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="favorite">
-<meta property="og:url" content="https://skipper-sj.github.io/2017/07/11/favorite/index.html">
+<meta property="og:title" content="ConcurrentHashMap源码解读笔记">
+<meta property="og:url" content="https://skipper-sj.github.io/2017/07/19/ConcurrentHashMap源码解读笔记/index.html">
 <meta property="og:site_name" content="skipper`s technique notes">
-<meta property="og:description" content="工具类收藏夹hexo主站：hexohexo主题：yelee 学习途径刷题工具：leetcode">
-<meta property="og:updated_time" content="2017-07-11T08:38:50.000Z">
+<meta property="og:description" content="简单介绍ConcurrentHashMap源码以及结构介绍">
+<meta property="og:updated_time" content="2017-07-22T01:24:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="favorite">
-<meta name="twitter:description" content="工具类收藏夹hexo主站：hexohexo主题：yelee 学习途径刷题工具：leetcode">
+<meta name="twitter:title" content="ConcurrentHashMap源码解读笔记">
+<meta name="twitter:description" content="简单介绍ConcurrentHashMap源码以及结构介绍">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -57,7 +57,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>favorite | skipper`s technique notes</title>
+<title>ConcurrentHashMap源码解读笔记 | skipper`s technique notes</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -265,11 +265,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-favorite" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-ConcurrentHashMap源码解读笔记" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/07/11/favorite/" class="article-date">
-      <time datetime="2017-07-11T02:25:05.000Z" itemprop="datePublished">2017-07-11</time>
+      <a href="/2017/07/19/ConcurrentHashMap源码解读笔记/" class="article-date">
+      <time datetime="2017-07-19T09:17:21.000Z" itemprop="datePublished">2017-07-19</time>
 </a>
 
 
@@ -284,7 +284,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      favorite
+      ConcurrentHashMap源码解读笔记
     </h1>
   
 
@@ -292,14 +292,10 @@
       
       <div class="article-info article-info-post">
         
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/工具/">工具</a><a class="article-category-link" href="/categories/工具/收藏/">收藏</a>
-    </div>
-
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具/">工具</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/源码/">源码</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -309,8 +305,19 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="工具类收藏夹"><a href="#工具类收藏夹" class="headerlink" title="工具类收藏夹"></a>工具类收藏夹</h2><p>hexo主站：<a href="https://hexo.io/docs/" target="_blank" rel="external">hexo</a><br>hexo主题：<a href="http://moxfive.coding.me/yelee/" target="_blank" rel="external">yelee</a></p>
-<h2 id="学习途径"><a href="#学习途径" class="headerlink" title="学习途径"></a>学习途径</h2><p>刷题工具：<a href="https://leetcode.com/" target="_blank" rel="external">leetcode</a></p>
+        <p><a href="http://www.jianshu.com/p/c0642afe03e0" target="_blank" rel="external">参考文档</a><br>ConcurrentHashMap是concurrent家族中的一个类，由于它可以高效地支持并发操作，以及被广泛使用，经典的开源框架spring的底层数据结构就是使用ConcurrentHashMap实现的。跟HashTable和synchronizeMap比，后两者在方法或者参数上添加了synchronized锁，而concurrentHashMap摒弃了Segment（锁段）的概念（在1.8之前的结构还是按照锁段结构），而是启用了一种全新的方式实现,利用CAS算法。所以，相较性能会有优势很多，适用于读多写少的场景（因为concurrentHashMap对写加锁，对读不加锁）。而且concurrentHashMap底层沿用了HashMap中1.8里面数组+链表+红黑树的方式思想。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//默认为null，初始化发生在第一次插入操作，默认大小为16的数组，用来存储Node节点数据，扩容时大小总是2的幂次方。</span></div><div class="line"> <span class="keyword">transient</span> <span class="keyword">volatile</span> Node&lt;K,V&gt;[] table;</div><div class="line"><span class="comment">//默认为null，扩容时新生成的数组，其大小为原数组的两倍。</span></div><div class="line"> <span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">volatile</span> Node&lt;K,V&gt;[] nextTable;</div><div class="line"><span class="comment">//默认为0，用来控制table的初始化和扩容操作，具体应用在后续会体现出来。</span></div><div class="line"> <span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">volatile</span> <span class="keyword">int</span> sizeCtl;</div></pre></td></tr></table></figure></p>
+<p>其中，sizeCtl为-1是表示table正在初始化，-N表示有N-1个线程正在进行扩容操作，其他情况下，如果table未初始化，表示table需要初始化的大小。如果table初始化完成，表示table的容量，默认是跟负载因子一致。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//保存key，value及key的hash值的数据结构。</span></div><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</div><div class="line">       <span class="keyword">final</span> <span class="keyword">int</span> hash;</div><div class="line">       <span class="keyword">final</span> K key;</div><div class="line">       <span class="keyword">volatile</span> V val;</div><div class="line">       <span class="keyword">volatile</span> Node&lt;K,V&gt; next;</div><div class="line">       ...</div><div class="line">     &#125;</div><div class="line"><span class="comment">//一个特殊的Node节点，hash值为-1，其中存储nextTable的引用。</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">ForwardingNode</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">Node</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</div><div class="line">...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>只有table发生扩容的时候，ForwardingNode才会发挥作用，作为一个占位符放在table中表示当前节点为null或则已经被移动。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">tableSizeFor</span><span class="params">(<span class="keyword">int</span> c)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> n = c - <span class="number">1</span>;</div><div class="line">        n |= n &gt;&gt;&gt; <span class="number">1</span>;</div><div class="line">        n |= n &gt;&gt;&gt; <span class="number">2</span>;</div><div class="line">        n |= n &gt;&gt;&gt; <span class="number">4</span>;</div><div class="line">        n |= n &gt;&gt;&gt; <span class="number">8</span>;</div><div class="line">        n |= n &gt;&gt;&gt; <span class="number">16</span>;</div><div class="line">        <span class="keyword">return</span> (n &lt; <span class="number">0</span>) ? <span class="number">1</span> : (n &gt;= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + <span class="number">1</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>实例化ConcurrentHashMap时带参数时，会根据参数调整table的大小，确保table的大小总是2的幂次方。<br>需要注意的是，ConcurrentHashMap在构造函数中只会初始化sizeCtl值，并不会直接初始化table，而是延缓到第一次put操作。</p>
+<h4 id="table的初始化"><a href="#table的初始化" class="headerlink" title="table的初始化"></a>table的初始化</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">final</span> Node&lt;K,V&gt;[] initTable() &#123;</div><div class="line">        Node&lt;K,V&gt;[] tab; <span class="keyword">int</span> sc;</div><div class="line">        <span class="keyword">while</span> ((tab = table) == <span class="keyword">null</span> || tab.length == <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">if</span> ((sc = sizeCtl) &lt; <span class="number">0</span>)</div><div class="line">                Thread.yield(); <span class="comment">// lost initialization race; just spin</span></div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (U.compareAndSwapInt(<span class="keyword">this</span>, SIZECTL, sc, -<span class="number">1</span>)) &#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    <span class="keyword">if</span> ((tab = table) == <span class="keyword">null</span> || tab.length == <span class="number">0</span>) &#123;</div><div class="line">                        <span class="keyword">int</span> n = (sc &gt; <span class="number">0</span>) ? sc : DEFAULT_CAPACITY;</div><div class="line">                        <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</div><div class="line">                        Node&lt;K,V&gt;[] nt = (Node&lt;K,V&gt;[])<span class="keyword">new</span> Node&lt;?,?&gt;[n];</div><div class="line">                        table = tab = nt;</div><div class="line">                        sc = n - (n &gt;&gt;&gt; <span class="number">2</span>);</div><div class="line">                    &#125;</div><div class="line">                &#125; <span class="keyword">finally</span> &#123;</div><div class="line">                    sizeCtl = sc;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> tab;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>这里就用到了sizeCtl，如果一个线程发现sizeCtl&lt;0，意味着另外的线程执行CAS操作成功，当前线程只需要让出cpu时间片。<br>执行第一次put操作的线程会执行Unsafe.compareAndSwapInt方法修改sizeCtl为-1，有且只有一个线程能够修改成功，其它线程通过Thread.yield()让出CPU时间片等待table初始化完成。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">final</span> V <span class="title">putVal</span><span class="params">(K key, V value, <span class="keyword">boolean</span> onlyIfAbsent)</span> </span>&#123;</div><div class="line">...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>put操作采用CAS+synchronized实现并发插入或更新操作。<br>采用Unsafe.getObjectVolatile来获取元素，保证每次拿到的数据都是最新的。<br>一下分别为几个判断语句的作用：  </p>
+<ul>
+<li>如果f为null，说明table中这个位置第一次插入元素，利用Unsafe.compareAndSwapObject方法插入Node节点。CAS方法很好保证了先后顺序。  </li>
+<li>如果f的hash值为-1，说明当前f是ForwardingNode节点，意味有其它线程正在扩容，则一起进行扩容操作。</li>
+<li>采用同步内置锁实现并发，把新的Node节点按链表或红黑树的方式插入到合适的位置。  </li>
+</ul>
 
       
     </div>
@@ -319,13 +326,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/07/11/favorite/">favorite</a></p>
+        <p><span>本文标题:</span><a href="/2017/07/19/ConcurrentHashMap源码解读笔记/">ConcurrentHashMap源码解读笔记</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Skipper shou</a></p>
-        <p><span>发布时间:</span>2017-07-11, 10:25:05</p>
-        <p><span>最后更新:</span>2017-07-11, 16:38:50</p>
+        <p><span>发布时间:</span>2017-07-19, 17:17:21</p>
+        <p><span>最后更新:</span>2017-07-22, 09:24:32</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/07/11/favorite/" title="favorite">https://skipper-sj.github.io/2017/07/11/favorite/</a>
-            <span class="copy-path" data-clipboard-text="原文: https://skipper-sj.github.io/2017/07/11/favorite/　　作者: Skipper shou" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/07/19/ConcurrentHashMap源码解读笔记/" title="ConcurrentHashMap源码解读笔记">https://skipper-sj.github.io/2017/07/19/ConcurrentHashMap源码解读笔记/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://skipper-sj.github.io/2017/07/19/ConcurrentHashMap源码解读笔记/　　作者: Skipper shou" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -337,16 +344,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/07/11/JVM分区以及垃圾回收/">
-                    JVM分区以及垃圾回收
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/07/10/springboot概念以及使用/">
-                    springboot概念以及使用
+                <a href="/2017/07/19/hashmap源码解读笔记/">
+                    HashMap源码解读笔记
                 </a>
             </div>
         
@@ -358,7 +359,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#工具类收藏夹"><span class="toc-number">1.</span> <span class="toc-text">工具类收藏夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习途径"><span class="toc-number">2.</span> <span class="toc-text">学习途径</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#table的初始化"><span class="toc-number">1.</span> <span class="toc-text">table的初始化</span></a></li></ol>
         
     </div>
     <style>
@@ -394,7 +395,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"favorite　| skipper`s technique notes　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"ConcurrentHashMap源码解读笔记　| skipper`s technique notes　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -414,15 +415,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/07/11/JVM分区以及垃圾回收/" title="上一篇: JVM分区以及垃圾回收">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/07/10/springboot概念以及使用/" title="下一篇: springboot概念以及使用">
+            <a href="/2017/07/19/hashmap源码解读笔记/" title="下一篇: HashMap源码解读笔记">
                 <i class="fa fa-angle-right"></i>
             </a>
         
