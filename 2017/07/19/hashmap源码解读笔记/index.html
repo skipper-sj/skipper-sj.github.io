@@ -16,13 +16,13 @@
 
 
 <meta name="description" content="简单介绍HashMap源码以及结构介绍">
-<meta name="keywords" content="源码,数据结构">
+<meta name="keywords" content="数据结构,源码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HashMap源码解读笔记">
 <meta property="og:url" content="https://skipper-sj.github.io/2017/07/19/hashmap源码解读笔记/index.html">
 <meta property="og:site_name" content="skipper`s technique notes">
 <meta property="og:description" content="简单介绍HashMap源码以及结构介绍">
-<meta property="og:updated_time" content="2017-07-24T08:38:19.000Z">
+<meta property="og:updated_time" content="2017-08-02T00:08:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap源码解读笔记">
 <meta name="twitter:description" content="简单介绍HashMap源码以及结构介绍">
@@ -305,10 +305,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><a href="http://www.cnblogs.com/leesf456/p/5242233.html" target="_blank" rel="external">参考文档</a><br>以下内容不会赘述代码内容，需要查看代码注释的，可以查看参考文档。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;, <span class="title">Cloneable</span>, <span class="title">Serializable</span></span>&#123;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+        <p><a href="http://www.cnblogs.com/leesf456/p/5242233.html" target="_blank" rel="external">参考文档</a><br><a href="http://blog.csdn.net/u011240877/article/details/53358305" target="_blank" rel="external">红黑树相关参考</a><br>以下内容不会赘述代码内容，需要查看代码注释的，可以查看参考文档。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;, <span class="title">Cloneable</span>, <span class="title">Serializable</span></span>&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>其中实现的方法，Map接口定义了一组通用的操作，Cloneable接口则表示可以进行拷贝，Serializable实现了序列化。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="number">1</span> &lt;&lt; <span class="number">4</span>;</div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> DEFAULT_LOAD_FACTOR = <span class="number">0.75f</span>;</div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAXIMUM_CAPACITY = <span class="number">1</span> &lt;&lt; <span class="number">30</span>;</div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TREEIFY_THRESHOLD = <span class="number">8</span>;</div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> UNTREEIFY_THRESHOLD = <span class="number">6</span>;</div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MIN_TREEIFY_CAPACITY = <span class="number">64</span>;</div></pre></td></tr></table></figure>
-<p>HashMap默认大小为16，默认的负载因子为0.75，当达到负载因子*当前大小时，会默认将大小提升两倍。HashMap默认最大值为2的30次方。<br>三个值分别表示桶（bucket）上的节点数比较来判定使用链表还是红黑树。<br>以及转化为红黑树对应的table的最大值。<br>类的几个构造函数简单初始化了HashMap的以上重要参数。  </p>
+<p>HashMap默认大小为16，默认的负载因子为0.75，当达到负载因子*当前大小时，会默认将大小提升两倍。HashMap默认最大值为2的30次方。<br>三个值分别表示桶（bucket）上的节点数比较来判定使用链表还是红黑树。<br>以及转化为红黑树对应的table的最大值。<br>类的几个构造函数简单初始化了HashMap的以上重要参数。<br>当链表中数量超过8时，会转化成红黑树。<br>还原阈值必须比树化阈值要低，树形化容量不能小于四倍树形阈值。  </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">final</span> V <span class="title">putVal</span><span class="params">(<span class="keyword">int</span> hash, K key, V value, <span class="keyword">boolean</span> onlyIfAbsent,</span></span></div><div class="line">                   <span class="keyword">boolean</span> evict) &#123;</div><div class="line"></div><div class="line">                   &#125;</div></pre></td></tr></table></figure>
 <p>putVal在JDK8之后引入了红黑树的概念，当结点数量达到阈值，会将链表转化为红黑树，而且HashMap并没有直接提供putVal接口方法，而是提供了put函数，put函数调用putVal来插入元素。<br>同样的，获取结点getNode函数也相应的加入了红黑树的概念，其他跟以前的方法一致，会遍历链表。而且HashMap也只提供了get方法。<br>作为HashMap使用，需要尽量避免resize的情况，因为resize会遍历所有的元素，时间复杂度很高，所以，我们要合理设置几个常量值。  </p>
 
@@ -322,7 +322,7 @@
         <p><span>本文标题:</span><a href="/2017/07/19/hashmap源码解读笔记/">HashMap源码解读笔记</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Skipper shou</a></p>
         <p><span>发布时间:</span>2017-07-19, 08:08:32</p>
-        <p><span>最后更新:</span>2017-07-24, 16:38:19</p>
+        <p><span>最后更新:</span>2017-08-02, 08:08:53</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/07/19/hashmap源码解读笔记/" title="HashMap源码解读笔记">https://skipper-sj.github.io/2017/07/19/hashmap源码解读笔记/</a>
             <span class="copy-path" data-clipboard-text="原文: https://skipper-sj.github.io/2017/07/19/hashmap源码解读笔记/　　作者: Skipper shou" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

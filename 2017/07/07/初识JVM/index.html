@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="skipper`s technique notes">
 <meta property="og:description" content="旨在学习JVM基础">
 <meta property="og:image" content="https://skipper-sj.github.io/2017/07/07/初识JVM/局部变量表gc示例.png">
-<meta property="og:updated_time" content="2017-07-18T03:44:13.000Z">
+<meta property="og:updated_time" content="2017-08-02T00:37:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初识JVM Java内存结构">
 <meta name="twitter:description" content="旨在学习JVM基础">
@@ -309,10 +309,10 @@
           
         <p>Java虚拟机规范规定的java虚拟机内存其实就是java虚拟机运行时数据区</p>
 <p>Java内存结构分为几块：</p>
-<h2 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h2><p>程序计数器是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。– 《深入理解java虚拟机》<br>类加载完之后，会产生对应的class文件，每一行执行指令完之后，程序计数器会加1，指向顺序汇总的下一个指令。<br>因为Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式来实现的，在任何时刻，一个处理器或者说一个内核都只会执行一条线程中的指令。<br>所以，每条线程拥有自己独立的程序计数器，各条线程之间不相互影响，独立存储，线程私有。  </p>
-<h2 id="Java虚拟机栈"><a href="#Java虚拟机栈" class="headerlink" title="Java虚拟机栈"></a>Java虚拟机栈</h2><p>每个方法在执行的同时都会创建一个栈帧，用于存放局部变量表、操作数栈、动态链接、方法出口等信息。<br>局部变量表存放的是8种java的基本数据类型、对象引用、returnAddress类型。也是线程私有的。其中有一点需要注意的是：创建局部变量，即使不在作用域，如果没有任何对局部变量表的读写操作，变量原本所占用的槽还没有被其他变量所复用，所以作为GC Roots一部分的局部变量表仍然保持着对它的关联。所以不会被垃圾回收。所以说，这时候，如果再后面是一个耗时很长的操作，那么设置为null就很有意义了。<br>如下图示例：<br><img src="/2017/07/07/初识JVM/局部变量表gc示例.png" alt="局部变量表gc示例"><br>以上可以看出，当int a=0;时，才会进行垃圾回收。</p>
-<h2 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h2><p>为虚拟机使用到的Native方法服务。<br>如果某个虚拟机实现的本地方法接口是使用C连接模型的话，那么它的本地方法栈就是C栈。也是线程私有的。</p>
-<h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><p>Java堆是被所有线程共享的一块内存区域，在虚拟机启动时创建。此内存区域的唯一目的就是存放对象实例，几乎所有的对象实例都在这里分配内存。<br>其中分代回收会在<a href="../../11/JVM分区以及垃圾回收">JVM分区以及垃圾回收</a>中详细描述。</p>
+<h2 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h2><p>程序计数器是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。– 摘自《深入理解java虚拟机》<br>类加载完之后，会产生对应的class文件，每一行执行指令完之后，程序计数器会加1，指向顺序汇总的下一个指令。<br>因为Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式来实现的，在任何时刻，一个处理器或者说一个内核都只会执行一条线程中的指令。<br>所以，每条线程拥有自己独立的程序计数器，各条线程之间不相互影响，独立存储，<u><strong>线程私有</strong></u>。  </p>
+<h2 id="Java虚拟机栈"><a href="#Java虚拟机栈" class="headerlink" title="Java虚拟机栈"></a>Java虚拟机栈</h2><p>每个方法在执行的同时都会创建一个栈帧，用于存放<u><strong>局部变量表</strong></u>、<u><strong>操作数栈</strong></u>、<u><strong>动态链接</strong></u>、<u><strong>方法出口</strong></u>等信息。<br>局部变量表存放的是<u><strong>8种java的基本数据类型</strong></u>、<u><strong>对象引用</strong></u>、<u><strong>returnAddress类型</strong></u>。也是<u><strong>线程私有的</strong></u>。其中有一点需要注意的是：创建局部变量，即使不在作用域，如果没有任何对局部变量表的读写操作，变量原本所占用的槽还没有被其他变量所复用，所以作为GC Roots一部分的局部变量表仍然保持着对它的关联。所以不会被垃圾回收。所以说，这时候，如果再后面是一个耗时很长的操作，那么设置为null就很有意义了。<br>如下图示例：<br><img src="/2017/07/07/初识JVM/局部变量表gc示例.png" alt="局部变量表gc示例"><br>以上可以看出，当int a=0;时，才会进行垃圾回收。</p>
+<h2 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h2><p>为虚拟机使用到的<u><strong>Native方法服务</strong></u>(例如C相关方法)。<br>如果某个虚拟机实现的本地方法接口是使用C连接模型的话，那么它的本地方法栈就是C栈。也是<u><strong>线程私有的</strong></u>。</p>
+<h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><p>Java堆是被所有<u><strong>线程共享</strong></u>的一块内存区域，在虚拟机启动时创建。此内存区域的唯一目的就是存放对象实例，几乎所有的对象实例都在这里分配内存。<br>其中分代回收会在<a href="../../11/JVM分区以及垃圾回收">JVM分区以及垃圾回收</a>中详细描述。</p>
 <h2 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h2><p>方法区也是线程共享的一块内存区域，用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</p>
 
       
@@ -325,7 +325,7 @@
         <p><span>本文标题:</span><a href="/2017/07/07/初识JVM/">初识JVM Java内存结构</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Skipper shou</a></p>
         <p><span>发布时间:</span>2017-07-07, 17:06:46</p>
-        <p><span>最后更新:</span>2017-07-18, 11:44:13</p>
+        <p><span>最后更新:</span>2017-08-02, 08:37:22</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/07/07/初识JVM/" title="初识JVM Java内存结构">https://skipper-sj.github.io/2017/07/07/初识JVM/</a>
             <span class="copy-path" data-clipboard-text="原文: https://skipper-sj.github.io/2017/07/07/初识JVM/　　作者: Skipper shou" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
