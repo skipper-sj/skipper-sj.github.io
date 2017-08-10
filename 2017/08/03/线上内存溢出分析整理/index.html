@@ -15,16 +15,17 @@
 
 
 
-<meta name="description" content="付出不一定有收获，但是不付出一定不会有收获。">
+<meta name="description" content="简单描述一些常用方法">
+<meta name="keywords" content="优化">
 <meta property="og:type" content="article">
-<meta property="og:title" content="动态代理类相关笔记">
-<meta property="og:url" content="https://skipper-sj.github.io/2017/07/24/动态代理类相关笔记/index.html">
+<meta property="og:title" content="线上问题分析整理">
+<meta property="og:url" content="https://skipper-sj.github.io/2017/08/03/线上内存溢出分析整理/index.html">
 <meta property="og:site_name" content="skipper`s technique notes">
-<meta property="og:description" content="付出不一定有收获，但是不付出一定不会有收获。">
-<meta property="og:updated_time" content="2017-07-24T07:23:40.000Z">
+<meta property="og:description" content="简单描述一些常用方法">
+<meta property="og:updated_time" content="2017-08-10T08:59:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="动态代理类相关笔记">
-<meta name="twitter:description" content="付出不一定有收获，但是不付出一定不会有收获。">
+<meta name="twitter:title" content="线上问题分析整理">
+<meta name="twitter:description" content="简单描述一些常用方法">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -56,7 +57,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>动态代理类相关笔记 | skipper`s technique notes</title>
+<title>线上问题分析整理 | skipper`s technique notes</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -264,11 +265,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-动态代理类相关笔记" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-线上内存溢出分析整理" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/07/24/动态代理类相关笔记/" class="article-date">
-      <time datetime="2017-07-24T07:23:40.000Z" itemprop="datePublished">2017-07-24</time>
+      <a href="/2017/08/03/线上内存溢出分析整理/" class="article-date">
+      <time datetime="2017-08-03T00:12:05.000Z" itemprop="datePublished">2017-08-03</time>
 </a>
 
 
@@ -283,7 +284,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      动态代理类相关笔记
+      线上问题分析整理
     </h1>
   
 
@@ -293,6 +294,10 @@
         
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/优化/">优化</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -300,7 +305,16 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        
+        <p>一般线上出现的问题，最多的就是内存溢出和CPU占用过高的问题，一般情况下，这两个问题都能够通过重启应用来解决，但是肯定不是长久之计，所以，需要一些手法来找到问题的根源。<br>本文还会顺便描述一些常用指令的重点的相关描述。</p>
+<h3 id="内存溢出"><a href="#内存溢出" class="headerlink" title="内存溢出"></a>内存溢出</h3><h3 id="CPU占用过高"><a href="#CPU占用过高" class="headerlink" title="CPU占用过高"></a>CPU占用过高</h3><h4 id="1-善用top指令"><a href="#1-善用top指令" class="headerlink" title="1.善用top指令"></a>1.善用top指令</h4><p>输入top指令能看到以下显示的内容：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">top - <span class="number">08</span>:<span class="number">28</span>:<span class="number">18</span> up <span class="number">9</span> days, <span class="number">17</span>:<span class="number">06</span>,  <span class="number">2</span> users,  load average: <span class="number">1.57</span>, <span class="number">1.95</span>, <span class="number">2.08</span>  </div><div class="line">Tasks:  <span class="number">95</span> total,   <span class="number">1</span> running,  <span class="number">94</span> sleeping,   <span class="number">0</span> stopped,   <span class="number">0</span> <span class="function">zombie  </span></div><div class="line"><span class="title">Cpu</span><span class="params">(s)</span>:  4.8%us,  3.1%sy,  0.0%ni, 92.1%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st</div><div class="line">Mem:   1922260k total,  1846672k used,    75588k free,    11736k buffers</div><div class="line">Swap:  2097148k total,   559328k used,  1537820k free,    20564k cached</div><div class="line"></div><div class="line">  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND</div><div class="line">  783 root      20   0 1109m 132m 5132 S  1.3  7.1  27:16.33 java</div><div class="line">12051 root      20   0 1219m 171m 5080 S  1.3  9.2  54:31.21 java</div><div class="line">24334 root      20   0 1890m 315m 6212 S  1.3 16.8  10:50.13 java</div><div class="line">26188 root      20   0 1144m 118m 4856 S  1.3  6.3  96:14.14 java</div><div class="line">20690 root      20   0 1133m 307m 4640 S  1.0 16.4 101:24.54 java</div><div class="line">27568 root      20   0 1122m 149m 5236 S  1.0  8.0  36:11.35 java</div><div class="line">28466 root      20   0 1095m 182m 4392 S  1.0  9.7 134:30.32 java</div><div class="line">29103 root      20   0 1121m 177m 2852 S  1.0  9.4 136:07.50 java</div><div class="line">15917 root      20   0 1061m  84m 4532 S  0.3  4.5  29:41.08 java</div><div class="line">    1 root      20   0 19352  544  316 S  0.0  0.0   0:08.21 init</div><div class="line">    2 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kthreadd</div><div class="line">    3 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/0</div><div class="line">    4 root      20   0     0    0    0 S  0.0  0.0   0:35.26 ksoftirqd/0</div><div class="line">    5 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 stopper/0</div><div class="line">    6 root      RT   0     0    0    0 S  0.0  0.0   0:02.06 watchdog/0</div><div class="line">    7 root      20   0     0    0    0 S  0.0  0.0   1:05.18 events/0</div><div class="line">    8 root      20   0     0    0    0 S  0.0  0.0   0:00.00 events/0</div><div class="line">    9 root      20   0     0    0    0 S  0.0  0.0   0:00.00 events_long/0</div><div class="line">    10 root      20   0     0    0    0 S  0.0  0.0   0:00.00 events_powe</div></pre></td></tr></table></figure></p>
+<p>一般情况下，可以查看load average参数，可以知道当前服务器的负载情况，该参数与cpu的核数相关，比如单核CPU应该在1以下，双核在2以下，一次类推。<br>常用的可以用以下指令来查询物理CPU个数：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cat /proc/cpuinfo| grep <span class="string">"physical id"</span>| sort| uniq| wc</div><div class="line">      <span class="number">1</span>       <span class="number">4</span>      <span class="number">16</span></div></pre></td></tr></table></figure></p>
+<p>还可以查看每个物理CPU中core的个数(即核数)：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cat /proc/cpuinfo| grep <span class="string">"cpu cores"</span>| uniq</div><div class="line">cpu cores       : <span class="number">1</span></div></pre></td></tr></table></figure></p>
+<p>还可以查看逻辑CPU的个数：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cat /proc/cpuinfo| grep <span class="string">"processor"</span>| wc</div><div class="line">      <span class="number">1</span>       <span class="number">3</span>      <span class="number">14</span></div></pre></td></tr></table></figure></p>
+<p>还可以通过free指令来查看当前内存使用情况：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[root@guest2 ~]# free</div><div class="line">             total       used       free     shared    buffers     cached</div><div class="line">Mem:       1922260    1850992      71268         12      14056      22904</div><div class="line">-/+ buffers/cache:    1814032     108228</div><div class="line">Swap:      2097148     559328    1537820</div></pre></td></tr></table></figure></p>
+<h4 id="2-获取问题线程的堆栈信息"><a href="#2-获取问题线程的堆栈信息" class="headerlink" title="2.获取问题线程的堆栈信息"></a>2.获取问题线程的堆栈信息</h4><p>获取进程的子线程，查看进程运行详情：<br>ps -mp pid -o THREAD,tid,time<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">USER     %CPU PRI SCNT WCHAN  USER SYSTEM   TID     TIME</div><div class="line">root      <span class="number">1.3</span>   -    - -         -      -     - <span class="number">01</span>:<span class="number">00</span>:<span class="number">35</span></div><div class="line">root      <span class="number">0.0</span>  <span class="number">19</span>    - futex_    -      - <span class="number">12051</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span></div><div class="line">root      <span class="number">0.0</span>  <span class="number">19</span>    - futex_    -      - <span class="number">12057</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">09</span></div><div class="line">root      <span class="number">0.0</span>  <span class="number">19</span>    - futex_    -      - <span class="number">12061</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">45</span></div><div class="line">root      <span class="number">0.0</span>  <span class="number">19</span>    - futex_    -      - <span class="number">12062</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span></div><div class="line">root      <span class="number">0.0</span>  <span class="number">19</span>    - futex_    -      - <span class="number">12063</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span></div><div class="line">root      <span class="number">0.0</span>  <span class="number">19</span>    - futex_    -      - <span class="number">12069</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span></div><div class="line">root      <span class="number">0.0</span>  <span class="number">19</span>    - futex_    -      - <span class="number">12070</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">10</span></div><div class="line">root      <span class="number">0.0</span>  <span class="number">19</span>    - futex_    -      - <span class="number">12071</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">08</span></div><div class="line">root      <span class="number">0.0</span>  <span class="number">19</span>    - futex_    -      - <span class="number">12072</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span></div><div class="line">root      <span class="number">0.0</span>  <span class="number">19</span>    - futex_    -      - <span class="number">12073</span> <span class="number">00</span>:<span class="number">02</span>:<span class="number">07</span></div><div class="line">root      <span class="number">0.0</span>  <span class="number">19</span>    - futex_    -      - <span class="number">12077</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span></div></pre></td></tr></table></figure></p>
+<p>通过以上指令，可以看到具体是哪一个线程运行时间过长，占用CPU过多，就可以查看该线程的堆栈信息了，不过获取堆栈需要获取线程号的16进制。<br>获取指令为：printf “%x\n” tid<br>然后就可以通过jstack指令来获取堆栈详情了：<br>jstack pid |grep tid -A 130（其中tid为16进制,可以通过130来控制显示行数。）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="string">"cat-TcpSocketSender"</span> daemon prio=<span class="number">10</span> tid=<span class="number">0x0000000001c03800</span> nid=<span class="number">0x3cb8</span> runnable [<span class="number">0x00007f2f1d43d000</span>]</div><div class="line">   java.lang.Thread.State: TIMED_WAITING (parking)</div><div class="line">        at sun.misc.Unsafe.park(Native Method)</div><div class="line">        - parking to wait <span class="keyword">for</span>  &lt;<span class="number">0x00000000f2011fa8</span>&gt; (a java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject)</div><div class="line">        at java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:<span class="number">226</span>)</div><div class="line">        at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:<span class="number">2082</span>)</div><div class="line">        at java.util.concurrent.LinkedBlockingQueue.poll(LinkedBlockingQueue.java:<span class="number">467</span>)</div><div class="line">        at com.dianping.cat.message.io.DefaultMessageQueue.poll(DefaultMessageQueue.java:<span class="number">49</span>)</div><div class="line">        at com.dianping.cat.message.io.TcpSocketSender.run(TcpSocketSender.java:<span class="number">174</span>)</div><div class="line">        at java.lang.Thread.run(Thread.java:<span class="number">745</span>)</div><div class="line">        at org.unidal.helper.Threads$RunnableThread.run(Threads.java:<span class="number">294</span>)</div><div class="line"></div><div class="line"><span class="string">"Thread-5"</span> daemon prio=<span class="number">10</span> tid=<span class="number">0x0000000001c01000</span> nid=<span class="number">0x3cb7</span> runnable [<span class="number">0x00007f2f1d53e000</span>]</div><div class="line">   java.lang.Thread.State: RUNNABLE</div><div class="line">        at sun.nio.ch.EPollArrayWrapper.epollWait(Native Method)</div><div class="line">        at sun.nio.ch.EPollArrayWrapper.poll(EPollArrayWrapper.java:<span class="number">269</span>)</div><div class="line">        at sun.nio.ch.EPollSelectorImpl.doSelect(EPollSelectorImpl.java:<span class="number">79</span>)</div><div class="line">        at sun.nio.ch.SelectorImpl.lockAndDoSelect(SelectorImpl.java:<span class="number">87</span>)</div><div class="line">        - locked &lt;<span class="number">0x00000000f2012148</span>&gt; (a io.netty.channel.nio.SelectedSelectionKeySet)</div><div class="line">        - locked &lt;<span class="number">0x00000000f2012168</span>&gt; (a java.util.Collections$UnmodifiableSet)</div><div class="line">        - locked &lt;<span class="number">0x00000000f2012100</span>&gt; (a sun.nio.ch.EPollSelectorImpl)</div><div class="line">        at sun.nio.ch.SelectorImpl.select(SelectorImpl.java:<span class="number">98</span>)</div><div class="line">        at io.netty.channel.nio.NioEventLoop.select(NioEventLoop.java:<span class="number">622</span>)</div><div class="line">        at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:<span class="number">310</span>)</div><div class="line">        at io.netty.util.concurrent.SingleThreadEventExecutor$<span class="number">2</span>.run(SingleThreadEventExecutor.java:<span class="number">110</span>)</div><div class="line">        at java.lang.Thread.run(Thread.java:<span class="number">745</span>)</div><div class="line"></div><div class="line"><span class="string">"server-heartbeat-thread-1"</span> daemon prio=<span class="number">10</span> tid=<span class="number">0x00007f2f20cd3000</span> nid=<span class="number">0x3cb5</span> waiting on condition [<span class="number">0x00007f2f1d740000</span>]</div><div class="line">   java.lang.Thread.State: TIMED_WAITING (parking)</div><div class="line">        at sun.misc.Unsafe.park(Native Method)</div><div class="line">        - parking to wait <span class="keyword">for</span>  &lt;<span class="number">0x00000000f1fd09e8</span>&gt; (a java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject)</div></pre></td></tr></table></figure></p>
+<p>一般情况下，以上方法就能够得到相应的错误位置，从而，修改问题。</p>
+
       
     </div>
     
@@ -308,13 +322,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/07/24/动态代理类相关笔记/">动态代理类相关笔记</a></p>
+        <p><span>本文标题:</span><a href="/2017/08/03/线上内存溢出分析整理/">线上问题分析整理</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Skipper shou</a></p>
-        <p><span>发布时间:</span>2017-07-24, 15:23:40</p>
-        <p><span>最后更新:</span>2017-07-24, 15:23:40</p>
+        <p><span>发布时间:</span>2017-08-03, 08:12:05</p>
+        <p><span>最后更新:</span>2017-08-10, 16:59:39</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/07/24/动态代理类相关笔记/" title="动态代理类相关笔记">https://skipper-sj.github.io/2017/07/24/动态代理类相关笔记/</a>
-            <span class="copy-path" data-clipboard-text="原文: https://skipper-sj.github.io/2017/07/24/动态代理类相关笔记/　　作者: Skipper shou" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/08/03/线上内存溢出分析整理/" title="线上问题分析整理">https://skipper-sj.github.io/2017/08/03/线上内存溢出分析整理/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://skipper-sj.github.io/2017/08/03/线上内存溢出分析整理/　　作者: Skipper shou" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -327,15 +341,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/07/24/HashMap与几种类似结构比较/">
-                    HashMap与几种类似结构比较
+                <a href="/2017/08/09/接口调优的一点认识/">
+                    接口调优的一点认识
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/07/24/动态代理以及反射基本概念/">
-                    动态代理以及反射基本概念
+                <a href="/2017/08/03/redis一致性笔记/">
+                    redis一致性笔记
                 </a>
             </div>
         
@@ -347,7 +361,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#内存溢出"><span class="toc-number">1.</span> <span class="toc-text">内存溢出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU占用过高"><span class="toc-number">2.</span> <span class="toc-text">CPU占用过高</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-善用top指令"><span class="toc-number">2.1.</span> <span class="toc-text">1.善用top指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-获取问题线程的堆栈信息"><span class="toc-number">2.2.</span> <span class="toc-text">2.获取问题线程的堆栈信息</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -383,7 +397,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"动态代理类相关笔记　| skipper`s technique notes　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"线上问题分析整理　| skipper`s technique notes　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -403,7 +417,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/07/24/HashMap与几种类似结构比较/" title="上一篇: HashMap与几种类似结构比较">
+            <a href="/2017/08/09/接口调优的一点认识/" title="上一篇: 接口调优的一点认识">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -411,7 +425,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/07/24/动态代理以及反射基本概念/" title="下一篇: 动态代理以及反射基本概念">
+            <a href="/2017/08/03/redis一致性笔记/" title="下一篇: redis一致性笔记">
                 <i class="fa fa-angle-right"></i>
             </a>
         
