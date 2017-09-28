@@ -76,7 +76,7 @@
 <meta property="og:url" content="https://skipper-sj.github.io/2017/09/28/aop注解的几点笔记/index.html">
 <meta property="og:site_name" content="skipper`s technique notes">
 <meta property="og:description" content="spring中AOP属于比较重要的概念，今天记录一下最近使用aop的一些东西。 注解类123456789101112/** * Created with IntelliJ IDEA. * Description: * Date: 2017-09-28 * Time: 下午2:30 */@Target(&amp;#123;ElementType.PARAMETER, ElementType.METHOD&amp;#">
-<meta property="og:updated_time" content="2017-09-28T11:48:33.000Z">
+<meta property="og:updated_time" content="2017-09-28T11:59:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="aop注解的几点笔记">
 <meta name="twitter:description" content="spring中AOP属于比较重要的概念，今天记录一下最近使用aop的一些东西。 注解类123456789101112/** * Created with IntelliJ IDEA. * Description: * Date: 2017-09-28 * Time: 下午2:30 */@Target(&amp;#123;ElementType.PARAMETER, ElementType.METHOD&amp;#">
@@ -383,7 +383,8 @@
 <li>METHOD:用于描述方法</li>
 <li>PACKAGE:用于描述包</li>
 <li>PARAMETER:用于描述参数</li>
-<li>TYPE:用于描述类、接口(包括注解类型) 或enum声明</li>
+<li>TYPE:用于描述类、接口(包括注解类型) 或enum声明<a id="more"></a>
+</li>
 </ul>
 <p>@Retention 定义了该Annotation被保留的时间长短：某些Annotation仅出现在源代码中，而被编译器丢弃；而另一些却被编译在class文件中；编译在class文件中的Annotation可能会被虚拟机忽略，而另一些在class被装载时将被读取（请注意并不影响class的执行，因为Annotation与class在使用上是被分离的）。使用这个meta-Annotation可以对 Annotation的“生命周期”限制。<br>取值（RetentionPoicy）有：</p>
 <ul>
