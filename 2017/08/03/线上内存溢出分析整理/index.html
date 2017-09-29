@@ -69,17 +69,17 @@
 
 
 
-<meta name="description" content="简单描述一些常用方法">
+<meta name="description" content="jstat参考文档一般线上出现的问题，最多的就是内存溢出和CPU占用过高的问题，一般情况下，这两个问题都能够通过重启应用来解决，但是肯定不是长久之计，所以，需要一些手法来找到问题的根源。本文还会顺便描述一些常用指令的重点的相关描述。 内存溢出对于内存溢出的问题，一般会使用线程dump查看内存情况，还可以使用jstat来查看当前jvm的情况。">
 <meta name="keywords" content="优化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="线上问题分析整理">
 <meta property="og:url" content="https://skipper-sj.github.io/2017/08/03/线上内存溢出分析整理/index.html">
 <meta property="og:site_name" content="skipper`s technique notes">
-<meta property="og:description" content="简单描述一些常用方法">
-<meta property="og:updated_time" content="2017-08-10T09:06:30.000Z">
+<meta property="og:description" content="jstat参考文档一般线上出现的问题，最多的就是内存溢出和CPU占用过高的问题，一般情况下，这两个问题都能够通过重启应用来解决，但是肯定不是长久之计，所以，需要一些手法来找到问题的根源。本文还会顺便描述一些常用指令的重点的相关描述。 内存溢出对于内存溢出的问题，一般会使用线程dump查看内存情况，还可以使用jstat来查看当前jvm的情况。">
+<meta property="og:updated_time" content="2017-09-29T00:37:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线上问题分析整理">
-<meta name="twitter:description" content="简单描述一些常用方法">
+<meta name="twitter:description" content="jstat参考文档一般线上出现的问题，最多的就是内存溢出和CPU占用过高的问题，一般情况下，这两个问题都能够通过重启应用来解决，但是肯定不是长久之计，所以，需要一些手法来找到问题的根源。本文还会顺便描述一些常用指令的重点的相关描述。 内存溢出对于内存溢出的问题，一般会使用线程dump查看内存情况，还可以使用jstat来查看当前jvm的情况。">
 
 
 
@@ -302,6 +302,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/杂/" itemprop="url" rel="index">
+                    <span itemprop="name">杂</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/杂/优化/" itemprop="url" rel="index">
+                    <span itemprop="name">优化</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -326,10 +359,6 @@
           
 
           
-              <div class="post-description">
-                  简单描述一些常用方法
-              </div>
-          
 
         </div>
       </header>
@@ -346,6 +375,7 @@
       
         <p><a href="http://blog.csdn.net/zhaozheng7758/article/details/8623549" target="_blank" rel="external">jstat参考文档</a><br>一般线上出现的问题，最多的就是内存溢出和CPU占用过高的问题，一般情况下，这两个问题都能够通过重启应用来解决，但是肯定不是长久之计，所以，需要一些手法来找到问题的根源。<br>本文还会顺便描述一些常用指令的重点的相关描述。</p>
 <h3 id="内存溢出"><a href="#内存溢出" class="headerlink" title="内存溢出"></a>内存溢出</h3><p>对于内存溢出的问题，一般会使用线程dump查看内存情况，还可以使用jstat来查看当前jvm的情况。</p>
+<a id="more"></a>
 <h3 id="CPU占用过高"><a href="#CPU占用过高" class="headerlink" title="CPU占用过高"></a>CPU占用过高</h3><h4 id="1-善用top指令"><a href="#1-善用top指令" class="headerlink" title="1.善用top指令"></a>1.善用top指令</h4><p>输入top指令能看到以下显示的内容：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">top - <span class="number">08</span>:<span class="number">28</span>:<span class="number">18</span> up <span class="number">9</span> days, <span class="number">17</span>:<span class="number">06</span>,  <span class="number">2</span> users,  load average: <span class="number">1.57</span>, <span class="number">1.95</span>, <span class="number">2.08</span>  </div><div class="line">Tasks:  <span class="number">95</span> total,   <span class="number">1</span> running,  <span class="number">94</span> sleeping,   <span class="number">0</span> stopped,   <span class="number">0</span> <span class="function">zombie  </span></div><div class="line"><span class="title">Cpu</span><span class="params">(s)</span>:  4.8%us,  3.1%sy,  0.0%ni, 92.1%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st</div><div class="line">Mem:   1922260k total,  1846672k used,    75588k free,    11736k buffers</div><div class="line">Swap:  2097148k total,   559328k used,  1537820k free,    20564k cached</div><div class="line"></div><div class="line">  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND</div><div class="line">  783 root      20   0 1109m 132m 5132 S  1.3  7.1  27:16.33 java</div><div class="line">12051 root      20   0 1219m 171m 5080 S  1.3  9.2  54:31.21 java</div><div class="line">24334 root      20   0 1890m 315m 6212 S  1.3 16.8  10:50.13 java</div><div class="line">26188 root      20   0 1144m 118m 4856 S  1.3  6.3  96:14.14 java</div><div class="line">20690 root      20   0 1133m 307m 4640 S  1.0 16.4 101:24.54 java</div><div class="line">27568 root      20   0 1122m 149m 5236 S  1.0  8.0  36:11.35 java</div><div class="line">28466 root      20   0 1095m 182m 4392 S  1.0  9.7 134:30.32 java</div><div class="line">29103 root      20   0 1121m 177m 2852 S  1.0  9.4 136:07.50 java</div><div class="line">15917 root      20   0 1061m  84m 4532 S  0.3  4.5  29:41.08 java</div><div class="line">    1 root      20   0 19352  544  316 S  0.0  0.0   0:08.21 init</div><div class="line">    2 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kthreadd</div><div class="line">    3 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/0</div><div class="line">    4 root      20   0     0    0    0 S  0.0  0.0   0:35.26 ksoftirqd/0</div><div class="line">    5 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 stopper/0</div><div class="line">    6 root      RT   0     0    0    0 S  0.0  0.0   0:02.06 watchdog/0</div><div class="line">    7 root      20   0     0    0    0 S  0.0  0.0   1:05.18 events/0</div><div class="line">    8 root      20   0     0    0    0 S  0.0  0.0   0:00.00 events/0</div><div class="line">    9 root      20   0     0    0    0 S  0.0  0.0   0:00.00 events_long/0</div><div class="line">    10 root      20   0     0    0    0 S  0.0  0.0   0:00.00 events_powe</div></pre></td></tr></table></figure></p>
 <p>一般情况下，可以查看load average参数，可以知道当前服务器的负载情况，该参数与cpu的核数相关，比如单核CPU应该在1以下，双核在2以下，一次类推。<br>常用的可以用以下指令来查询物理CPU个数：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cat /proc/cpuinfo| grep <span class="string">"physical id"</span>| sort| uniq| wc</div><div class="line">      <span class="number">1</span>       <span class="number">4</span>      <span class="number">16</span></div></pre></td></tr></table></figure></p>
 <p>还可以查看每个物理CPU中core的个数(即核数)：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cat /proc/cpuinfo| grep <span class="string">"cpu cores"</span>| uniq</div><div class="line">cpu cores       : <span class="number">1</span></div></pre></td></tr></table></figure></p>
@@ -485,7 +515,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>

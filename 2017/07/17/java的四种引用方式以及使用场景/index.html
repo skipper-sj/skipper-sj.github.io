@@ -69,17 +69,17 @@
 
 
 
-<meta name="description" content="java的四种引用方式">
+<meta name="description" content="参考文档    java的四种引用方式包括：强引用，软引用，弱引用，虚引用 使用这几种引用方式主要目的是为了：1.通过代码的方式决定某些对象的生命周期。2.有利于jvm进行垃圾回收。 基本概念强引用强引用是指创建一个对象并把这个对象赋给一个引用变量。比如：Object object =new Object();String str =”hello”;强引用有引用变量指向时永远不会被垃圾回收，jvm">
 <meta name="keywords" content="基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java的四种引用方式以及使用场景">
 <meta property="og:url" content="https://skipper-sj.github.io/2017/07/17/java的四种引用方式以及使用场景/index.html">
 <meta property="og:site_name" content="skipper`s technique notes">
-<meta property="og:description" content="java的四种引用方式">
-<meta property="og:updated_time" content="2017-07-31T02:09:00.000Z">
+<meta property="og:description" content="参考文档    java的四种引用方式包括：强引用，软引用，弱引用，虚引用 使用这几种引用方式主要目的是为了：1.通过代码的方式决定某些对象的生命周期。2.有利于jvm进行垃圾回收。 基本概念强引用强引用是指创建一个对象并把这个对象赋给一个引用变量。比如：Object object =new Object();String str =”hello”;强引用有引用变量指向时永远不会被垃圾回收，jvm">
+<meta property="og:updated_time" content="2017-09-29T00:40:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java的四种引用方式以及使用场景">
-<meta name="twitter:description" content="java的四种引用方式">
+<meta name="twitter:description" content="参考文档    java的四种引用方式包括：强引用，软引用，弱引用，虚引用 使用这几种引用方式主要目的是为了：1.通过代码的方式决定某些对象的生命周期。2.有利于jvm进行垃圾回收。 基本概念强引用强引用是指创建一个对象并把这个对象赋给一个引用变量。比如：Object object =new Object();String str =”hello”;强引用有引用变量指向时永远不会被垃圾回收，jvm">
 
 
 
@@ -302,6 +302,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/概念/" itemprop="url" rel="index">
+                    <span itemprop="name">概念</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -326,10 +359,6 @@
           
 
           
-              <div class="post-description">
-                  java的四种引用方式
-              </div>
-          
 
         </div>
       </header>
@@ -346,7 +375,7 @@
       
         <p><a href="http://www.cnblogs.com/huajiezh/p/5835618.html" target="_blank" rel="external">参考文档</a><br>    java的四种引用方式包括：强引用，软引用，弱引用，虚引用</p>
 <p>使用这几种引用方式主要目的是为了：<br>1.通过代码的方式决定某些对象的生命周期。<br>2.有利于jvm进行垃圾回收。</p>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h3><p>强引用是指创建一个对象并把这个对象赋给一个引用变量。<br>比如：<br>Object object =new Object();<br>String str =”hello”;<br>强引用有引用变量指向时永远不会被垃圾回收，jvm会抛出OOM也不会回收对象。<br>如果想中断强引用和某个对象之间的关联，可以显示地将引用赋值为null，这样一来的话，JVM在合适的时间就会回收该对象。  </p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h3><p>强引用是指创建一个对象并把这个对象赋给一个引用变量。<br>比如：<br>Object object =new Object();<br>String str =”hello”;<br>强引用有引用变量指向时永远不会被垃圾回收，jvm会抛出OOM也不会回收对象。<br>如果想中断强引用和某个对象之间的关联，可以显示地将引用赋值为null，这样一来的话，JVM在合适的时间就会回收该对象。<br><a id="more"></a></p>
 <h3 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h3><p>软引用是通过SoftReference来实现的。<br>比如：<br>MyObject aRef = new  MyObject();<br>SoftReference aSoftRef=new SoftReference(aRef);<br>如果一个对象具有软引用，内存空间足够，垃圾回收器就不会回收它；<br>如果内存空间不足了，就会回收这些对象的内存。只要垃圾回收器没有回收它，该对象就可以被程序使用。<br>软引用可用来实现内存敏感的高速缓存,比如网页缓存、图片缓存等。使用软引用能防止内存泄露，增强程序的健壮性。<br>如上面的例子，MyObject对象有一个SoftReference的软引用，还有一个aRef的强引用，此后，aRef = null;那么这个对象成为了软引用对象，jvm会根据特定的算法，按照内存需求来决定软引用对象的回收处理。即jvm会尽可能的优先回收长时间闲置不用的软可及对象。<br>但是，如果软可及对象过多，当软可及对象被回收之后，SoftReference对象已经不再具有存在的价值，所以，需要ReferenceQueue来将SoftReference进行回收。</p>
 <h3 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h3><p>当JVM进行垃圾回收时，无论内存是否充足，都会回收被弱引用关联的对象。<br>用WeakReference来表示。<br>这里所说的被弱引用关联的对象是指只有弱引用与之关联，如果存在强引用同时与之关联，则进行垃圾回收时也不会回收该对象（软引用也是如此）。  </p>
 <h3 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a>虚引用</h3><p>不影响对象的生命周期，不过虚引用PhantomReference会跟引用队列关联使用，所以，方便所引用的对象的内存被回收之前采取必要的行动。  </p>
@@ -484,7 +513,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>

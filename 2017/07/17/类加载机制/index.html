@@ -69,19 +69,19 @@
 
 
 
-<meta name="description" content="描述类加载机制以及相关概念">
+<meta name="description" content="关于类加载器所做的事情，已经在前一篇文章做了介绍。此处先介绍类加载器体系结构如图所示，类加载器可分为几类：   （1）启动类加载器负责加载存放在%JAVA_HOME%\lib目录中的类库，并且被java虚拟机识别的类库（识别方式是按照文件名，所以，名字不符的就算放入也不会加载），启动类加载器无法被java程序直接引用。   （2）扩展类加载器负责加载%JAVA_HOME%\lib\ext目录中的类">
 <meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="类加载机制">
 <meta property="og:url" content="https://skipper-sj.github.io/2017/07/17/类加载机制/index.html">
 <meta property="og:site_name" content="skipper`s technique notes">
-<meta property="og:description" content="描述类加载机制以及相关概念">
+<meta property="og:description" content="关于类加载器所做的事情，已经在前一篇文章做了介绍。此处先介绍类加载器体系结构如图所示，类加载器可分为几类：   （1）启动类加载器负责加载存放在%JAVA_HOME%\lib目录中的类库，并且被java虚拟机识别的类库（识别方式是按照文件名，所以，名字不符的就算放入也不会加载），启动类加载器无法被java程序直接引用。   （2）扩展类加载器负责加载%JAVA_HOME%\lib\ext目录中的类">
 <meta property="og:image" content="https://skipper-sj.github.io/2017/07/17/类加载机制/类加载器体系结构.jpg">
 <meta property="og:image" content="https://skipper-sj.github.io/2017/07/17/类加载机制/双亲委派模式实现.png">
-<meta property="og:updated_time" content="2017-07-18T03:04:18.000Z">
+<meta property="og:updated_time" content="2017-09-29T00:37:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="类加载机制">
-<meta name="twitter:description" content="描述类加载机制以及相关概念">
+<meta name="twitter:description" content="关于类加载器所做的事情，已经在前一篇文章做了介绍。此处先介绍类加载器体系结构如图所示，类加载器可分为几类：   （1）启动类加载器负责加载存放在%JAVA_HOME%\lib目录中的类库，并且被java虚拟机识别的类库（识别方式是按照文件名，所以，名字不符的就算放入也不会加载），启动类加载器无法被java程序直接引用。   （2）扩展类加载器负责加载%JAVA_HOME%\lib\ext目录中的类">
 <meta name="twitter:image" content="https://skipper-sj.github.io/2017/07/17/类加载机制/类加载器体系结构.jpg">
 
 
@@ -305,6 +305,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -329,10 +362,6 @@
           
 
           
-              <div class="post-description">
-                  描述类加载机制以及相关概念
-              </div>
-          
 
         </div>
       </header>
@@ -351,7 +380,7 @@
 <h3 id="（1）启动类加载器"><a href="#（1）启动类加载器" class="headerlink" title="（1）启动类加载器"></a>（1）启动类加载器</h3><p>负责加载存放在%JAVA_HOME%\lib目录中的类库，并且被java虚拟机识别的类库（识别方式是按照文件名，所以，名字不符的就算放入也不会加载），启动类加载器无法被java程序直接引用。  </p>
 <h3 id="（2）扩展类加载器"><a href="#（2）扩展类加载器" class="headerlink" title="（2）扩展类加载器"></a>（2）扩展类加载器</h3><p>负责加载%JAVA_HOME%\lib\ext目录中的类库。</p>
 <h3 id="（3）应用程序类加载器"><a href="#（3）应用程序类加载器" class="headerlink" title="（3）应用程序类加载器"></a>（3）应用程序类加载器</h3><p>负责加载用户类路径classpath上所指定的类库</p>
-<h3 id="（4）自定义类加载器"><a href="#（4）自定义类加载器" class="headerlink" title="（4）自定义类加载器"></a>（4）自定义类加载器</h3><p>如果程序中没有自定义过类加载器，应用程序类加载器就是程序中默认的类加载器。<br>若要实现自定义类加载器，只需要继承java.lang.ClassLoader 类，并且重写其findClass()方法即可。  </p>
+<h3 id="（4）自定义类加载器"><a href="#（4）自定义类加载器" class="headerlink" title="（4）自定义类加载器"></a>（4）自定义类加载器</h3><p>如果程序中没有自定义过类加载器，应用程序类加载器就是程序中默认的类加载器。<br>若要实现自定义类加载器，只需要继承java.lang.ClassLoader 类，并且重写其findClass()方法即可。<br><a id="more"></a></p>
 <h2 id="双亲委派模式"><a href="#双亲委派模式" class="headerlink" title="双亲委派模式"></a>双亲委派模式</h2><p>当一个类收到了类加载请求，他首先不会尝试自己去加载这个类，而是把这个请求委派给父类去完成，每一个层次类加载器都是如此，因此所有的加载请求都应该传送到启动类加载其中，只有当父类加载器反馈自己无法完成这个请求的时候（在它的加载路径下没有找到所需加载的Class），子类加载器才会尝试自己去加载。<br>在下图中很好的体现了该模式的运行方式：<br><img src="/2017/07/17/类加载机制/双亲委派模式实现.png" alt="双亲委派模式过程"></p>
 <h2 id="获取类的二进制流"><a href="#获取类的二进制流" class="headerlink" title="获取类的二进制流"></a>获取类的二进制流</h2><p>目前来说，获取二进制流的方式有很多，比如：</p>
 <ul>
@@ -493,7 +522,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>

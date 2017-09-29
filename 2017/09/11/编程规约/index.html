@@ -69,17 +69,17 @@
 
 
 
-<meta name="description" content="本文档旨在规范现有项目中常见的一些问题">
+<meta name="description" content="开发规范一、 编程规约（一） 命名规约 代码中的命名严禁使用拼音与英文混合的方式，更不允许直接使用中文的方式。中英文的命名方式，会显得很另类，而且不方便理解，在某些编译器下，会提示单词错误等。推荐使用intellij IDEA，会对英文拼写做校验。 注意使用驼峰形式的命名方式，类名使用UpperCamelCase风格，方法名、参数名、成员变量、局部变量都统一使用lowerCamelCase风格，严">
 <meta name="keywords" content="规范">
 <meta property="og:type" content="article">
 <meta property="og:title" content="编程规约">
 <meta property="og:url" content="https://skipper-sj.github.io/2017/09/11/编程规约/index.html">
 <meta property="og:site_name" content="skipper`s technique notes">
-<meta property="og:description" content="本文档旨在规范现有项目中常见的一些问题">
-<meta property="og:updated_time" content="2017-09-11T06:28:49.000Z">
+<meta property="og:description" content="开发规范一、 编程规约（一） 命名规约 代码中的命名严禁使用拼音与英文混合的方式，更不允许直接使用中文的方式。中英文的命名方式，会显得很另类，而且不方便理解，在某些编译器下，会提示单词错误等。推荐使用intellij IDEA，会对英文拼写做校验。 注意使用驼峰形式的命名方式，类名使用UpperCamelCase风格，方法名、参数名、成员变量、局部变量都统一使用lowerCamelCase风格，严">
+<meta property="og:updated_time" content="2017-09-29T00:35:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编程规约">
-<meta name="twitter:description" content="本文档旨在规范现有项目中常见的一些问题">
+<meta name="twitter:description" content="开发规范一、 编程规约（一） 命名规约 代码中的命名严禁使用拼音与英文混合的方式，更不允许直接使用中文的方式。中英文的命名方式，会显得很另类，而且不方便理解，在某些编译器下，会提示单词错误等。推荐使用intellij IDEA，会对英文拼写做校验。 注意使用驼峰形式的命名方式，类名使用UpperCamelCase风格，方法名、参数名、成员变量、局部变量都统一使用lowerCamelCase风格，严">
 
 
 
@@ -302,6 +302,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/杂/" itemprop="url" rel="index">
+                    <span itemprop="name">杂</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/杂/规约/" itemprop="url" rel="index">
+                    <span itemprop="name">规约</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -326,10 +359,6 @@
           
 
           
-              <div class="post-description">
-                  本文档旨在规范现有项目中常见的一些问题
-              </div>
-          
 
         </div>
       </header>
@@ -350,7 +379,7 @@
 <li>常量命名全部大写，单词间用下划线隔开，力求语义表达完整清楚，不要嫌名字长。<br>有些人为了缩短名字，往往使语义更加难以理解，方法的命名也同样如此。</li>
 <li>抽象类命名使用Abstract或Base开头;异常类命名使用Exception结尾;测试类命名以它要测试的类的名称开始，以Test结尾。枚举类命名以enum结尾。枚举中的枚举成员必须全大写，而且单词间需要用下划线隔开。<br>力求一眼能够看出特殊类的种类。</li>
 <li>包名统一使用小写，点分隔符之间有且仅有一个自然语义的英语单词。包名统一使用单数形式，但是类名如果有复数含义，类名可以使用复数形式。</li>
-<li>接口类中的方法和属性不要加任何修饰符号(public也不要加)，保持代码的简洁性，并加上有效的Javadoc注释。<br>接口注释的时候，必须注明方法的功能点，出入参的含义，如果有枚举的情况，需要关联到对应的枚举类，或者标出枚举的列表。</li>
+<li>接口类中的方法和属性不要加任何修饰符号(public也不要加)，保持代码的简洁性，并加上有效的Javadoc注释。<br>接口注释的时候，必须注明方法的功能点，出入参的含义，如果有枚举的情况，需要关联到对应的枚举类，或者标出枚举的列表。<a id="more"></a></li>
 <li>各层命名规约:<br>A) Service/DAO层方法命名规约<br>1) 获取单个对象的方法用get做前缀。<br>2) 获取多个对象的方法用list做前缀。<br>3) 获取统计值的方法用count做前缀。<br>4) 插入的方法用save(推荐)或insert做前缀。<br>5) 删除的方法用remove(推荐)或delete做前缀。<br>6) 修改的方法用update做前缀。<br>B) 领域模型命名规约<br>1) 数据对象:xxxDO，xxx即为数据表名。<br>2) 数据传输对象:xxxDTO，xxx为业务领域相关的名称。<br>3) 展示对象:xxxVO，xxx一般为网页名称。<br>4) POJO是DO/DTO/BO/VO的统称，禁止命名成xxxPOJO</li>
 </ol>
 <h3 id="（二）-常量定义"><a href="#（二）-常量定义" class="headerlink" title="（二） 常量定义"></a>（二） 常量定义</h3><ol>
@@ -552,7 +581,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>

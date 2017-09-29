@@ -69,17 +69,17 @@
 
 
 
-<meta name="description" content="简单介绍ConcurrentHashMap源码以及结构介绍">
+<meta name="description" content="参考文档ConcurrentHashMap是concurrent家族中的一个类，由于它可以高效地支持并发操作，以及被广泛使用，经典的开源框架spring的底层数据结构就是使用ConcurrentHashMap实现的。跟HashTable和synchronizeMap比，后两者在方法或者参数上添加了synchronized锁，而concurrentHashMap摒弃了Segment（锁段）的概念（在">
 <meta name="keywords" content="源码,数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ConcurrentHashMap源码解读笔记">
 <meta property="og:url" content="https://skipper-sj.github.io/2017/07/19/ConcurrentHashMap源码解读笔记/index.html">
 <meta property="og:site_name" content="skipper`s technique notes">
-<meta property="og:description" content="简单介绍ConcurrentHashMap源码以及结构介绍">
-<meta property="og:updated_time" content="2017-07-22T01:24:32.000Z">
+<meta property="og:description" content="参考文档ConcurrentHashMap是concurrent家族中的一个类，由于它可以高效地支持并发操作，以及被广泛使用，经典的开源框架spring的底层数据结构就是使用ConcurrentHashMap实现的。跟HashTable和synchronizeMap比，后两者在方法或者参数上添加了synchronized锁，而concurrentHashMap摒弃了Segment（锁段）的概念（在">
+<meta property="og:updated_time" content="2017-09-29T00:38:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ConcurrentHashMap源码解读笔记">
-<meta name="twitter:description" content="简单介绍ConcurrentHashMap源码以及结构介绍">
+<meta name="twitter:description" content="参考文档ConcurrentHashMap是concurrent家族中的一个类，由于它可以高效地支持并发操作，以及被广泛使用，经典的开源框架spring的底层数据结构就是使用ConcurrentHashMap实现的。跟HashTable和synchronizeMap比，后两者在方法或者参数上添加了synchronized锁，而concurrentHashMap摒弃了Segment（锁段）的概念（在">
 
 
 
@@ -302,6 +302,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -326,10 +359,6 @@
           
 
           
-              <div class="post-description">
-                  简单介绍ConcurrentHashMap源码以及结构介绍
-              </div>
-          
 
         </div>
       </header>
@@ -345,6 +374,7 @@
 
       
         <p><a href="http://www.jianshu.com/p/c0642afe03e0" target="_blank" rel="external">参考文档</a><br>ConcurrentHashMap是concurrent家族中的一个类，由于它可以高效地支持并发操作，以及被广泛使用，经典的开源框架spring的底层数据结构就是使用ConcurrentHashMap实现的。跟HashTable和synchronizeMap比，后两者在方法或者参数上添加了synchronized锁，而concurrentHashMap摒弃了Segment（锁段）的概念（在1.8之前的结构还是按照锁段结构），而是启用了一种全新的方式实现,利用CAS算法。所以，相较性能会有优势很多，适用于读多写少的场景（因为concurrentHashMap对写加锁，对读不加锁）。而且concurrentHashMap底层沿用了HashMap中1.8里面数组+链表+红黑树的方式思想。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//默认为null，初始化发生在第一次插入操作，默认大小为16的数组，用来存储Node节点数据，扩容时大小总是2的幂次方。</span></div><div class="line"> <span class="keyword">transient</span> <span class="keyword">volatile</span> Node&lt;K,V&gt;[] table;</div><div class="line"><span class="comment">//默认为null，扩容时新生成的数组，其大小为原数组的两倍。</span></div><div class="line"> <span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">volatile</span> Node&lt;K,V&gt;[] nextTable;</div><div class="line"><span class="comment">//默认为0，用来控制table的初始化和扩容操作，具体应用在后续会体现出来。</span></div><div class="line"> <span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">volatile</span> <span class="keyword">int</span> sizeCtl;</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <p>其中，sizeCtl为-1是表示table正在初始化，-N表示有N-1个线程正在进行扩容操作，其他情况下，如果table未初始化，表示table需要初始化的大小。如果table初始化完成，表示table的容量，默认是跟负载因子一致。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//保存key，value及key的hash值的数据结构。</span></div><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</div><div class="line">       <span class="keyword">final</span> <span class="keyword">int</span> hash;</div><div class="line">       <span class="keyword">final</span> K key;</div><div class="line">       <span class="keyword">volatile</span> V val;</div><div class="line">       <span class="keyword">volatile</span> Node&lt;K,V&gt; next;</div><div class="line">       ...</div><div class="line">     &#125;</div><div class="line"><span class="comment">//一个特殊的Node节点，hash值为-1，其中存储nextTable的引用。</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">ForwardingNode</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">Node</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</div><div class="line">...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>只有table发生扩容的时候，ForwardingNode才会发挥作用，作为一个占位符放在table中表示当前节点为null或则已经被移动。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">tableSizeFor</span><span class="params">(<span class="keyword">int</span> c)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> n = c - <span class="number">1</span>;</div><div class="line">        n |= n &gt;&gt;&gt; <span class="number">1</span>;</div><div class="line">        n |= n &gt;&gt;&gt; <span class="number">2</span>;</div><div class="line">        n |= n &gt;&gt;&gt; <span class="number">4</span>;</div><div class="line">        n |= n &gt;&gt;&gt; <span class="number">8</span>;</div><div class="line">        n |= n &gt;&gt;&gt; <span class="number">16</span>;</div><div class="line">        <span class="keyword">return</span> (n &lt; <span class="number">0</span>) ? <span class="number">1</span> : (n &gt;= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + <span class="number">1</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
 <p>实例化ConcurrentHashMap时带参数时，会根据参数调整table的大小，确保table的大小总是2的幂次方。<br>需要注意的是，ConcurrentHashMap在构造函数中只会初始化sizeCtl值，并不会直接初始化table，而是延缓到第一次put操作。</p>
@@ -490,7 +520,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>

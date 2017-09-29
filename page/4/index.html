@@ -973,6 +973,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1012,10 +1045,13 @@
 
       
         
-          旨在学习JVM基础
+          <p>Java虚拟机规范规定的java虚拟机内存其实就是java虚拟机运行时数据区</p>
+<p>Java内存结构分为几块：</p>
+<h2 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h2><p>程序计数器是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。– 摘自《深入理解java虚拟机》<br>类加载完之后，会产生对应的class文件，每一行执行指令完之后，程序计数器会加1，指向顺序汇总的下一个指令。<br>因为Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式来实现的，在任何时刻，一个处理器或者说一个内核都只会执行一条线程中的指令。<br>所以，每条线程拥有自己独立的程序计数器，各条线程之间不相互影响，独立存储，<u><strong>线程私有</strong></u>。  </p>
+<h2 id="Java虚拟机栈"><a href="#Java虚拟机栈" class="headerlink" title="Java虚拟机栈"></a>Java虚拟机栈</h2><p>每个方法在执行的同时都会创建一个栈帧，用于存放<u><strong>局部变量表</strong></u>、<u><strong>操作数栈</strong></u>、<u><strong>动态链接</strong></u>、<u><strong>方法出口</strong></u>等信息。<br>局部变量表存放的是<u><strong>8种java的基本数据类型</strong></u>、<u><strong>对象引用</strong></u>、<u><strong>returnAddress类型</strong></u>。也是<u><strong>线程私有的</strong></u>。其中有一点需要注意的是：创建局部变量，即使不在作用域，如果没有任何对局部变量表的读写操作，变量原本所占用的槽还没有被其他变量所复用，所以作为GC Roots一部分的局部变量表仍然保持着对它的关联。所以不会被垃圾回收。所以说，这时候，如果再后面是一个耗时很长的操作，那么设置为null就很有意义了。<br>如下图示例：<br><img src="/2017/07/07/初识JVM/局部变量表gc示例.png" alt="局部变量表gc示例"><br></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/07/07/初识JVM/">
+            <a class="btn" href="/2017/07/07/初识JVM/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1113,7 +1149,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>

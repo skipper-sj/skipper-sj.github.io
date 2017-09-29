@@ -303,6 +303,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/杂/" itemprop="url" rel="index">
+                    <span itemprop="name">杂</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/杂/优化/" itemprop="url" rel="index">
+                    <span itemprop="name">优化</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -342,10 +375,11 @@
 
       
         
-          简单描述一些常用方法
+          <p><a href="http://blog.csdn.net/zhaozheng7758/article/details/8623549" target="_blank" rel="external">jstat参考文档</a><br>一般线上出现的问题，最多的就是内存溢出和CPU占用过高的问题，一般情况下，这两个问题都能够通过重启应用来解决，但是肯定不是长久之计，所以，需要一些手法来找到问题的根源。<br>本文还会顺便描述一些常用指令的重点的相关描述。</p>
+<h3 id="内存溢出"><a href="#内存溢出" class="headerlink" title="内存溢出"></a>内存溢出</h3><p>对于内存溢出的问题，一般会使用线程dump查看内存情况，还可以使用jstat来查看当前jvm的情况。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/08/03/线上内存溢出分析整理/">
+            <a class="btn" href="/2017/08/03/线上内存溢出分析整理/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -573,6 +607,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -612,10 +679,10 @@
 
       
         
-          总结几种常用的map结构
+          <h3 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h3><p>HashMap在1.7以及1.7以前，都用的是数组加链表的结构来存储的，通过Hash算法，来判断数据在哪个数据里面，然后添加到链表末端。<br>1.8之后，HashMap在数据量达到一定数值后，会形成数组+链表+红黑树的结构。<br>但是HashMap一直是线程不安全的，在多线程put的情况下，get的时候会出现死循环，而不是死锁。在扩容的时候也会发生。<br>多线程下put的时候也可能导致元素丢失。<br>源码的解读请查看<a href="../../19/hashmap源码解读笔记/">HashMap源码解读笔记</a><br></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/07/24/HashMap与几种类似结构比较/">
+            <a class="btn" href="/2017/07/24/HashMap与几种类似结构比较/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -838,6 +905,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/动态代理/" itemprop="url" rel="index">
+                    <span itemprop="name">动态代理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -877,10 +977,15 @@
 
       
         
-          简单介绍动态代理以及反射
+          <h3 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h3><p>所谓代理，就是对目标对象的方法调用是通过代理对象来完成的。<br>代理类在程序运行时创建的代理方式被成为动态代理。<br>动态代理创建对象的过程如下：</p>
+<ul>
+<li>通过实现InvocationHandler接口创建自己的调用处理器 IvocationHandler handler = new InvocationHandlerImpl(…);</li>
+<li>通过为Proxy类指定ClassLoader对象和一组interface创建动态代理类<br>Class clazz = Proxy.getProxyClass(classLoader,new Class[]{…});</li>
+<li>通过反射机制获取动态代理类的构造函数，其参数类型是调用处理器接口类型<br>Constructor constructor = clazz.getConstructor(new Class[]{InvocationHandler.class});</li>
+<li>通过构造函数创建代理类实例，此时需将调用处理器对象作为参数被传入<br>Interface Proxy = (Interface)constructor.newInstance(new Object[] (handler));</li></ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/07/24/动态代理以及反射基本概念/">
+            <a class="btn" href="/2017/07/24/动态代理以及反射基本概念/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -973,6 +1078,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/概念/" itemprop="url" rel="index">
+                    <span itemprop="name">概念</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1012,10 +1150,11 @@
 
       
         
-          分析三种IO以及他们的区别
+          <p><a href="http://ifeve.com/buffers/" target="_blank" rel="external">参考文档</a></p>
+<h3 id="同步阻塞IO（Java-BIO）"><a href="#同步阻塞IO（Java-BIO）" class="headerlink" title="同步阻塞IO（Java BIO）"></a>同步阻塞IO（Java BIO）</h3><p>同步并阻塞，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，当然可以通过线程池机制改善。<br>BIO比较适用于连接数小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中。<br></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/07/24/Java中BIO、NIO、AIO的理解/">
+            <a class="btn" href="/2017/07/24/Java中BIO、NIO、AIO的理解/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1108,6 +1247,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1147,10 +1319,10 @@
 
       
         
-          简单介绍ConcurrentHashMap源码以及结构介绍
+          <p><a href="http://www.jianshu.com/p/c0642afe03e0" target="_blank" rel="external">参考文档</a><br>ConcurrentHashMap是concurrent家族中的一个类，由于它可以高效地支持并发操作，以及被广泛使用，经典的开源框架spring的底层数据结构就是使用ConcurrentHashMap实现的。跟HashTable和synchronizeMap比，后两者在方法或者参数上添加了synchronized锁，而concurrentHashMap摒弃了Segment（锁段）的概念（在1.8之前的结构还是按照锁段结构），而是启用了一种全新的方式实现,利用CAS算法。所以，相较性能会有优势很多，适用于读多写少的场景（因为concurrentHashMap对写加锁，对读不加锁）。而且concurrentHashMap底层沿用了HashMap中1.8里面数组+链表+红黑树的方式思想。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//默认为null，初始化发生在第一次插入操作，默认大小为16的数组，用来存储Node节点数据，扩容时大小总是2的幂次方。</span></div><div class="line"> <span class="keyword">transient</span> <span class="keyword">volatile</span> Node&lt;K,V&gt;[] table;</div><div class="line"><span class="comment">//默认为null，扩容时新生成的数组，其大小为原数组的两倍。</span></div><div class="line"> <span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">volatile</span> Node&lt;K,V&gt;[] nextTable;</div><div class="line"><span class="comment">//默认为0，用来控制table的初始化和扩容操作，具体应用在后续会体现出来。</span></div><div class="line"> <span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">volatile</span> <span class="keyword">int</span> sizeCtl;</div></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/07/19/ConcurrentHashMap源码解读笔记/">
+            <a class="btn" href="/2017/07/19/ConcurrentHashMap源码解读笔记/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1243,6 +1415,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1282,10 +1487,11 @@
 
       
         
-          简单介绍HashMap源码以及结构介绍
+          <p><a href="http://www.cnblogs.com/leesf456/p/5242233.html" target="_blank" rel="external">参考文档</a><br><a href="http://blog.csdn.net/u011240877/article/details/53358305" target="_blank" rel="external">红黑树相关参考</a><br>以下内容不会赘述代码内容，需要查看代码注释的，可以查看参考文档。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;, <span class="title">Cloneable</span>, <span class="title">Serializable</span></span>&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>其中实现的方法，Map接口定义了一组通用的操作，Cloneable接口则表示可以进行拷贝，Serializable实现了序列化。<br></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/07/19/hashmap源码解读笔记/">
+            <a class="btn" href="/2017/07/19/hashmap源码解读笔记/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1653,7 +1859,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>

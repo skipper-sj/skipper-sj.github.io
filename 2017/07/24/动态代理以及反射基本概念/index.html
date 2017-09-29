@@ -69,17 +69,17 @@
 
 
 
-<meta name="description" content="简单介绍动态代理以及反射">
+<meta name="description" content="动态代理所谓代理，就是对目标对象的方法调用是通过代理对象来完成的。代理类在程序运行时创建的代理方式被成为动态代理。动态代理创建对象的过程如下：  通过实现InvocationHandler接口创建自己的调用处理器 IvocationHandler handler = new InvocationHandlerImpl(…); 通过为Proxy类指定ClassLoader对象和一组interface">
 <meta name="keywords" content="基础,动态代理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="动态代理以及反射基本概念">
 <meta property="og:url" content="https://skipper-sj.github.io/2017/07/24/动态代理以及反射基本概念/index.html">
 <meta property="og:site_name" content="skipper`s technique notes">
-<meta property="og:description" content="简单介绍动态代理以及反射">
-<meta property="og:updated_time" content="2017-07-24T08:38:58.000Z">
+<meta property="og:description" content="动态代理所谓代理，就是对目标对象的方法调用是通过代理对象来完成的。代理类在程序运行时创建的代理方式被成为动态代理。动态代理创建对象的过程如下：  通过实现InvocationHandler接口创建自己的调用处理器 IvocationHandler handler = new InvocationHandlerImpl(…); 通过为Proxy类指定ClassLoader对象和一组interface">
+<meta property="og:updated_time" content="2017-09-29T00:36:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动态代理以及反射基本概念">
-<meta name="twitter:description" content="简单介绍动态代理以及反射">
+<meta name="twitter:description" content="动态代理所谓代理，就是对目标对象的方法调用是通过代理对象来完成的。代理类在程序运行时创建的代理方式被成为动态代理。动态代理创建对象的过程如下：  通过实现InvocationHandler接口创建自己的调用处理器 IvocationHandler handler = new InvocationHandlerImpl(…); 通过为Proxy类指定ClassLoader对象和一组interface">
 
 
 
@@ -302,6 +302,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/动态代理/" itemprop="url" rel="index">
+                    <span itemprop="name">动态代理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -326,10 +359,6 @@
           
 
           
-              <div class="post-description">
-                  简单介绍动态代理以及反射
-              </div>
-          
 
         </div>
       </header>
@@ -349,10 +378,9 @@
 <li>通过实现InvocationHandler接口创建自己的调用处理器 IvocationHandler handler = new InvocationHandlerImpl(…);</li>
 <li>通过为Proxy类指定ClassLoader对象和一组interface创建动态代理类<br>Class clazz = Proxy.getProxyClass(classLoader,new Class[]{…});</li>
 <li>通过反射机制获取动态代理类的构造函数，其参数类型是调用处理器接口类型<br>Constructor constructor = clazz.getConstructor(new Class[]{InvocationHandler.class});</li>
-<li>通过构造函数创建代理类实例，此时需将调用处理器对象作为参数被传入<br>Interface Proxy = (Interface)constructor.newInstance(new Object[] (handler));</li>
+<li>通过构造函数创建代理类实例，此时需将调用处理器对象作为参数被传入<br>Interface Proxy = (Interface)constructor.newInstance(new Object[] (handler));<a id="more"></a>
+动态代理必须有一个共同的父类Proxy。Java的继承机制注定了这些动态代理类无法实现对class的动态代理，只能实现接口的代理。<br>后续会补充<a href="../../24/动态代理类相关笔记/">动态代理类</a>的一些内容。<h3 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h3>所谓反射，就是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。<br>反射机制能够让我们在运行时，判断任意一个对象所属的类、构造任意一个类的对象、判断任意一个类所具有的成员变量和方法、调用任意一个对象的方法、生成动态代理。  </li>
 </ul>
-<p>动态代理必须有一个共同的父类Proxy。Java的继承机制注定了这些动态代理类无法实现对class的动态代理，只能实现接口的代理。<br>后续会补充<a href="../../24/动态代理类相关笔记/">动态代理类</a>的一些内容。</p>
-<h3 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h3><p>所谓反射，就是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。<br>反射机制能够让我们在运行时，判断任意一个对象所属的类、构造任意一个类的对象、判断任意一个类所具有的成员变量和方法、调用任意一个对象的方法、生成动态代理。  </p>
 
       
     </div>
@@ -486,7 +514,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
