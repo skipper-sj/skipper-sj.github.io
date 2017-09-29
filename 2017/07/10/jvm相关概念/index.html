@@ -69,18 +69,18 @@
 
 
 
-<meta name="description" content="一些比较杂的概念">
+<meta name="description" content="类的生命周期java的class类在虚拟机中的生命周期如下图所示：   （1）加载将class类文件夹子道内存中，最终形成可以被虚拟机直接使用的java类型的过程。  通过一个类的全限定名来获取定义此类的二进制字节流。 将定义类的二进制字节流所代表的静态存储结构转换为方法区的运行时数据结构。 在java堆中生成一个代表该类的java.lang.Class对象，作为方法区数据的访问入口。">
 <meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM相关概念">
 <meta property="og:url" content="https://skipper-sj.github.io/2017/07/10/jvm相关概念/index.html">
 <meta property="og:site_name" content="skipper`s technique notes">
-<meta property="og:description" content="一些比较杂的概念">
+<meta property="og:description" content="类的生命周期java的class类在虚拟机中的生命周期如下图所示：   （1）加载将class类文件夹子道内存中，最终形成可以被虚拟机直接使用的java类型的过程。  通过一个类的全限定名来获取定义此类的二进制字节流。 将定义类的二进制字节流所代表的静态存储结构转换为方法区的运行时数据结构。 在java堆中生成一个代表该类的java.lang.Class对象，作为方法区数据的访问入口。">
 <meta property="og:image" content="https://skipper-sj.github.io/2017/07/10/jvm相关概念/类的生命周期.jpg">
-<meta property="og:updated_time" content="2017-07-18T03:04:19.000Z">
+<meta property="og:updated_time" content="2017-09-29T00:53:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM相关概念">
-<meta name="twitter:description" content="一些比较杂的概念">
+<meta name="twitter:description" content="类的生命周期java的class类在虚拟机中的生命周期如下图所示：   （1）加载将class类文件夹子道内存中，最终形成可以被虚拟机直接使用的java类型的过程。  通过一个类的全限定名来获取定义此类的二进制字节流。 将定义类的二进制字节流所代表的静态存储结构转换为方法区的运行时数据结构。 在java堆中生成一个代表该类的java.lang.Class对象，作为方法区数据的访问入口。">
 <meta name="twitter:image" content="https://skipper-sj.github.io/2017/07/10/jvm相关概念/类的生命周期.jpg">
 
 
@@ -304,6 +304,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -328,10 +361,6 @@
           
 
           
-              <div class="post-description">
-                  一些比较杂的概念
-              </div>
-          
 
         </div>
       </header>
@@ -351,11 +380,8 @@
 <ul>
 <li>通过一个类的全限定名来获取定义此类的二进制字节流。</li>
 <li>将定义类的二进制字节流所代表的静态存储结构转换为方法区的运行时数据结构。</li>
-<li>在java堆中生成一个代表该类的java.lang.Class对象，作为方法区数据的访问入口。  </li>
-</ul>
-<p>在<a href="../../17/类加载机制">类加载机制</a>做详细介绍。</p>
-<h4 id="（2）验证"><a href="#（2）验证" class="headerlink" title="（2）验证"></a>（2）验证</h4><p>为了确保class文件的字节流中包含的信息符合当前虚拟机的要求，并且不会危害虚拟机的安全。  </p>
-<ul>
+<li>在java堆中生成一个代表该类的java.lang.Class对象，作为方法区数据的访问入口。  <a id="more"></a>
+在<a href="../../17/类加载机制">类加载机制</a>做详细介绍。<h4 id="（2）验证"><a href="#（2）验证" class="headerlink" title="（2）验证"></a>（2）验证</h4>为了确保class文件的字节流中包含的信息符合当前虚拟机的要求，并且不会危害虚拟机的安全。  </li>
 <li>文件格式验证：验证Class文件魔数(指的是文件的格式，位于class文件的头4个字节)、主次版本（第5到8个字节代表着jdk的版本）、常量池（代表常量池中有多少项常量）、类文件本身等等。</li>
 <li>元数据验证：主要是对字节码描述的信息进行语义分析，包括是否有父类、是否是抽象类、是否是接口、是否继承了不允许被继承的类(final类)、是否实现了父类或者接口的方法等等。</li>
 <li>字节码验证：是整个验证过程中最复杂的，主要进行数据流和控制流分析，如保证跳转指令不会跳转到方法体之外的字节码指令、数据类型转换安全有效等。</li>
@@ -503,10 +529,10 @@
             
             
             <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">14</span>
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">分类</span>
-              
+              </a>
             </div>
           
 

@@ -69,18 +69,18 @@
 
 
 
-<meta name="description" content="简单RPC框架原理介绍">
+<meta name="description" content="RPC调用是面向服务架构场景下进行服务间调用的常用组件，一个完整的RPC调用的流程如图1所示：RPC框架需要关注几点：  1.方法调用：方法调用的过程如何转换为可以传输的消息内容。 2.服务发现：如何发布服务并告知调用者服务地址。 3.数据传输：服务调用者和提供者之间如何进行数据传输。">
 <meta name="keywords" content="框架,RPC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RPC框架原理入门">
 <meta property="og:url" content="https://skipper-sj.github.io/2017/07/17/RPC框架原理入门/index.html">
 <meta property="og:site_name" content="skipper`s technique notes">
-<meta property="og:description" content="简单RPC框架原理介绍">
+<meta property="og:description" content="RPC调用是面向服务架构场景下进行服务间调用的常用组件，一个完整的RPC调用的流程如图1所示：RPC框架需要关注几点：  1.方法调用：方法调用的过程如何转换为可以传输的消息内容。 2.服务发现：如何发布服务并告知调用者服务地址。 3.数据传输：服务调用者和提供者之间如何进行数据传输。">
 <meta property="og:image" content="https://skipper-sj.github.io/2017/07/17/RPC框架原理入门/RPC调用流程.png">
-<meta property="og:updated_time" content="2017-07-18T00:21:47.000Z">
+<meta property="og:updated_time" content="2017-09-29T00:53:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RPC框架原理入门">
-<meta name="twitter:description" content="简单RPC框架原理介绍">
+<meta name="twitter:description" content="RPC调用是面向服务架构场景下进行服务间调用的常用组件，一个完整的RPC调用的流程如图1所示：RPC框架需要关注几点：  1.方法调用：方法调用的过程如何转换为可以传输的消息内容。 2.服务发现：如何发布服务并告知调用者服务地址。 3.数据传输：服务调用者和提供者之间如何进行数据传输。">
 <meta name="twitter:image" content="https://skipper-sj.github.io/2017/07/17/RPC框架原理入门/RPC调用流程.png">
 
 
@@ -304,6 +304,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/框架/" itemprop="url" rel="index">
+                    <span itemprop="name">框架</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/框架/RPC/" itemprop="url" rel="index">
+                    <span itemprop="name">RPC</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -328,10 +361,6 @@
           
 
           
-              <div class="post-description">
-                  简单RPC框架原理介绍
-              </div>
-          
 
         </div>
       </header>
@@ -350,12 +379,9 @@
 <ul>
 <li>1.方法调用：方法调用的过程如何转换为可以传输的消息内容。</li>
 <li>2.服务发现：如何发布服务并告知调用者服务地址。</li>
-<li>3.数据传输：服务调用者和提供者之间如何进行数据传输。</li>
+<li>3.数据传输：服务调用者和提供者之间如何进行数据传输。<a id="more"></a>
+<h3 id="1-方法调用"><a href="#1-方法调用" class="headerlink" title="1.方法调用"></a>1.方法调用</h3><h4 id="协议设定"><a href="#协议设定" class="headerlink" title="协议设定"></a>协议设定</h4>就是设定Request和Response，比如com.alibaba.dubbo.remoting.exchange.Request和com.alibaba.dubbo.remoting.exchange.Response<br>就是dubbo中的协议规定。<h4 id="请求、返回与“协议”对象的转化"><a href="#请求、返回与“协议”对象的转化" class="headerlink" title="请求、返回与“协议”对象的转化"></a>请求、返回与“协议”对象的转化</h4>为了简化服务方和调用方的实现，RPC框架里面需要完成方法请求与request对象之间的转换 和 处理结果与response对象之间的转换。<h3 id="2-服务发现"><a href="#2-服务发现" class="headerlink" title="2.服务发现"></a>2.服务发现</h3>当提供者服务启动时，需要自动向注册中心注册服务；当提供者服务停止时，需要向注册中心注销服务；提供者需要定时向注册中心发送心跳，一段时间未收到来自提供者的心跳后，认为提供者已经停止服务，从注册中心上摘取掉对应的服务。从调用者的角度看：调用者启动时订阅注册中心的消息并从注册中心获取提供者的地址；当有提供者上线或者下线时，注册中心会告知到调用者；调用者下线时，取消订阅。<h3 id="3-数据传输"><a href="#3-数据传输" class="headerlink" title="3.数据传输"></a>3.数据传输</h3>服务提供者和调用者之间进行数据传输，可以借助基于端口的协议和基于HTTP的协议进行，如使用TCP协议通信 或 使用HTTP协议通信。通信方式上，可以使用传统的BIO(Blocked I/O) 或 NIO(New I/O)方式进行。</li>
 </ul>
-<h3 id="1-方法调用"><a href="#1-方法调用" class="headerlink" title="1.方法调用"></a>1.方法调用</h3><h4 id="协议设定"><a href="#协议设定" class="headerlink" title="协议设定"></a>协议设定</h4><p>就是设定Request和Response，比如com.alibaba.dubbo.remoting.exchange.Request和com.alibaba.dubbo.remoting.exchange.Response<br>就是dubbo中的协议规定。</p>
-<h4 id="请求、返回与“协议”对象的转化"><a href="#请求、返回与“协议”对象的转化" class="headerlink" title="请求、返回与“协议”对象的转化"></a>请求、返回与“协议”对象的转化</h4><p>为了简化服务方和调用方的实现，RPC框架里面需要完成方法请求与request对象之间的转换 和 处理结果与response对象之间的转换。</p>
-<h3 id="2-服务发现"><a href="#2-服务发现" class="headerlink" title="2.服务发现"></a>2.服务发现</h3><p>当提供者服务启动时，需要自动向注册中心注册服务；当提供者服务停止时，需要向注册中心注销服务；提供者需要定时向注册中心发送心跳，一段时间未收到来自提供者的心跳后，认为提供者已经停止服务，从注册中心上摘取掉对应的服务。从调用者的角度看：调用者启动时订阅注册中心的消息并从注册中心获取提供者的地址；当有提供者上线或者下线时，注册中心会告知到调用者；调用者下线时，取消订阅。</p>
-<h3 id="3-数据传输"><a href="#3-数据传输" class="headerlink" title="3.数据传输"></a>3.数据传输</h3><p>服务提供者和调用者之间进行数据传输，可以借助基于端口的协议和基于HTTP的协议进行，如使用TCP协议通信 或 使用HTTP协议通信。通信方式上，可以使用传统的BIO(Blocked I/O) 或 NIO(New I/O)方式进行。</p>
 
       
     </div>
@@ -488,10 +514,10 @@
             
             
             <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">14</span>
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">分类</span>
-              
+              </a>
             </div>
           
 

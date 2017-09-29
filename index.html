@@ -524,7 +524,6 @@
             <h4 id="linux服务器常用调试指令"><a href="#linux服务器常用调试指令" class="headerlink" title="linux服务器常用调试指令"></a>linux服务器常用调试指令</h4><p>服务器负载查看<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">top</div></pre></td></tr></table></figure></p>
 <h4 id="mac与服务器之间文件的上传下载"><a href="#mac与服务器之间文件的上传下载" class="headerlink" title="mac与服务器之间文件的上传下载"></a>mac与服务器之间文件的上传下载</h4><p>文件下载：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo scp root@ip:/usr/local/filename /usr/local/</div></pre></td></tr></table></figure></p>
 <p>文件上传<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo scp /usr/local/filename root@ip:/usr/local</div></pre></td></tr></table></figure></p>
-<p>####</p>
 
           
         
@@ -627,8 +626,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java基础/" itemprop="url" rel="index">
-                    <span itemprop="name">java基础</span>
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
                   </a>
                 </span>
 
@@ -638,7 +637,7 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java基础/设计模式/" itemprop="url" rel="index">
+                  <a href="/categories/基础/设计模式/" itemprop="url" rel="index">
                     <span itemprop="name">设计模式</span>
                   </a>
                 </span>
@@ -789,6 +788,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -828,10 +860,14 @@
 
       
         
-          简单介绍单例模式
+          <h4 id="一、单例模式"><a href="#一、单例模式" class="headerlink" title="一、单例模式"></a>一、单例模式</h4><p>维基百科中介绍：也叫单子模式，是一种常用的软件设计模式。在应用这个模式时，单例对象的类必须保证只有一个实例存在。许多时候整个系统只需要拥有一个的全局对象，这样有利于我们协调系统整体的行为。<br>简单的说，对象除了维持自身的一致性，无需承担其他责任，</p>
+<h4 id="二、实现方式"><a href="#二、实现方式" class="headerlink" title="二、实现方式"></a>二、实现方式</h4><ol>
+<li>提供唯一的私有构造器，避免多个单体(Singleton)对象被创建，私有构造器可以防止客户程序员通过除由我们提供的方法之外的任意方式来创建一个实例，如果不把构造器声明为private或protected，编译器会自动创建一个public的构造函数。  </li>
+<li>使用静态域（static field）来维护实例，将单体对象作为单体类的一个静态域实例化。使用保存唯一实例的static变量，其类型就是单例类型本身。需要的话，使用final，使其不能被重载。  </li>
+<li>使用静态方法（static method）来监视实例的创建。</li></ol>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/09/21/浅谈设计模式（一）/">
+            <a class="btn" href="/2017/09/21/浅谈设计模式（一）/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1359,6 +1395,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/中间件/" itemprop="url" rel="index">
+                    <span itemprop="name">中间件</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/中间件/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1398,14 +1467,11 @@
 
       
         
-          作为redis入门级的参考介绍
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/15/redis笔记/">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <h3 id="一、初识redis"><a href="#一、初识redis" class="headerlink" title="一、初识redis"></a>一、初识redis</h3><p>维基百科对redis的介绍：Redis是一个使用ANSI C编写的开源、支持网络、基于内存、可选持久性的键值对存储数据库。<br>正如维基百科中介绍，redis是基于内存的，将数据存储在内存中，所以，如果没有做相关的持久化配置，重启服务器会造成数据丢失。<br>然而，redis又是可选持久性的，可以对数据进行持久化，可通过快照模式，或者aof模式，具体可以参考<a href="http://www.cnblogs.com/chenpingzhao/p/5158791.html" target="_blank" rel="external">文档</a>中关于持久化的介绍。<br>而且，redis还支持分布式处理，还有相关的redis分布式开源架构，比如<a href="https://github.com/redisson/redisson" target="_blank" rel="external">redisson</a>，其中也借鉴了jdk中current包里面的结构。  </p>
+<h3 id="二、redis指令"><a href="#二、redis指令" class="headerlink" title="二、redis指令"></a>二、redis指令</h3><p>redis支持五种数据类型，包括：string（字符串），hash（哈希），list（列表），set（集合）及zset(sorted set：有序集合)。<br>针对不同的数据类型，有不同的指令形式，具体的指令可以参考<a href="http://redisdoc.com/#id1" target="_blank" rel="external">文档</a></p>
+
+          
         
       
     </div>
@@ -1759,10 +1825,10 @@
             
             
             <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">14</span>
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">分类</span>
-              
+              </a>
             </div>
           
 
