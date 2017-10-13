@@ -376,7 +376,12 @@
       
         
           <h4 id="一、观察者模式"><a href="#一、观察者模式" class="headerlink" title="一、观察者模式"></a>一、观察者模式</h4><p>维基百科中介绍：在此种模式中，一个目标对象管理所有相依于它的观察者对象，并且在它本身的状态改变时主动发出通知。这通常透过呼叫各观察者所提供的方法来实现。此种模式通常被用来实时事件处理系统。</p>
-<h4 id="二、代码示例"><a href="#二、代码示例" class="headerlink" title="二、代码示例"></a>二、代码示例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Created with IntelliJ IDEA.</div><div class="line"> * Description:抽象观察者角色类</div><div class="line"> *</div><div class="line"> * <span class="doctag">@author</span></div><div class="line"> * Date: 2017-10-13</div><div class="line"> * Time: 上午8:27</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Observer</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 更新接口</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> state 更新的状态</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(String state)</span></span>;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="二、代码示例"><a href="#二、代码示例" class="headerlink" title="二、代码示例"></a>二、代码示例</h4><ul>
+<li><strong>抽象观察者(Observer)角色</strong>：为所有的具体观察者定义一个接口，在得到主题的通知时更新自己，这个接口叫做更新接口。</li>
+<li><strong>具体观察者(ConcreteObserver)角色</strong>：存储与主题的状态自恰的状态。具体观察者角色实现抽象观察者角色所要求的更新接口，以便使本身的状态与主题的状态对像协调。如果需要，具体观察者角色可以保持一个指向具体主题对象的引用。</li>
+<li><strong>抽象主题(Subject)角色</strong>：抽象主题角色把所有对观察者对象的引用保存在一个聚集（比如ArrayList对象）里，每个主题都可以有任何数量的观察者。抽象主题提供一个接口，可以增加和删除观察者对象，抽象主题角色又叫做抽象被观察者(Observable)角色。</li>
+<li><strong>具体主题(ConcreteSubject)角色</strong>：将有关状态存入具体观察者对象；在具体主题的内部状态改变时，给所有登记过的观察者发出通知。具体主题角色又叫做具体被观察者(Concrete Observable)角色。</li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/10/12/浅谈设计模式（四）/#more" rel="contents">
