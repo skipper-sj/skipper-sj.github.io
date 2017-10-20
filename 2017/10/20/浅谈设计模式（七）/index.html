@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="spring," />
+  <meta name="keywords" content="设计模式," />
 
 
 
@@ -69,17 +69,17 @@
 
 
 
-<meta name="description" content="spring作为常用的框架之一，以下简单介绍了使用的九种设计模式： 简单工厂模式又称为静态工厂模式，实质是由一个工厂类根据传入的参数，动态决定应该创建哪一个产品类。">
-<meta name="keywords" content="spring">
+<meta name="description" content="一、抽象工厂模式维基百科中介绍：一种软件开发设计模式。抽象工厂模式提供了一种方式，可以将一组具有同一主题的单独的工厂封装起来。在正常使用中，客户端程序需要创建抽象工厂的具体实现，然后使用抽象工厂作为接口来创建这一主题的具体对象。客户端程序不需要知道（或关心）它从这些内部的工厂方法中获得对象的具体类型，因为客户端程序仅使用这些对象的通用接口。抽象工厂模式将一组对象的实现细节与他们的一般使用分离开来。">
+<meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="spring中出现的九种设计模式">
-<meta property="og:url" content="https://skipper-sj.github.io/2017/07/19/spring中出现的九种设计模式/index.html">
+<meta property="og:title" content="浅谈设计模式（七）">
+<meta property="og:url" content="https://skipper-sj.github.io/2017/10/20/浅谈设计模式（七）/index.html">
 <meta property="og:site_name" content="skipper`s technique notes">
-<meta property="og:description" content="spring作为常用的框架之一，以下简单介绍了使用的九种设计模式： 简单工厂模式又称为静态工厂模式，实质是由一个工厂类根据传入的参数，动态决定应该创建哪一个产品类。">
-<meta property="og:updated_time" content="2017-09-29T00:54:05.000Z">
+<meta property="og:description" content="一、抽象工厂模式维基百科中介绍：一种软件开发设计模式。抽象工厂模式提供了一种方式，可以将一组具有同一主题的单独的工厂封装起来。在正常使用中，客户端程序需要创建抽象工厂的具体实现，然后使用抽象工厂作为接口来创建这一主题的具体对象。客户端程序不需要知道（或关心）它从这些内部的工厂方法中获得对象的具体类型，因为客户端程序仅使用这些对象的通用接口。抽象工厂模式将一组对象的实现细节与他们的一般使用分离开来。">
+<meta property="og:updated_time" content="2017-10-20T00:44:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spring中出现的九种设计模式">
-<meta name="twitter:description" content="spring作为常用的框架之一，以下简单介绍了使用的九种设计模式： 简单工厂模式又称为静态工厂模式，实质是由一个工厂类根据传入的参数，动态决定应该创建哪一个产品类。">
+<meta name="twitter:title" content="浅谈设计模式（七）">
+<meta name="twitter:description" content="一、抽象工厂模式维基百科中介绍：一种软件开发设计模式。抽象工厂模式提供了一种方式，可以将一组具有同一主题的单独的工厂封装起来。在正常使用中，客户端程序需要创建抽象工厂的具体实现，然后使用抽象工厂作为接口来创建这一主题的具体对象。客户端程序不需要知道（或关心）它从这些内部的工厂方法中获得对象的具体类型，因为客户端程序仅使用这些对象的通用接口。抽象工厂模式将一组对象的实现细节与他们的一般使用分离开来。">
 
 
 
@@ -109,13 +109,13 @@
 
 
 
-  <link rel="canonical" href="https://skipper-sj.github.io/2017/07/19/spring中出现的九种设计模式/"/>
+  <link rel="canonical" href="https://skipper-sj.github.io/2017/10/20/浅谈设计模式（七）/"/>
 
 
 
 
 
-  <title>spring中出现的九种设计模式 | skipper`s technique notes</title>
+  <title>浅谈设计模式（七） | skipper`s technique notes</title>
   
 
 
@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://skipper-sj.github.io/2017/07/19/spring中出现的九种设计模式/">
+    <link itemprop="mainEntityOfPage" href="https://skipper-sj.github.io/2017/10/20/浅谈设计模式（七）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Skipper shou">
@@ -279,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">spring中出现的九种设计模式</h1>
+          <h1 class="post-title" itemprop="name headline">浅谈设计模式（七）</h1>
         
 
         <div class="post-meta">
@@ -291,8 +291,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-19T07:57:17+08:00">
-                2017-07-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-20T08:05:13+08:00">
+                2017-10-20
               </time>
             
 
@@ -314,8 +314,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/框架/" itemprop="url" rel="index">
-                    <span itemprop="name">框架</span>
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
                   </a>
                 </span>
 
@@ -325,8 +325,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/框架/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
+                  <a href="/categories/基础/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
                   </a>
                 </span>
 
@@ -342,7 +342,7 @@
 
           
           
-             <span id="/2017/07/19/spring中出现的九种设计模式/" class="leancloud_visitors" data-flag-title="spring中出现的九种设计模式">
+             <span id="/2017/10/20/浅谈设计模式（七）/" class="leancloud_visitors" data-flag-title="浅谈设计模式（七）">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -373,8 +373,15 @@
       
 
       
-        <p>spring作为常用的框架之一，以下简单介绍了使用的九种设计模式：</p>
-<h3 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h3><p>又称为静态工厂模式，实质是由一个工厂类根据传入的参数，动态决定应该创建哪一个产品类。</p>
+        <h4 id="一、抽象工厂模式"><a href="#一、抽象工厂模式" class="headerlink" title="一、抽象工厂模式"></a>一、抽象工厂模式</h4><p>维基百科中介绍：一种软件开发设计模式。抽象工厂模式提供了一种方式，可以将一组具有同一主题的单独的工厂封装起来。在正常使用中，客户端程序需要创建抽象工厂的具体实现，然后使用抽象工厂作为接口来创建这一主题的具体对象。客户端程序不需要知道（或关心）它从这些内部的工厂方法中获得对象的具体类型，因为客户端程序仅使用这些对象的通用接口。抽象工厂模式将一组对象的实现细节与他们的一般使用分离开来。</p>
+<h4 id="二、代码示例"><a href="#二、代码示例" class="headerlink" title="二、代码示例"></a>二、代码示例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Created with IntelliJ IDEA.</div><div class="line"> * Description:</div><div class="line"> *</div><div class="line"> * <span class="doctag">@author</span></div><div class="line"> * Date: 2017-10-20</div><div class="line"> * Time: 上午8:28</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IProduct1</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">productMethod</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Created with IntelliJ IDEA.</div><div class="line"> * Description:</div><div class="line"> *</div><div class="line"> * <span class="doctag">@author</span></div><div class="line"> * Date: 2017-10-20</div><div class="line"> * Time: 上午8:30</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IProduct2</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">productMethod</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Created with IntelliJ IDEA.</div><div class="line"> * Description:</div><div class="line"> *</div><div class="line"> * <span class="doctag">@author</span></div><div class="line"> * Date: 2017-10-20</div><div class="line"> * Time: 上午8:31</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Product1</span> <span class="keyword">implements</span> <span class="title">IProduct1</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">productMethod</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"产品1"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Created with IntelliJ IDEA.</div><div class="line"> * Description:</div><div class="line"> *</div><div class="line"> * <span class="doctag">@author</span></div><div class="line"> * Date: 2017-10-20</div><div class="line"> * Time: 上午8:31</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Product2</span> <span class="keyword">implements</span> <span class="title">IProduct2</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">productMethod</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"产品2"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Created with IntelliJ IDEA.</div><div class="line"> * Description:</div><div class="line"> *</div><div class="line"> * <span class="doctag">@author</span></div><div class="line"> * Date: 2017-10-20</div><div class="line"> * Time: 上午8:32</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IFactory</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function">IProduct1 <span class="title">createProduct1</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="function">IProduct2 <span class="title">createProduct2</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Created with IntelliJ IDEA.</div><div class="line"> * Description:</div><div class="line"> *</div><div class="line"> * <span class="doctag">@author</span></div><div class="line"> * Date: 2017-10-20</div><div class="line"> * Time: 上午8:33</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Factory</span> <span class="keyword">implements</span> <span class="title">IFactory</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> IProduct1 <span class="title">createProduct1</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"工厂1"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Product1();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> IProduct2 <span class="title">createProduct2</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"工厂2"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Product2();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Created with IntelliJ IDEA.</div><div class="line"> * Description:</div><div class="line"> *</div><div class="line"> * <span class="doctag">@author</span></div><div class="line"> * Date: 2017-10-20</div><div class="line"> * Time: 上午8:37</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        IFactory factory = <span class="keyword">new</span> Factory();</div><div class="line">        factory.createProduct1().productMethod();</div><div class="line">        factory.createProduct2().productMethod();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -392,7 +399,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/spring/" rel="tag"># spring</a>
+            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
           
         </div>
       
@@ -405,8 +412,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/17/RPC框架原理入门/" rel="next" title="RPC框架原理入门">
-                <i class="fa fa-chevron-left"></i> RPC框架原理入门
+              <a href="/2017/10/18/浅谈设计模式（六）/" rel="next" title="浅谈设计模式（六）">
+                <i class="fa fa-chevron-left"></i> 浅谈设计模式（六）
               </a>
             
           </div>
@@ -414,10 +421,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/07/19/hashmap源码解读笔记/" rel="prev" title="HashMap源码解读笔记">
-                HashMap源码解读笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -552,7 +555,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单工厂模式"><span class="nav-number">1.</span> <span class="nav-text">简单工厂模式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、抽象工厂模式"><span class="nav-number">1.</span> <span class="nav-text">一、抽象工厂模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、代码示例"><span class="nav-number">2.</span> <span class="nav-text">二、代码示例</span></a></li></ol></div>
             
 
           </div>
