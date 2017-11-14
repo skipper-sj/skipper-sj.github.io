@@ -1719,6 +1719,7 @@
             <h4 id="linux服务器常用调试指令"><a href="#linux服务器常用调试指令" class="headerlink" title="linux服务器常用调试指令"></a>linux服务器常用调试指令</h4><p>服务器负载查看<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">top</div></pre></td></tr></table></figure></p>
 <h4 id="mac与服务器之间文件的上传下载"><a href="#mac与服务器之间文件的上传下载" class="headerlink" title="mac与服务器之间文件的上传下载"></a>mac与服务器之间文件的上传下载</h4><p>文件下载：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo scp root@ip:/usr/local/filename /usr/local/</div></pre></td></tr></table></figure></p>
 <p>文件上传<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo scp /usr/local/filename root@ip:/usr/local</div></pre></td></tr></table></figure></p>
+<h4 id="top信息写入文件"><a href="#top信息写入文件" class="headerlink" title="top信息写入文件"></a>top信息写入文件</h4><p>top指令每三秒更新，更新一次后停止并写入文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">top -d 3 -n 1&gt;top.log</div></pre></td></tr></table></figure></p>
 
           
         

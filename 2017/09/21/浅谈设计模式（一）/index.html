@@ -76,7 +76,7 @@
 <meta property="og:url" content="https://skipper-sj.github.io/2017/09/21/浅谈设计模式（一）/index.html">
 <meta property="og:site_name" content="skipper`s technique notes">
 <meta property="og:description" content="一、单例模式维基百科中介绍：也叫单子模式，是一种常用的软件设计模式。在应用这个模式时，单例对象的类必须保证只有一个实例存在。许多时候整个系统只需要拥有一个的全局对象，这样有利于我们协调系统整体的行为。简单的说，对象除了维持自身的一致性，无需承担其他责任， 二、实现方式 提供唯一的私有构造器，避免多个单体(Singleton)对象被创建，私有构造器可以防止客户程序员通过除由我们提供的方法之外的任意方">
-<meta property="og:updated_time" content="2017-09-30T01:01:49.000Z">
+<meta property="og:updated_time" content="2017-11-14T00:10:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈设计模式（一）">
 <meta name="twitter:description" content="一、单例模式维基百科中介绍：也叫单子模式，是一种常用的软件设计模式。在应用这个模式时，单例对象的类必须保证只有一个实例存在。许多时候整个系统只需要拥有一个的全局对象，这样有利于我们协调系统整体的行为。简单的说，对象除了维持自身的一致性，无需承担其他责任， 二、实现方式 提供唯一的私有构造器，避免多个单体(Singleton)对象被创建，私有构造器可以防止客户程序员通过除由我们提供的方法之外的任意方">
@@ -378,7 +378,10 @@
 <li>提供唯一的私有构造器，避免多个单体(Singleton)对象被创建，私有构造器可以防止客户程序员通过除由我们提供的方法之外的任意方式来创建一个实例，如果不把构造器声明为private或protected，编译器会自动创建一个public的构造函数。  </li>
 <li>使用静态域（static field）来维护实例，将单体对象作为单体类的一个静态域实例化。使用保存唯一实例的static变量，其类型就是单例类型本身。需要的话，使用final，使其不能被重载。  </li>
 <li>使用静态方法（static method）来监视实例的创建。<a id="more"></a>
-<h4 id="三、单例模式的几种表现方式"><a href="#三、单例模式的几种表现方式" class="headerlink" title="三、单例模式的几种表现方式"></a>三、单例模式的几种表现方式</h4>几个典型的概念介绍：<br>lazy loading:懒加载指的是在第一次运行的时候才会将数据加载到运行空间中，这样可以避免数据大量加载而并没有使用的情况发生。<br>多线程缺省同步锁：一般解决并发问题，是通过synchronized来加互斥锁进行同步控制，但是在某些情况下，JVM已经隐式的为你执行了同步：</li>
+</li>
+</ol>
+<h4 id="三、单例模式的几种表现方式"><a href="#三、单例模式的几种表现方式" class="headerlink" title="三、单例模式的几种表现方式"></a>三、单例模式的几种表现方式</h4><p>几个典型的概念介绍：<br>lazy loading:懒加载指的是在第一次运行的时候才会将数据加载到运行空间中，这样可以避免数据大量加载而并没有使用的情况发生。<br>多线程缺省同步锁：一般解决并发问题，是通过synchronized来加互斥锁进行同步控制，但是在某些情况下，JVM已经隐式的为你执行了同步：</p>
+<ol>
 <li>由静态初始化器（在静态字段上或static{}块中的初始化器）初始化数据时。  </li>
 <li>访问final字段时。  </li>
 <li>在创建线程之前创建对象时。</li>
