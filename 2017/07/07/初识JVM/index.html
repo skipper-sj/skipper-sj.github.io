@@ -69,19 +69,17 @@
 
 
 
-<meta name="description" content="Java虚拟机规范规定的java虚拟机内存其实就是java虚拟机运行时数据区 Java内存结构分为几块： 程序计数器程序计数器是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。– 摘自《深入理解java虚拟机》类加载完之后，会产生对应的class文件，每一行执行指令完之后，程序计数器会加1，指向顺序汇总的下一个指令。因为Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时">
+<meta name="description" content="Java虚拟机规范规定的java虚拟机内存其实就是java虚拟机运行时数据区 Java内存结构分为几块： 一、程序计数器程序计数器是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。– 摘自《深入理解java虚拟机》类加载完之后，会产生对应的class文件，每一行执行指令完之后，程序计数器会加1，指向顺序汇总的下一个指令。因为Java虚拟机的多线程是通过线程轮流切换并分配处理器执">
 <meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="初识JVM Java内存结构">
 <meta property="og:url" content="https://skipper-sj.github.io/2017/07/07/初识JVM/index.html">
 <meta property="og:site_name" content="skipper`s technique notes">
-<meta property="og:description" content="Java虚拟机规范规定的java虚拟机内存其实就是java虚拟机运行时数据区 Java内存结构分为几块： 程序计数器程序计数器是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。– 摘自《深入理解java虚拟机》类加载完之后，会产生对应的class文件，每一行执行指令完之后，程序计数器会加1，指向顺序汇总的下一个指令。因为Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时">
-<meta property="og:image" content="https://skipper-sj.github.io/2017/07/07/初识JVM/局部变量表gc示例.png">
-<meta property="og:updated_time" content="2017-09-29T00:36:03.000Z">
+<meta property="og:description" content="Java虚拟机规范规定的java虚拟机内存其实就是java虚拟机运行时数据区 Java内存结构分为几块： 一、程序计数器程序计数器是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。– 摘自《深入理解java虚拟机》类加载完之后，会产生对应的class文件，每一行执行指令完之后，程序计数器会加1，指向顺序汇总的下一个指令。因为Java虚拟机的多线程是通过线程轮流切换并分配处理器执">
+<meta property="og:updated_time" content="2017-12-25T00:08:20.751Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初识JVM Java内存结构">
-<meta name="twitter:description" content="Java虚拟机规范规定的java虚拟机内存其实就是java虚拟机运行时数据区 Java内存结构分为几块： 程序计数器程序计数器是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。– 摘自《深入理解java虚拟机》类加载完之后，会产生对应的class文件，每一行执行指令完之后，程序计数器会加1，指向顺序汇总的下一个指令。因为Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时">
-<meta name="twitter:image" content="https://skipper-sj.github.io/2017/07/07/初识JVM/局部变量表gc示例.png">
+<meta name="twitter:description" content="Java虚拟机规范规定的java虚拟机内存其实就是java虚拟机运行时数据区 Java内存结构分为几块： 一、程序计数器程序计数器是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。– 摘自《深入理解java虚拟机》类加载完之后，会产生对应的class文件，每一行执行指令完之后，程序计数器会加1，指向顺序汇总的下一个指令。因为Java虚拟机的多线程是通过线程轮流切换并分配处理器执">
 
 
 
@@ -377,11 +375,22 @@
       
         <p>Java虚拟机规范规定的java虚拟机内存其实就是java虚拟机运行时数据区</p>
 <p>Java内存结构分为几块：</p>
-<h2 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h2><p>程序计数器是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。– 摘自《深入理解java虚拟机》<br>类加载完之后，会产生对应的class文件，每一行执行指令完之后，程序计数器会加1，指向顺序汇总的下一个指令。<br>因为Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式来实现的，在任何时刻，一个处理器或者说一个内核都只会执行一条线程中的指令。<br>所以，每条线程拥有自己独立的程序计数器，各条线程之间不相互影响，独立存储，<u><strong>线程私有</strong></u>。  </p>
-<h2 id="Java虚拟机栈"><a href="#Java虚拟机栈" class="headerlink" title="Java虚拟机栈"></a>Java虚拟机栈</h2><p>每个方法在执行的同时都会创建一个栈帧，用于存放<u><strong>局部变量表</strong></u>、<u><strong>操作数栈</strong></u>、<u><strong>动态链接</strong></u>、<u><strong>方法出口</strong></u>等信息。<br>局部变量表存放的是<u><strong>8种java的基本数据类型</strong></u>、<u><strong>对象引用</strong></u>、<u><strong>returnAddress类型</strong></u>。也是<u><strong>线程私有的</strong></u>。其中有一点需要注意的是：创建局部变量，即使不在作用域，如果没有任何对局部变量表的读写操作，变量原本所占用的槽还没有被其他变量所复用，所以作为GC Roots一部分的局部变量表仍然保持着对它的关联。所以不会被垃圾回收。所以说，这时候，如果再后面是一个耗时很长的操作，那么设置为null就很有意义了。<br>如下图示例：<br><img src="/2017/07/07/初识JVM/局部变量表gc示例.png" alt="局部变量表gc示例"><br><a id="more"></a><br>以上可以看出，当int a=0;时，才会进行垃圾回收。</p>
-<h2 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h2><p>为虚拟机使用到的<u><strong>Native方法服务</strong></u>(例如C相关方法)。<br>如果某个虚拟机实现的本地方法接口是使用C连接模型的话，那么它的本地方法栈就是C栈。也是<u><strong>线程私有的</strong></u>。</p>
-<h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><p>Java堆是被所有<u><strong>线程共享</strong></u>的一块内存区域，在虚拟机启动时创建。此内存区域的唯一目的就是存放对象实例，几乎所有的对象实例都在这里分配内存。<br>其中分代回收会在<a href="../../11/JVM分区以及垃圾回收">JVM分区以及垃圾回收</a>中详细描述。</p>
-<h2 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h2><p>方法区也是线程共享的一块内存区域，用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</p>
+<h2 id="一、程序计数器"><a href="#一、程序计数器" class="headerlink" title="一、程序计数器"></a>一、程序计数器</h2><p>程序计数器是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。– 摘自《深入理解java虚拟机》<br>类加载完之后，会产生对应的class文件，每一行执行指令完之后，程序计数器会加1，指向顺序汇总的下一个指令。<br>因为Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式来实现的，在任何时刻，一个处理器或者说一个内核都只会执行一条线程中的指令。<br>所以，每条线程拥有自己独立的程序计数器，各条线程之间不相互影响，独立存储，<u><strong>线程私有</strong></u>。  </p>
+<h2 id="二、Java虚拟机栈"><a href="#二、Java虚拟机栈" class="headerlink" title="二、Java虚拟机栈"></a>二、Java虚拟机栈</h2><p>每个方法在执行的同时都会创建一个栈帧，用于存放<u><strong>局部变量表</strong></u>、<u><strong>操作数栈</strong></u>、<u><strong>动态链接</strong></u>、<u><strong>方法出口</strong></u>等信息。<br>局部变量表存放的是<u><strong>8种java的基本数据类型（int、long、byte、short、float、doubel、char、boolean）</strong></u>、<u><strong>对象引用</strong></u>、<u><strong>returnAddress类型</strong></u>。也是<u><strong>线程私有的</strong></u>。<br>其实，每一个方法的调用就是对应着一个栈帧在虚拟机栈里面从入栈到出站的过程。虚拟机只对栈顶的栈帧进行操作。</p>
+<h4 id="1-局部变量表"><a href="#1-局部变量表" class="headerlink" title="1.局部变量表"></a>1.局部变量表</h4><p>局部变量表的容量已变量槽（slot）为最小单位，32位虚拟机中一个slot可以存在一个32位以内的数据类型。  </p>
+<h4 id="2-操作数栈"><a href="#2-操作数栈" class="headerlink" title="2.操作数栈"></a>2.操作数栈</h4><p>Java虚拟机的解释执行引擎被称为”基于栈的执行引擎”，其中所指的栈就是指－操作数栈。</p>
+<p>其中有一点需要注意的是：创建局部变量，即使不在作用域，如果没有任何对局部变量表的读写操作，变量原本所占用的槽还没有被其他变量所复用，所以作为GC Roots一部分的局部变量表仍然保持着对它的关联。所以不会被垃圾回收。所以说，这时候，如果再后面是一个耗时很长的操作，那么设置为null就很有意义了。<br>在<a href="../../../12/21/Java虚拟机栈">Java虚拟机栈</a>中会对此进行比较详细的讲述。</p>
+<a id="more"></a>
+<h2 id="三、本地方法栈"><a href="#三、本地方法栈" class="headerlink" title="三、本地方法栈"></a>三、本地方法栈</h2><p>为虚拟机使用到的<u><strong>Native方法服务</strong></u>(例如C相关方法)。<br>如果某个虚拟机实现的本地方法接口是使用C连接模型的话，那么它的本地方法栈就是C栈。也是<u><strong>线程私有的</strong></u>。</p>
+<h2 id="四、堆"><a href="#四、堆" class="headerlink" title="四、堆"></a>四、堆</h2><p>Java堆是被所有<u><strong>线程共享</strong></u>的一块内存区域，在虚拟机启动时创建。此内存区域的唯一目的就是存放对象实例，几乎所有的对象实例都在这里分配内存。<br>其中分代回收会在<a href="../../11/JVM分区以及垃圾回收">JVM分区以及垃圾回收</a>中详细描述。</p>
+<h2 id="无、方法区"><a href="#无、方法区" class="headerlink" title="无、方法区"></a>无、方法区</h2><p>方法区也是线程共享的一块内存区域，用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</p>
+<h2 id="执行引擎"><a href="#执行引擎" class="headerlink" title="执行引擎"></a>执行引擎</h2><p>编译器将源代码转换成字节码，需要使用到jvm的字节码执行引擎。执行引擎负责具体的代码调用及执行过程。<br>主要包括以下几点：</p>
+<ul>
+<li>输入：字节码文件</li>
+<li>处理：字节码解析</li>
+<li>输出：执行结果</li>
+</ul>
+<h2 id="本地接口"><a href="#本地接口" class="headerlink" title="本地接口"></a>本地接口</h2><p>jvm中的本地接口，称为JNI，是一种编程框架，使得java虚拟机中的java程序可以调用本地应用或库，也可以被其他程序调用。 本地程序一般是用其它语言（C、C++或汇编语言等）编写的, 并且被编译为基于本机硬件和操作系统的程序。  </p>
 
       
     </div>
@@ -498,7 +507,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -555,7 +564,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#程序计数器"><span class="nav-number">1.</span> <span class="nav-text">程序计数器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java虚拟机栈"><span class="nav-number">2.</span> <span class="nav-text">Java虚拟机栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地方法栈"><span class="nav-number">3.</span> <span class="nav-text">本地方法栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆"><span class="nav-number">4.</span> <span class="nav-text">堆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法区"><span class="nav-number">5.</span> <span class="nav-text">方法区</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、程序计数器"><span class="nav-number">1.</span> <span class="nav-text">一、程序计数器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Java虚拟机栈"><span class="nav-number">2.</span> <span class="nav-text">二、Java虚拟机栈</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-局部变量表"><span class="nav-number">2.0.1.</span> <span class="nav-text">1.局部变量表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-操作数栈"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.操作数栈</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、本地方法栈"><span class="nav-number">3.</span> <span class="nav-text">三、本地方法栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、堆"><span class="nav-number">4.</span> <span class="nav-text">四、堆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无、方法区"><span class="nav-number">5.</span> <span class="nav-text">无、方法区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行引擎"><span class="nav-number">6.</span> <span class="nav-text">执行引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地接口"><span class="nav-number">7.</span> <span class="nav-text">本地接口</span></a></li></ol></div>
             
 
           </div>

@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="基础,文件流," />
+  <meta name="keywords" content="JVM," />
 
 
 
@@ -69,17 +69,17 @@
 
 
 
-<meta name="description" content="参考文档 同步阻塞IO（Java BIO）同步并阻塞，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，当然可以通过线程池机制改善。BIO比较适用于连接数小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中。">
-<meta name="keywords" content="基础,文件流">
+<meta name="description" content="对于虚拟机栈的概念已经在前文已经讲述：初识JVM 虚拟机栈中的gc下面举一些实例，运行下列实例时，需要在运行参数VM options中输入：-verbose:gcgc()函数的作用只是提醒虚拟机：程序员希望进行一次垃圾回收。但是它不能保证垃圾回收一定会进行，而且具体什么时候进行是取决于具体的虚拟机的，不同的虚拟机有不同的对策。123456public static void main(String">
+<meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java中BIO、NIO、AIO的理解">
-<meta property="og:url" content="https://skipper-sj.github.io/2017/07/24/Java中BIO、NIO、AIO的理解/index.html">
+<meta property="og:title" content="Java虚拟机栈">
+<meta property="og:url" content="https://skipper-sj.github.io/2017/12/21/Java虚拟机栈/index.html">
 <meta property="og:site_name" content="skipper`s technique notes">
-<meta property="og:description" content="参考文档 同步阻塞IO（Java BIO）同步并阻塞，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，当然可以通过线程池机制改善。BIO比较适用于连接数小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中。">
-<meta property="og:updated_time" content="2017-09-29T00:40:26.000Z">
+<meta property="og:description" content="对于虚拟机栈的概念已经在前文已经讲述：初识JVM 虚拟机栈中的gc下面举一些实例，运行下列实例时，需要在运行参数VM options中输入：-verbose:gcgc()函数的作用只是提醒虚拟机：程序员希望进行一次垃圾回收。但是它不能保证垃圾回收一定会进行，而且具体什么时候进行是取决于具体的虚拟机的，不同的虚拟机有不同的对策。123456public static void main(String">
+<meta property="og:updated_time" content="2017-12-21T05:34:33.920Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java中BIO、NIO、AIO的理解">
-<meta name="twitter:description" content="参考文档 同步阻塞IO（Java BIO）同步并阻塞，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，当然可以通过线程池机制改善。BIO比较适用于连接数小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中。">
+<meta name="twitter:title" content="Java虚拟机栈">
+<meta name="twitter:description" content="对于虚拟机栈的概念已经在前文已经讲述：初识JVM 虚拟机栈中的gc下面举一些实例，运行下列实例时，需要在运行参数VM options中输入：-verbose:gcgc()函数的作用只是提醒虚拟机：程序员希望进行一次垃圾回收。但是它不能保证垃圾回收一定会进行，而且具体什么时候进行是取决于具体的虚拟机的，不同的虚拟机有不同的对策。123456public static void main(String">
 
 
 
@@ -109,13 +109,13 @@
 
 
 
-  <link rel="canonical" href="https://skipper-sj.github.io/2017/07/24/Java中BIO、NIO、AIO的理解/"/>
+  <link rel="canonical" href="https://skipper-sj.github.io/2017/12/21/Java虚拟机栈/"/>
 
 
 
 
 
-  <title>Java中BIO、NIO、AIO的理解 | skipper`s technique notes</title>
+  <title>Java虚拟机栈 | skipper`s technique notes</title>
   
 
 
@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://skipper-sj.github.io/2017/07/24/Java中BIO、NIO、AIO的理解/">
+    <link itemprop="mainEntityOfPage" href="https://skipper-sj.github.io/2017/12/21/Java虚拟机栈/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Skipper shou">
@@ -279,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java中BIO、NIO、AIO的理解</h1>
+          <h1 class="post-title" itemprop="name headline">Java虚拟机栈</h1>
         
 
         <div class="post-meta">
@@ -291,8 +291,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-24T14:30:48+08:00">
-                2017-07-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-21T07:25:59+08:00">
+                2017-12-21
               </time>
             
 
@@ -325,8 +325,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/基础/概念/" itemprop="url" rel="index">
-                    <span itemprop="name">概念</span>
+                  <a href="/categories/基础/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
                   </a>
                 </span>
 
@@ -342,7 +342,7 @@
 
           
           
-             <span id="/2017/07/24/Java中BIO、NIO、AIO的理解/" class="leancloud_visitors" data-flag-title="Java中BIO、NIO、AIO的理解">
+             <span id="/2017/12/21/Java虚拟机栈/" class="leancloud_visitors" data-flag-title="Java虚拟机栈">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -373,11 +373,14 @@
       
 
       
-        <p><a href="http://ifeve.com/buffers/" target="_blank" rel="external">参考文档</a></p>
-<h3 id="同步阻塞IO（Java-BIO）"><a href="#同步阻塞IO（Java-BIO）" class="headerlink" title="同步阻塞IO（Java BIO）"></a>同步阻塞IO（Java BIO）</h3><p>同步并阻塞，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，当然可以通过线程池机制改善。<br>BIO比较适用于连接数小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中。<br><a id="more"></a></p>
-<h3 id="同步非阻塞、异步阻塞（NIO）"><a href="#同步非阻塞、异步阻塞（NIO）" class="headerlink" title="同步非阻塞、异步阻塞（NIO）"></a>同步非阻塞、异步阻塞（NIO）</h3><p>同步非阻塞，服务器实现模式为一个请求一个线程，即客户端发送的连接请求都会注册到多路复用器上，多路复用器轮询到连接有I/O请求时才启动一个线程进行处理。用户进程也需要时不时的询问IO操作是否就绪，这就要求用户进程不停的去询问。<br>异步阻塞，此种方式下是指应用发起一个IO操作以后，不等待内核IO操作的完成，等内核完成IO操作以后会通知应用程序，此时是通过select系统调用来完成的，而select函数本身的实现方式是阻塞的，而采用select函数有个好处就是它可以同时监听多个文件句柄（如果从UNP的角度看，select属于同步操作。因为select之后，进程还需要读写数据），从而提高系统的并发性！<br>NIO适用于连接数多且链接比较短的架构，比如聊天服务器，并发局限于应用中，编程比较复杂。  </p>
-<h3 id="异步非阻塞（AIO）"><a href="#异步非阻塞（AIO）" class="headerlink" title="异步非阻塞（AIO）"></a>异步非阻塞（AIO）</h3><p>用户进程只需要发起一个IO操作然后立即返回，等IO操作真正的完成以后，应用程序会得到IO操作完成的通知，此时用户进程只需要对数据进行处理就好了，不需要进行实际的IO读写操作，因为真正的IO读取或者写入操作已经由内核完成了。<br>AIO适用于连接数多且连接比较长的架构，比如相册服务器，充分调用OS参与并发操作，编程比较复杂。  </p>
-<h2 id="NIO详解"><a href="#NIO详解" class="headerlink" title="NIO详解"></a>NIO详解</h2><p>我对NIO的理解可以整理成一个流程：<br>输入文件-&gt;缓冲区-&gt;通道-&gt;缓冲区-&gt;程序处理数据-&gt;缓冲区-&gt;通道-&gt;缓冲区-&gt;输出文件<br>NIO的核心是Channel，所有的IO都是从一个Channel开始的，有点像流。<br>其中，Selector允许单线程处理多个Channel，一次来实现多线程的操作。这种设计就比较适合连接数比较多的，但是流量比较少的场景。  </p>
+        <p>对于虚拟机栈的概念已经在前文已经讲述：<a href="../../../07/07/初识JVM">初识JVM</a></p>
+<h4 id="虚拟机栈中的gc"><a href="#虚拟机栈中的gc" class="headerlink" title="虚拟机栈中的gc"></a>虚拟机栈中的gc</h4><p>下面举一些实例，运行下列实例时，需要在运行参数VM options中输入：-verbose:gc<br>gc()函数的作用只是提醒虚拟机：程序员希望进行一次垃圾回收。但是它不能保证垃圾回收一定会进行，而且具体什么时候进行是取决于具体的虚拟机的，不同的虚拟机有不同的对策。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">byte</span>[] placeholder = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">64</span>];</div><div class="line">        &#125;</div><div class="line">        System.gc();</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>上述代码可以得到：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[GC (System.gc())  644157K-&gt;642128K(893440K), 0.0160629 secs]</div><div class="line">[Full GC (System.gc())  642128K-&gt;641980K(893440K), 0.0128772 secs]</div></pre></td></tr></table></figure></p>
+<p>明显gc没有对静态代码块中的代码产生影响，程序没有对placeholder进行回收。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">byte</span>[] placeholder = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">64</span>];</div><div class="line">            Integer b = <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">        System.gc();</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>上述代码可以得到：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[GC (System.gc())  644157K-&gt;642144K(893440K), 0.0166834 secs]</div><div class="line">[Full GC (System.gc())  642144K-&gt;641980K(893440K), 0.0140780 secs]</div></pre></td></tr></table></figure></p>
+<p>同样，在同一作用域内没有对局部变量进行读写操作，程序也不会对placeholder进行回收。<br><a id="more"></a><br>以上可以看出，当int a=0;时，才会进行垃圾回收。</p>
+<h3 id="OOM与Stack-OverflowError"><a href="#OOM与Stack-OverflowError" class="headerlink" title="OOM与Stack OverflowError"></a>OOM与Stack OverflowError</h3><p>在hotspot虚拟机中，直接把虚拟机栈和本地方法栈合二为一，因此对于HotSpot来说，虽然-Xoss参数（设置本地方法栈大小）存在，但实际上是无效的，栈容量只由-Xss参数设定。<br>栈溢出抛出StackOverflowError错误，<strong>出现此种情况是因为方法运行的时候栈的深度超过了虚拟机容许的最大深度所致。</strong><br>对于栈内存溢出，根据《Java 虚拟机规范》中文版： <strong>如果线程请求的栈容量超过栈允许的最大容量的话，Java 虚拟机将抛出一个StackOverflow异常；如果Java虚拟机栈可以动态扩展，并且扩展的动作已经尝试过，但是无法申请到足够的内存去完成扩展，或者在新建立线程的时候没有足够的内存去创建对应的虚拟机栈，那么Java虚拟机将抛出一个OutOfMemory 异常。</strong> 如果一个进程运行占用4G内存，通过公式可以计算出建立线程栈的时候可以用的内存：<strong>线程栈总可用内存=4G-（-Xmx的值）- （-XX:MaxPermSize的值）- 程序计数器占用的内存</strong> 对此，程序可能抛出OutOfMemoryError:unable to create native thread。<br>栈中出现OOM的情况如下：<br><strong>以下代码对OOM的情况，因为是基于计算机内核进行的，所以可能会导致电脑假死的情况，如需要测试，请保存重要的文档之后再进行测试。</strong><br>需要配合以下运行参数进行测试：run configurations参数：-verbose:gc -Xms20M -Xmx20M -Xmn10M -Xss2M<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">dontStop</span><span class="params">()</span> </span>&#123;</div><div class="line">       <span class="keyword">while</span>(<span class="keyword">true</span>) &#123;&#125;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stackLeakByThread</span><span class="params">()</span> </span>&#123;</div><div class="line">       <span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</div><div class="line">           Thread thread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">               <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                   dontStop();</div><div class="line">               &#125;</div><div class="line">           &#125;);</div><div class="line"></div><div class="line">           thread.start();</div><div class="line">       &#125;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">       OOMTest1 oomTest1 = <span class="keyword">new</span> OOMTest1();</div><div class="line">       oomTest1.stackLeakByThread();</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>栈中出现Stack Overflow的情况如下：<br>需要配合以下运行参数进行测试：run configurations参数：-verbose:gc -Xms20M -Xmx20M -Xmn10M -Xss2M<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stackLeak</span><span class="params">()</span> </span>&#123;</div><div class="line">        stackLeak();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line">        StackOverflowErrorTest stackOverflowErrorTest = <span class="keyword">new</span> StackOverflowErrorTest();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            stackOverflowErrorTest.stackLeak();</div><div class="line">        &#125; <span class="keyword">catch</span> (Throwable e) &#123;</div><div class="line">            <span class="keyword">throw</span> e;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -395,9 +398,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/基础/" rel="tag"># 基础</a>
-          
-            <a href="/tags/文件流/" rel="tag"># 文件流</a>
+            <a href="/tags/JVM/" rel="tag"># JVM</a>
           
         </div>
       
@@ -410,8 +411,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/19/ConcurrentHashMap源码解读笔记/" rel="next" title="ConcurrentHashMap源码解读笔记">
-                <i class="fa fa-chevron-left"></i> ConcurrentHashMap源码解读笔记
+              <a href="/2017/10/20/浅谈设计模式（七）/" rel="next" title="浅谈设计模式（七）">
+                <i class="fa fa-chevron-left"></i> 浅谈设计模式（七）
               </a>
             
           </div>
@@ -419,10 +420,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/07/24/动态代理以及反射基本概念/" rel="prev" title="动态代理以及反射基本概念">
-                动态代理以及反射基本概念 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -557,7 +554,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#同步阻塞IO（Java-BIO）"><span class="nav-number">1.</span> <span class="nav-text">同步阻塞IO（Java BIO）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同步非阻塞、异步阻塞（NIO）"><span class="nav-number">2.</span> <span class="nav-text">同步非阻塞、异步阻塞（NIO）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步非阻塞（AIO）"><span class="nav-number">3.</span> <span class="nav-text">异步非阻塞（AIO）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NIO详解"><span class="nav-number"></span> <span class="nav-text">NIO详解</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#虚拟机栈中的gc"><span class="nav-number">1.</span> <span class="nav-text">虚拟机栈中的gc</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OOM与Stack-OverflowError"><span class="nav-number"></span> <span class="nav-text">OOM与Stack OverflowError</span></a></div>
             
 
           </div>

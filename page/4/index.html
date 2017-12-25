@@ -261,6 +261,178 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://skipper-sj.github.io/2017/07/17/类加载机制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Skipper shou">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="skipper`s technique notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/17/类加载机制/" itemprop="url">类加载机制</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-17T07:52:46+08:00">
+                2017-07-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/07/17/类加载机制/" class="leancloud_visitors" data-flag-title="类加载机制">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>关于类加载器所做的事情，已经在前一篇文章做了介绍。此处先介绍类加载器体系结构<br><img src="//skipper-sj.github.io/2017/07/17/类加载机制/类加载器体系结构.jpg" alt="类加载器体系结构"><br>如图所示，类加载器可分为几类：  </p>
+<h3 id="（1）启动类加载器"><a href="#（1）启动类加载器" class="headerlink" title="（1）启动类加载器"></a>（1）启动类加载器</h3><p>负责加载存放在%JAVA_HOME%\lib目录中的类库，并且被java虚拟机识别的类库（识别方式是按照文件名，所以，名字不符的就算放入也不会加载），启动类加载器无法被java程序直接引用。  </p>
+<h3 id="（2）扩展类加载器"><a href="#（2）扩展类加载器" class="headerlink" title="（2）扩展类加载器"></a>（2）扩展类加载器</h3><p>负责加载%JAVA_HOME%\lib\ext目录中的类库。</p>
+<h3 id="（3）应用程序类加载器"><a href="#（3）应用程序类加载器" class="headerlink" title="（3）应用程序类加载器"></a>（3）应用程序类加载器</h3><p>负责加载用户类路径classpath上所指定的类库</p>
+<h3 id="（4）自定义类加载器"><a href="#（4）自定义类加载器" class="headerlink" title="（4）自定义类加载器"></a>（4）自定义类加载器</h3><p>如果程序中没有自定义过类加载器，应用程序类加载器就是程序中默认的类加载器。<br>若要实现自定义类加载器，只需要继承java.lang.ClassLoader 类，并且重写其findClass()方法即可。<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/17/类加载机制/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://skipper-sj.github.io/2017/07/14/JVM调优试验与总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -685,7 +857,7 @@
 
       
         
-          <h2 id="Java虚拟机垃圾收集器关注的内存结构如下"><a href="#Java虚拟机垃圾收集器关注的内存结构如下" class="headerlink" title="Java虚拟机垃圾收集器关注的内存结构如下"></a>Java虚拟机垃圾收集器关注的内存结构如下</h2><p><img src="/2017/07/11/JVM分区以及垃圾回收/jvm垃圾回收内存结构.jpg" alt="JVM垃圾回收内存结构"><br>如图所示：堆内存被分为新生代和老年代两个部分，整个堆内存使用分代复制垃圾收集算法。方法区：一般被称为永久代。<br>其中详细的算法会在<a href="../垃圾回收算法详解">垃圾回收算法详解</a>中进行描述。</p>
+          <h2 id="Java虚拟机垃圾收集器关注的内存结构如下"><a href="#Java虚拟机垃圾收集器关注的内存结构如下" class="headerlink" title="Java虚拟机垃圾收集器关注的内存结构如下"></a>Java虚拟机垃圾收集器关注的内存结构如下</h2><p><img src="//skipper-sj.github.io/2017/07/11/JVM分区以及垃圾回收/jvm垃圾回收内存结构.jpg" alt="JVM垃圾回收内存结构"><br>如图所示：堆内存被分为新生代和老年代两个部分，整个堆内存使用分代复制垃圾收集算法。方法区：一般被称为永久代。<br>其中详细的算法会在<a href="../垃圾回收算法详解">垃圾回收算法详解</a>中进行描述。</p>
 <h3 id="新生代"><a href="#新生代" class="headerlink" title="新生代"></a>新生代</h3><p>新生代使用的是复制和标记-清除垃圾算法。<br>新生代中98%的对象是朝生夕死的短生命周期对象。所以不需要将新生代分为容量大小相等的两部分内存。<br>如果空白的survivor空间无法存放下仍然存活的对象，使用内存分配担保机制，直接将新生代依然存活的对象复制到年老代内存中，同时对于创建大对象时，如果新生代中无足够的连续内存时，也直接在年老代中分配内存空间。<br>Java虚拟机对新生代的垃圾回收称为Minor GC，次数比较频繁，每次回收时间也比较短。<br>使用java虚拟机-Xmn参数可以指定新生代内存大小。<br></p>
           <!--noindex-->
           <div class="post-button text-center">
@@ -1452,7 +1624,7 @@
 
       
         
-          <h3 id="类文件结构"><a href="#类文件结构" class="headerlink" title="类文件结构"></a>类文件结构</h3><p>这里举出一个例子代码<img src="/2017/07/10/jvm相关知识点梳理/democlass.png" alt="例子代码"><br>字节码分析结果：<br><img src="/2017/07/10/jvm相关知识点梳理/javap得到的字节码结果.png" alt="字节码结果"><br>文件的二进制结果：<br><img src="/2017/07/10/jvm相关知识点梳理/二进制结果.png" alt="文件的二进制结果"></p>
+          <h3 id="类文件结构"><a href="#类文件结构" class="headerlink" title="类文件结构"></a>类文件结构</h3><p>这里举出一个例子代码<img src="//skipper-sj.github.io/2017/07/10/jvm相关知识点梳理/democlass.png" alt="例子代码"><br>字节码分析结果：<br><img src="//skipper-sj.github.io/2017/07/10/jvm相关知识点梳理/javap得到的字节码结果.png" alt="字节码结果"><br>文件的二进制结果：<br><img src="//skipper-sj.github.io/2017/07/10/jvm相关知识点梳理/二进制结果.png" alt="文件的二进制结果"></p>
 <h4 id="1-魔数与Class文件的版本"><a href="#1-魔数与Class文件的版本" class="headerlink" title="1.魔数与Class文件的版本"></a>1.魔数与Class文件的版本</h4><p>每个class文件的头4个字节被称为魔数，值为：0xCAFEBABE，56位为次版本号，78位为主版本号，例如JDK 1.7.0的其中一个版本为00000032。</p>
 <h4 id="2-常量池"><a href="#2-常量池" class="headerlink" title="2.常量池"></a>2.常量池</h4><p>紧接着版本号后面的是常量池，首先是常量池容量，由89两位表示。<br>常量池的项目类型对应着一张关联表。不同的项目类型，后面跟的数据不同</p>
 <ul>
@@ -1628,179 +1800,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://skipper-sj.github.io/2017/07/10/jvm相关概念/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Skipper shou">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="skipper`s technique notes">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/10/jvm相关概念/" itemprop="url">JVM相关概念</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-10T14:58:09+08:00">
-                2017-07-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/基础/" itemprop="url" rel="index">
-                    <span itemprop="name">基础</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/基础/JVM/" itemprop="url" rel="index">
-                    <span itemprop="name">JVM</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/07/10/jvm相关概念/" class="leancloud_visitors" data-flag-title="JVM相关概念">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="类的生命周期"><a href="#类的生命周期" class="headerlink" title="类的生命周期"></a>类的生命周期</h2><p>java的class类在虚拟机中的生命周期如下图所示：<br><img src="/2017/07/10/jvm相关概念/../jvm相关概念/类的生命周期.jpg" alt="类的生命周期">  </p>
-<h4 id="（1）加载"><a href="#（1）加载" class="headerlink" title="（1）加载"></a>（1）加载</h4><p>将class类文件夹子道内存中，最终形成可以被虚拟机直接使用的java类型的过程。</p>
-<ul>
-<li>通过一个类的全限定名来获取定义此类的二进制字节流。</li>
-<li>将定义类的二进制字节流所代表的静态存储结构转换为方法区的运行时数据结构。</li>
-<li>在java堆中生成一个代表该类的java.lang.Class对象，作为方法区数据的访问入口。</li></ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/10/jvm相关概念/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1850,7 +1849,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

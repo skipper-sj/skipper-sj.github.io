@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="基础,文件流," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -69,17 +69,15 @@
 
 
 
-<meta name="description" content="参考文档 同步阻塞IO（Java BIO）同步并阻塞，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，当然可以通过线程池机制改善。BIO比较适用于连接数小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中。">
-<meta name="keywords" content="基础,文件流">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java中BIO、NIO、AIO的理解">
-<meta property="og:url" content="https://skipper-sj.github.io/2017/07/24/Java中BIO、NIO、AIO的理解/index.html">
+<meta name="description" content="付出不一定有收获，但是不付出一定不会有收获。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="skipper`s technique notes">
+<meta property="og:url" content="https://skipper-sj.github.io/archives/2017/12/index.html">
 <meta property="og:site_name" content="skipper`s technique notes">
-<meta property="og:description" content="参考文档 同步阻塞IO（Java BIO）同步并阻塞，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，当然可以通过线程池机制改善。BIO比较适用于连接数小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中。">
-<meta property="og:updated_time" content="2017-09-29T00:40:26.000Z">
+<meta property="og:description" content="付出不一定有收获，但是不付出一定不会有收获。">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java中BIO、NIO、AIO的理解">
-<meta name="twitter:description" content="参考文档 同步阻塞IO（Java BIO）同步并阻塞，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，当然可以通过线程池机制改善。BIO比较适用于连接数小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中。">
+<meta name="twitter:title" content="skipper`s technique notes">
+<meta name="twitter:description" content="付出不一定有收获，但是不付出一定不会有收获。">
 
 
 
@@ -109,13 +107,13 @@
 
 
 
-  <link rel="canonical" href="https://skipper-sj.github.io/2017/07/24/Java中BIO、NIO、AIO的理解/"/>
+  <link rel="canonical" href="https://skipper-sj.github.io/archives/2017/12/"/>
 
 
 
 
 
-  <title>Java中BIO、NIO、AIO的理解 | skipper`s technique notes</title>
+  <title>归档 | skipper`s technique notes</title>
   
 
 
@@ -144,7 +142,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left page-archive">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -248,201 +246,73 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <span class="archive-move-on"></span>
 
-  
+      <span class="archive-page-counter">
+        
+        
+         
+        
+        OK! 目前共计 44 篇日志。 继续努力。
+      </span>
 
-  
-  
-  
+      
+
+        
+        
+        
+
+        
+          
+          <div class="collection-title">
+            <h1 class="archive-year" id="archive-year-2017">2017</h1>
+          </div>
+        
+        
+
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://skipper-sj.github.io/2017/07/24/Java中BIO、NIO、AIO的理解/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Skipper shou">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="skipper`s technique notes">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/2017/12/21/Java虚拟机栈/" itemprop="url">
+              
+                <span itemprop="name">Java虚拟机栈</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">Java中BIO、NIO、AIO的理解</h1>
-        
+      </h2>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-24T14:30:48+08:00">
-                2017-07-24
-              </time>
-            
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-12-21T07:25:59+08:00"
+              content="2017-12-21" >
+          12-21
+        </time>
+      </div>
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/基础/" itemprop="url" rel="index">
-                    <span itemprop="name">基础</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/基础/概念/" itemprop="url" rel="index">
-                    <span itemprop="name">概念</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/07/24/Java中BIO、NIO、AIO的理解/" class="leancloud_visitors" data-flag-title="Java中BIO、NIO、AIO的理解">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p><a href="http://ifeve.com/buffers/" target="_blank" rel="external">参考文档</a></p>
-<h3 id="同步阻塞IO（Java-BIO）"><a href="#同步阻塞IO（Java-BIO）" class="headerlink" title="同步阻塞IO（Java BIO）"></a>同步阻塞IO（Java BIO）</h3><p>同步并阻塞，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，当然可以通过线程池机制改善。<br>BIO比较适用于连接数小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中。<br><a id="more"></a></p>
-<h3 id="同步非阻塞、异步阻塞（NIO）"><a href="#同步非阻塞、异步阻塞（NIO）" class="headerlink" title="同步非阻塞、异步阻塞（NIO）"></a>同步非阻塞、异步阻塞（NIO）</h3><p>同步非阻塞，服务器实现模式为一个请求一个线程，即客户端发送的连接请求都会注册到多路复用器上，多路复用器轮询到连接有I/O请求时才启动一个线程进行处理。用户进程也需要时不时的询问IO操作是否就绪，这就要求用户进程不停的去询问。<br>异步阻塞，此种方式下是指应用发起一个IO操作以后，不等待内核IO操作的完成，等内核完成IO操作以后会通知应用程序，此时是通过select系统调用来完成的，而select函数本身的实现方式是阻塞的，而采用select函数有个好处就是它可以同时监听多个文件句柄（如果从UNP的角度看，select属于同步操作。因为select之后，进程还需要读写数据），从而提高系统的并发性！<br>NIO适用于连接数多且链接比较短的架构，比如聊天服务器，并发局限于应用中，编程比较复杂。  </p>
-<h3 id="异步非阻塞（AIO）"><a href="#异步非阻塞（AIO）" class="headerlink" title="异步非阻塞（AIO）"></a>异步非阻塞（AIO）</h3><p>用户进程只需要发起一个IO操作然后立即返回，等IO操作真正的完成以后，应用程序会得到IO操作完成的通知，此时用户进程只需要对数据进行处理就好了，不需要进行实际的IO读写操作，因为真正的IO读取或者写入操作已经由内核完成了。<br>AIO适用于连接数多且连接比较长的架构，比如相册服务器，充分调用OS参与并发操作，编程比较复杂。  </p>
-<h2 id="NIO详解"><a href="#NIO详解" class="headerlink" title="NIO详解"></a>NIO详解</h2><p>我对NIO的理解可以整理成一个流程：<br>输入文件-&gt;缓冲区-&gt;通道-&gt;缓冲区-&gt;程序处理数据-&gt;缓冲区-&gt;通道-&gt;缓冲区-&gt;输出文件<br>NIO的核心是Channel，所有的IO都是从一个Channel开始的，有点像流。<br>其中，Selector允许单线程处理多个Channel，一次来实现多线程的操作。这种设计就比较适合连接数比较多的，但是流量比较少的场景。  </p>
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/基础/" rel="tag"># 基础</a>
-          
-            <a href="/tags/文件流/" rel="tag"># 文件流</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/07/19/ConcurrentHashMap源码解读笔记/" rel="next" title="ConcurrentHashMap源码解读笔记">
-                <i class="fa fa-chevron-left"></i> ConcurrentHashMap源码解读笔记
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/07/24/动态代理以及反射基本概念/" rel="prev" title="动态代理以及反射基本概念">
-                动态代理以及反射基本概念 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
       
+
     </div>
   </div>
+  
+  
+  
+
+  
+
 
 
           </div>
@@ -450,12 +320,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTAzMC83NTc5"></div>
-    
-  </div>
-
 
         </div>
         
@@ -476,17 +340,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <p class="site-author-name" itemprop="name">Skipper shou</p>
@@ -547,22 +402,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#同步阻塞IO（Java-BIO）"><span class="nav-number">1.</span> <span class="nav-text">同步阻塞IO（Java BIO）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同步非阻塞、异步阻塞（NIO）"><span class="nav-number">2.</span> <span class="nav-text">同步非阻塞、异步阻塞（NIO）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步非阻塞（AIO）"><span class="nav-number">3.</span> <span class="nav-text">异步非阻塞（AIO）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NIO详解"><span class="nav-number"></span> <span class="nav-text">NIO详解</span></a></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -711,17 +550,6 @@
 
 
 
-  
-    <script type="text/javascript">
-      (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
   
 
 
