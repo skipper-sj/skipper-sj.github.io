@@ -76,7 +76,7 @@
 <meta property="og:url" content="https://skipper-sj.github.io/2017/07/07/初识JVM/index.html">
 <meta property="og:site_name" content="skipper`s technique notes">
 <meta property="og:description" content="Java虚拟机规范规定的java虚拟机内存其实就是java虚拟机运行时数据区 Java内存结构分为几块： 一、程序计数器程序计数器是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。– 摘自《深入理解java虚拟机》类加载完之后，会产生对应的class文件，每一行执行指令完之后，程序计数器会加1，指向顺序汇总的下一个指令。因为Java虚拟机的多线程是通过线程轮流切换并分配处理器执">
-<meta property="og:updated_time" content="2017-12-25T00:12:15.063Z">
+<meta property="og:updated_time" content="2017-12-26T00:05:29.327Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初识JVM Java内存结构">
 <meta name="twitter:description" content="Java虚拟机规范规定的java虚拟机内存其实就是java虚拟机运行时数据区 Java内存结构分为几块： 一、程序计数器程序计数器是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。– 摘自《深入理解java虚拟机》类加载完之后，会产生对应的class文件，每一行执行指令完之后，程序计数器会加1，指向顺序汇总的下一个指令。因为Java虚拟机的多线程是通过线程轮流切换并分配处理器执">
@@ -381,14 +381,14 @@
 <a id="more"></a>
 <h2 id="三、本地方法栈"><a href="#三、本地方法栈" class="headerlink" title="三、本地方法栈"></a>三、本地方法栈</h2><p>为虚拟机使用到的<u><strong>Native方法服务</strong></u>(例如C相关方法)。<br>如果某个虚拟机实现的本地方法接口是使用C连接模型的话，那么它的本地方法栈就是C栈。也是<u><strong>线程私有的</strong></u>。</p>
 <h2 id="四、堆"><a href="#四、堆" class="headerlink" title="四、堆"></a>四、堆</h2><p>Java堆是被所有<u><strong>线程共享</strong></u>的一块内存区域，在虚拟机启动时创建。此内存区域的唯一目的就是存放对象实例，几乎所有的对象实例都在这里分配内存。<br>其中分代回收会在<a href="../../11/JVM分区以及垃圾回收">JVM分区以及垃圾回收</a>中详细描述。</p>
-<h2 id="无、方法区"><a href="#无、方法区" class="headerlink" title="无、方法区"></a>无、方法区</h2><p>方法区也是线程共享的一块内存区域，用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</p>
-<h2 id="执行引擎"><a href="#执行引擎" class="headerlink" title="执行引擎"></a>执行引擎</h2><p>编译器将源代码转换成字节码，需要使用到jvm的字节码执行引擎。执行引擎负责具体的代码调用及执行过程。<br>主要包括以下几点：</p>
+<h2 id="五、方法区"><a href="#五、方法区" class="headerlink" title="五、方法区"></a>五、方法区</h2><p>方法区也是线程共享的一块内存区域，用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</p>
+<h2 id="六、执行引擎"><a href="#六、执行引擎" class="headerlink" title="六、执行引擎"></a>六、执行引擎</h2><p>编译器将源代码转换成字节码，需要使用到jvm的字节码执行引擎。执行引擎负责具体的代码调用及执行过程。<br>主要包括以下几点：</p>
 <ul>
 <li>输入：字节码文件</li>
 <li>处理：字节码解析</li>
 <li>输出：执行结果</li>
 </ul>
-<h2 id="本地接口"><a href="#本地接口" class="headerlink" title="本地接口"></a>本地接口</h2><p>jvm中的本地接口，称为JNI，是一种编程框架，使得java虚拟机中的java程序可以调用本地应用或库，也可以被其他程序调用。 本地程序一般是用其它语言（C、C++或汇编语言等）编写的, 并且被编译为基于本机硬件和操作系统的程序。  </p>
+<h2 id="七、本地接口"><a href="#七、本地接口" class="headerlink" title="七、本地接口"></a>七、本地接口</h2><p>jvm中的本地接口，称为JNI，是一种编程框架，使得java虚拟机中的java程序可以调用本地应用或库，也可以被其他程序调用。 本地程序一般是用其它语言（C、C++或汇编语言等）编写的, 并且被编译为基于本机硬件和操作系统的程序。  </p>
 
       
     </div>
@@ -505,7 +505,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -562,7 +562,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、程序计数器"><span class="nav-number">1.</span> <span class="nav-text">一、程序计数器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Java虚拟机栈"><span class="nav-number">2.</span> <span class="nav-text">二、Java虚拟机栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、本地方法栈"><span class="nav-number">3.</span> <span class="nav-text">三、本地方法栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、堆"><span class="nav-number">4.</span> <span class="nav-text">四、堆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无、方法区"><span class="nav-number">5.</span> <span class="nav-text">无、方法区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行引擎"><span class="nav-number">6.</span> <span class="nav-text">执行引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地接口"><span class="nav-number">7.</span> <span class="nav-text">本地接口</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、程序计数器"><span class="nav-number">1.</span> <span class="nav-text">一、程序计数器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Java虚拟机栈"><span class="nav-number">2.</span> <span class="nav-text">二、Java虚拟机栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、本地方法栈"><span class="nav-number">3.</span> <span class="nav-text">三、本地方法栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、堆"><span class="nav-number">4.</span> <span class="nav-text">四、堆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、方法区"><span class="nav-number">5.</span> <span class="nav-text">五、方法区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、执行引擎"><span class="nav-number">6.</span> <span class="nav-text">六、执行引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、本地接口"><span class="nav-number">7.</span> <span class="nav-text">七、本地接口</span></a></li></ol></div>
             
 
           </div>
