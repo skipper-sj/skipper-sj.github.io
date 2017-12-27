@@ -76,7 +76,7 @@
 <meta property="og:url" content="https://skipper-sj.github.io/2017/12/26/OOM的种类/index.html">
 <meta property="og:site_name" content="skipper`s technique notes">
 <meta property="og:description" content="1在jvm中，OOM存在于除程序计数器以外的java虚拟机栈、本地方法栈、堆和方法区中。 常见的OOM错误有五种： 无法创建新的线程java.lang.OutOfMemoryError: unable to create new native thread当创建线程时，如已创建不了线程了，则会抛出此错误，如果是JDK内部必须创建成功的线程，那么会造成Java进程退出，如果是用户线程，则仅抛出OOM">
-<meta property="og:updated_time" content="2017-12-26T00:05:26.330Z">
+<meta property="og:updated_time" content="2017-12-27T00:05:03.126Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OOM的种类">
 <meta name="twitter:description" content="1在jvm中，OOM存在于除程序计数器以外的java虚拟机栈、本地方法栈、堆和方法区中。 常见的OOM错误有五种： 无法创建新的线程java.lang.OutOfMemoryError: unable to create new native thread当创建线程时，如已创建不了线程了，则会抛出此错误，如果是JDK内部必须创建成功的线程，那么会造成Java进程退出，如果是用户线程，则仅抛出OOM">
@@ -375,8 +375,8 @@
       
         <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">在jvm中，OOM存在于除程序计数器以外的java虚拟机栈、本地方法栈、堆和方法区中。</div></pre></td></tr></table></figure>
 <p>常见的OOM错误有五种：</p>
-<h3 id="无法创建新的线程"><a href="#无法创建新的线程" class="headerlink" title="无法创建新的线程"></a>无法创建新的线程</h3><p>java.lang.OutOfMemoryError: unable to create new native thread<br>当创建线程时，如已创建不了线程了，则会抛出此错误，如果是JDK内部必须创建成功的线程，那么会造成Java进程退出，如果是用户线程，则仅抛出OOM，创建不了的原因通常是创建了太多线程，耗尽了内存，通常可通过减少创建的线程数，或通过-Xss调小线程所占用的栈大小来减少对Java 对外内存的消耗。</p>
-<h3 id="java进程占用内存超过限定值"><a href="#java进程占用内存超过限定值" class="headerlink" title="java进程占用内存超过限定值"></a>java进程占用内存超过限定值</h3><p>java.lang.OutOfMemoryError: request bytes for . Out of swap space?<br>当JNI模块或JVM内部进行malloc操作（例如GC时做mark）时，需要消耗堆外的内存，如此时Java进程所占用的地址空间超过限制（例如windows: 2G，linux: 3G），或物理内存、swap区均使用完毕，那么则会出现此错误，当出现此错误时，Java进程将会退出。32位的java所能操作的内存一般为2G，如果JVM heap全部占完了会导致Native heap无法allocate memory，这个问题在jdk6之前有人认为是jdk的一个bug，之后的版本已修复。</p>
+<h3 id="无法创建新的线程"><a href="#无法创建新的线程" class="headerlink" title="无法创建新的线程"></a>无法创建新的线程</h3><p>java.lang.OutOfMemoryError: unable to create new native thread<br>当创建线程时，如已创建不了线程了，则会抛出此错误，如果是JDK内部必须创建成功的线程，那么会造成Java进程退出，如果是用户线程，则仅抛出OOM，创建不了的原因通常是创建了太多线程，耗尽了内存，通常可通过减少创建的线程数，或通过-Xss调小线程所占用的栈大小来减少对Java 对外内存的消耗。<br>以上情况一般在虚拟机栈和本地方法栈中发生。</p>
+<h3 id="java进程占用内存超过限定值"><a href="#java进程占用内存超过限定值" class="headerlink" title="java进程占用内存超过限定值"></a>java进程占用内存超过限定值</h3><p>java.lang.OutOfMemoryError: request bytes for . Out of swap space?<br>当JNI模块或JVM内部进行malloc操作（例如GC时做mark）时，需要消耗堆外的内存，如此时Java进程所占用的地址空间超过限制（例如windows: 2G，linux: 3G），或物理内存、swap区均使用完毕，那么则会出现此错误，当出现此错误时，Java进程将会退出。32位的java所能操作的内存一般为2G，如果JVM heap全部占完了会导致Native heap无法allocate memory，这个问题在jdk6之前有人认为是jdk的一个bug，之后的版本已修复。  </p>
 <h3 id="堆内存溢出"><a href="#堆内存溢出" class="headerlink" title="堆内存溢出"></a>堆内存溢出</h3><p>java.lang.OutOfMemoryError: Java heap space<br>最常见的OOM错误，当通过new创建对象或数组时，如Java Heap空间不足（新生代不足，触发minor GC，还是不够，触发Full GC，还是不够），则抛出此错误。</p>
 <h3 id="GC时间超过限定值"><a href="#GC时间超过限定值" class="headerlink" title="GC时间超过限定值"></a>GC时间超过限定值</h3><p>java.lang.OutOfMemoryError: GC overhead limit execeeded<br>当通过new创建对象或数组时，如Java Heap空间不足，且GC所使用的时间占了程序总时间的98%，且Heap剩余空间小于2%，则抛出此错误，以避免Full GC一直执行，可通过UseGCOverheadLimit来决定是否开启这种策略，可通过GCTimeLimit和GCHeapFreeLimit来控制百分比。</p>
 <h3 id="永久代内存不足"><a href="#永久代内存不足" class="headerlink" title="永久代内存不足"></a>永久代内存不足</h3><p>当加载class时，在进行了Full GC后如PermGen空间仍然不足，则抛出此错误。</p>
@@ -420,6 +420,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/27/JVM参数讲解/" rel="prev" title="JVM参数讲解">
+                JVM参数讲解 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -497,7 +501,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

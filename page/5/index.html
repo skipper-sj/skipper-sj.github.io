@@ -261,6 +261,179 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://skipper-sj.github.io/2017/07/10/jvm相关知识点梳理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Skipper shou">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="skipper`s technique notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/10/jvm相关知识点梳理/" itemprop="url">JVM相关知识点梳理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-10T14:58:41+08:00">
+                2017-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/07/10/jvm相关知识点梳理/" class="leancloud_visitors" data-flag-title="JVM相关知识点梳理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="类文件结构"><a href="#类文件结构" class="headerlink" title="类文件结构"></a>类文件结构</h3><p>这里举出一个例子代码<img src="//skipper-sj.github.io/2017/07/10/jvm相关知识点梳理/democlass.png" alt="例子代码"><br>字节码分析结果：<br><img src="//skipper-sj.github.io/2017/07/10/jvm相关知识点梳理/javap得到的字节码结果.png" alt="字节码结果"><br>文件的二进制结果：<br><img src="//skipper-sj.github.io/2017/07/10/jvm相关知识点梳理/二进制结果.png" alt="文件的二进制结果"></p>
+<h4 id="1-魔数与Class文件的版本"><a href="#1-魔数与Class文件的版本" class="headerlink" title="1.魔数与Class文件的版本"></a>1.魔数与Class文件的版本</h4><p>每个class文件的头4个字节被称为魔数，值为：0xCAFEBABE，56位为次版本号，78位为主版本号，例如JDK 1.7.0的其中一个版本为00000032。</p>
+<h4 id="2-常量池"><a href="#2-常量池" class="headerlink" title="2.常量池"></a>2.常量池</h4><p>紧接着版本号后面的是常量池，首先是常量池容量，由89两位表示。<br>常量池的项目类型对应着一张关联表。不同的项目类型，后面跟的数据不同</p>
+<ul>
+<li>CONSTANT_Class_info的标示位为：0x07，</li>
+<li>0x0014代表之后的21位常量<br>根据二进制结果与常量池的项目类型对照表，可以得到对应的字节码结果。</li></ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/10/jvm相关知识点梳理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://skipper-sj.github.io/2017/07/10/深入jvm字节码/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1066,7 +1239,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
